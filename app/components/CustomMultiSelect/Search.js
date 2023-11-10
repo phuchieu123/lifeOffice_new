@@ -1,6 +1,6 @@
 import React, { useState, memo, useEffect, useRef, useCallback } from 'react';
-import { FlatList, TouchableOpacity, View } from 'react-native';
-import { Icon, Text, Button } from 'native-base';
+import { FlatList,Text, TouchableOpacity, View } from 'react-native';
+import { Icon, Button } from 'native-base';
 import Footer from './components/Footer'
 import ToggleIcon from './components/ToggleIcon';
 import _ from 'lodash';
@@ -126,8 +126,8 @@ const Search = (props) => {
       </View>
 
       <Footer onClose={onClose} handleSave={handleSave} />
-    </Modal >
-  </View >
+    </Modal>
+  </View>
 };
 
 export default memo(Search);

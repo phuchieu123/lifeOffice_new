@@ -1,13 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Text, Spinner } from 'native-base';
-import { FlatList } from 'react-native';
+import { FlatList, Text, ActivityIndicator} from 'react-native';
 import LoadingLayout from '../../components/LoadingLayout';
 import { handleSearch, serialize } from '../../utils/common';
 import _ from 'lodash';
 
 const RenderFooter = ({ isLoadingMore }) => {
   if (isLoadingMore) {
-    return <Spinner />;
+    return <ActivityIndicator size="large"/>;
   }
   return null;
 };
@@ -130,6 +129,7 @@ const ListPage = (props) => {
         <Text style={{ alignSelf: 'center', flex: 1, textAlignVertical: 'center', position: 'absolute', top: 40 }}>{props.noDataText || 'Không có dữ liệu'}</Text>
       )}
       <FlatList
+      style={{}}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         inverted={props.inverted}

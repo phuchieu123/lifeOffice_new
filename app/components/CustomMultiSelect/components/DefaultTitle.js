@@ -20,7 +20,7 @@ const DefaultTitle = props => {
 
     return <>
         {selectedItems.length
-            ? <Text style={{ marginRight: 10, textAlignVertical: 'center', justifySelf: 'center', ...styles }}>{displaySeleted}</Text>
+            ? <Text style={{ marginRight: 10, textAlignVertical: 'center', justifySelf: 'center', ...styles, top: 0 }}>{displaySeleted}</Text>
             : emptyText
                 ? <Text style={{ marginRight: 10, textAlignVertical: 'center', justifySelf: 'center', ...styles }}>{emptyText}</Text>
                 : <Text style={{ opacity: 0.5, marginRight: 10, textAlignVertical: 'center', justifySelf: 'center', ...styles }}>Lựa chọn</Text>

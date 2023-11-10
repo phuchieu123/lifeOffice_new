@@ -7,7 +7,6 @@ export default styles = {
   },
   button: {
     flexDirection: 'row',
-    height: 45,
     alignSelf: 'flex-end',
     justifyContent: 'center',
     alignItems: 'center',

@@ -5,11 +5,13 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { ImageBackground, TouchableOpacity } from 'react-native';
+import { ImageBackground, TouchableOpacity, Text, View  } from 'react-native';
 // import styled from 'styled-components';
 import _ from 'lodash';
 import moment from 'moment';
-import { Body, Button, Card, CardItem, Icon, Text, View } from 'native-base';
+import Octicons from 'react-native-vector-icons/Octicons';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 import ProgressCircle from 'react-native-progress-circle';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -50,10 +52,10 @@ function ProjectCard(props) {
   const onPressGear = () => navigate('ProjectDetail', { project })
 
   return (
-    <View>
-      <Card style={{ borderRadius: 20, top: 0 }}>
-        <CardItem cardBody >
-          <Body>
+    <View style={{margin: 5}}>
+      <View style={{ borderRadius: 20, top: 0 }}>
+        <View >
+          <View>
             <TouchableOpacity style={{ flex: 1, alignItems: 'flex-end', flexDirection: 'row' }}>
               <ImageBackground
                 source={project.avatar ? { uri: project.avatar, } : images.background}
@@ -63,67 +65,76 @@ function ProjectCard(props) {
                 <View style={{ flex: 1, alignItems: 'flex-end', flexDirection: 'row', justifyContent: 'space-between' }}>
                   <View style={{ flex: 0.7, justifyContent: 'flex-end' }}>
                     {_.get(project, 'totalChild', 0) > 0 ? (
-                      <Button
+                      <TouchableOpacity
                         style={{
                           backgroundColor: 'rgba(52, 52, 52, 0.8)',
-                          height: 'auto',
-                          marginBottom: 4,
-                          marginLeft: 4,
+                        borderRadius: 30,
+                        height: "auto",
+                        marginBottom: 4,
+                        marginLeft: 4,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      color: 'white'
                         }}
-                        rounded
                         small
                         iconLeft
                         inconRight
                         onPress={openChildProject}>
-                        <Icon type="FontAwesome" name="bars" />
-                        <Text style={{ flex: 1, fontSize: 10 }} numberOfLines={2}>
+                        <Icon type="FontAwesome" name="bars" style={{ color: 'white', marginHorizontal: 14,fontSize: 20, marginVertical: 5}} />
+                        <Text style={{ flex: 1, fontSize: 11, color: '#fff' }} numberOfLines={2}>
                           {`${project.totalChild} công việc`}
                         </Text>
-                      </Button>
-                    ) : <Button
+                      </TouchableOpacity>
+                    ) : <TouchableOpacity
                       style={{
                         backgroundColor: 'rgba(52, 52, 52, 0.8)',
+                        borderRadius: 30,
                         height: 'auto',
                         marginBottom: 4,
                         marginLeft: 4,
+                      flexDirection: 'row',
+                      alignItems: 'center',
                       }}
-                      rounded
                       small
                       iconLeft
                       inconRight
                       onPress={openAddProject}>
-                      <Icon type="Feather" name="plus" />
-                      <Text style={{ flex: 1, fontSize: 10 }} numberOfLines={2}>
+                      <Icon type="Feather" name="plus" style={{ color: 'white', marginHorizontal: 16,fontSize: 20, marginVertical: 5}} />
+                      <Text style={{ flex: 1, fontSize: 11, color: '#fff' }} numberOfLines={2}>
                         Tạo công việc
                       </Text>
-                    </Button>}
+                    </TouchableOpacity>}
 
-                    <Button
+                    <TouchableOpacity
                       style={{
                         backgroundColor: 'rgba(52, 52, 52, 0.8)',
+                        borderRadius: 30,
                         height: 'auto',
                         marginBottom: 4,
                         marginLeft: 4,
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                     
                       }}
-                      rounded
                       small
                       iconLeft
                       inconRight
                       onPress={onPressGear}>
-                      <Icon type="FontAwesome" name="gears" />
-                      <Text style={{ flex: 1, fontSize: 10, }} numberOfLines={2}>
+                      <Icon type="FontAwesome" name="gears"  style={{ color: 'white', marginHorizontal: 14,fontSize: 20, marginVertical: 5}} />
+                      <Text style={{fontSize: 10,color: 'white', flex: 1, }} numberOfLines={2}>
                         {project.name}
                       </Text>
-                    </Button>
+                    </TouchableOpacity>
 
                     <View style={{
                       backgroundColor: 'rgba(52, 52, 52, 0.8)',
                       borderRadius: 30,
                       height: 35,
                       marginBottom: 10,
-                      flexDirection: 'row'
+                      flexDirection: 'row',
+                      alignItems:'center'
                     }}>
-                      <Icon name='triangle-down' type='Octicons' style={{ color: '#fff', fontSize: 20, marginHorizontal: 20, marginTop: 10 }} />
+                      <Octicons name='triangle-down' type='OcticonsOcticons' style={{ color: '#fff', fontSize: 20, marginHorizontal: 20}} />
                       <Search single
                         disableIcon
                         items={kanbanTaskConfigs}
@@ -164,10 +175,10 @@ function ProjectCard(props) {
                 </View>
               </ImageBackground>
             </TouchableOpacity>
-          </Body>
-        </CardItem>
-      </Card>
-    </View >
+          </View>
+        </View>
+      </View>
+    </View>
 
   );
 }

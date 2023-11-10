@@ -1,5 +1,4 @@
     import React, { useState, useEffect, useRef } from 'react';
-    import {  Body, Right, } from 'native-base';
     import { connect } from 'react-redux'
     import { createStructuredSelector } from 'reselect';
     import { View, Text } from 'react-native';
@@ -37,7 +36,7 @@
                     {rightHeader}
                     {/* <MsgIcon /> */}
                 </View>
-            </View >
+            </View>
         );
     }
 
