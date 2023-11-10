@@ -1,0 +1,50 @@
+/*
+ *
+ * ApprovePage constants
+ *
+ */
+
+export const ADD_APPROVE = 'app/ApprovePage/ADD_APPROVE';
+export const ADD_APPROVE_SUCCESS = 'app/ApprovePage/ADD_APPROVE_SUCCESS';
+export const ADD_APPROVE_FAILURE = 'app/ApprovePage/ADD_APPROVE_FAILURE';
+
+
+export const ADD_APPROVE_OVER_TIME = 'app/ApprovePage/ADD_APPROVE_OVER_TIME';
+export const ADD_APPROVE_OVER_TIME_SUCCESS = 'app/ApprovePage/ADD_APPROVE_OVER_TIME_SUCCESS';
+export const ADD_APPROVE_OVER_TIME_FAILURE = 'app/ApprovePage/ADD_APPROVE_OVER_TIME_FAILURE';
+
+
+export const ADD_APPROVE_ISLOADING = 'app/ApprovePage/ADD_APPROVE_ISLOADING';
+export const ADD_APPROVE_SUCCESS_ISLOADING = 'app/ApprovePage/ADD_APPROVE_SUCCESS_ISLOADING';
+export const ADD_APPROVE_FAILURE_ISLOADING = 'app/ApprovePage/ADD_APPROVE_FAILURE_ISLOADING';
+
+
+
+export const ADD_MEETING_SCHEDULE = 'app/ApprovePage/ADD_MEETING_SCHEDULE';
+export const ADD_MEETING_SCHEDULE_SUCCESS = 'app/ApprovePage/ADD_MEETING_SCHEDULE_SUCCESS';
+export const ADD_MEETING_SCHEDULE_FAILURE = 'app/ApprovePage/ADD_MEETING_SCHEDULE__FAILURE';
+
+
+
+
+
+
+
+export const APPROVE_MEETING_SCHEDULE = 'app/ApprovePage/APPROVE_MEETING_SCHEDULE';
+export const APPROVE_MEETING_SCHEDULE_SUCCESS = 'app/ApprovePage/APPROVE_MEETING_SCHEDULE_SUCCESS';
+export const APPROVE_MEETING_SCHEDULE_FAILURE = 'app/ApprovePage/APPROVE_MEETING_SCHEDULE_FAILURE';
+
+
+
+
+export const ADD_ON_LEAVE = 'app/ApprovePage/ADD_ON_LEAVE';
+export const ADD_ON_LEAVE_SUCCESS = 'app/ApprovePage/ADD_ON_LEAVE_SUCCESS';
+export const ADD_ON_LEAVE_FAILURE = 'app/ApprovePage/ADD_ON_LEAVE_FAILURE';
+
+
+export const APPROVE_ADD_ON_LEAVE = 'app/ApprovePage/APPROVE_ADD_ON_LEAVE';
+export const APPROVE_ADD_ON_LEAVE_SUCCESS = 'app/ApprovePage/APPROVE_ADD_ON_LEAVE_SUCCESS';
+export const APPROVE_ADD_ON_LEAVE_FAILURE = 'app/ApprovePage/APPROVE_ADD_ON_LEAVE_FAILURE';
+
+
+export const CLEANUP = 'app/ApprovePage/CLEANUP';
