@@ -60,7 +60,7 @@ const FolderModal = props => {
                 </Button>
             </View>
         </View>
-    </Modal >
+    </Modal>
 }
 
 export default FolderModal
