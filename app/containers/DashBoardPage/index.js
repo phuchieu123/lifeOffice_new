@@ -242,7 +242,7 @@ export function DashBoardPage(props) {
             {!taskRole.GET ? null : <DashBoardTask navigation={navigation} kanbanTaskConfigs={kanbanTaskConfigs} query={query} />}
             {!inComingDocumentRole.GET ? null : <IncomingDocument />}
             {!calendarRole.GET ? null : <MeetingSchedule />}
-            {/* {!calendarRole.GET ? null : <WorkingSchedule profile={profile} />} */}
+            {!calendarRole.GET ? null : <WorkingSchedule profile={profile} />}
           </View>
         </ScrollView>
       </View>

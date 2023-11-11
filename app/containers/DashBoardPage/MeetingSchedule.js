@@ -108,7 +108,7 @@ export default IncomingDocument = props => {
             }}>
             Lịch họp
           </Text>
-          <Icon
+          <Ionicons
             name="reload"
             style={{position: 'absolute', right: 10, top: 12, color: '#fff'}}
           />
