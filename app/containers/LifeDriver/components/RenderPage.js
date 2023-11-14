@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {ActionSheet} from 'native-base';
 import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+import IconFontAwesome from 'react-native-vector-icons/FontAwesome'
 import {REQUEST_METHOD} from '../../../utils/constants';
 import DriverPage from '../../../components/ListPage/DriverPage';
 import RenderItem from './RenderItem';
@@ -199,12 +200,10 @@ const RenderPage = props => {
     <View style={{flex: 1}}>
       <View style={{flexDirection: 'colum'}}>
         <SearchBox onChange={onChangeSearchContent} />
-        <View style={{padding: 5, flexDirection: 'row', alignItems: 'center'}}>
-          <Icon
-            size={15}
-            style={{paddingHorizontal: 5, color: 'rgba(46, 149, 46, 1)', fontSize: 15}}
-            name="home"
-            type="Entypo"
+        <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+          <IconFontAwesome
+          name="home"
+            style={{paddingHorizontal: 5, color: 'rgba(46, 149, 46, 1)', fontSize: 20}}
             onPress={toMainpage}
           />
           {path === '/' ? (

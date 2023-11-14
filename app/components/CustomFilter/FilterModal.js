@@ -1,7 +1,8 @@
 import SingleAPISearch from '../../components/CustomMultiSelect/SingleAPISearch';
 import { API_USERS } from '../../configs/Paths';
 import moment from 'moment';
-import { Body, Button, Icon, List, ListItem, Text, View } from 'native-base';
+import { Text, View} from 'react-native'
+import { Body, Button, Icon } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
@@ -96,24 +97,24 @@ const FilterModal = (props) => {
     return (
         <Modal isVisible={isVisible} style={{ height: 'auto', borderRadius: 10 }}>
             <View style={{ backgroundColor: '#fff', borderRadius: 10 }}>
-                <List>
+                <View>
                     {enableDatePicker && <View>
-                        <ListItem itemHeader itemDivider style={{ borderRadius: 10 }}>
+                        <View itemHeader itemDivider style={{ borderRadius: 10 }}>
                             <Text>Thời gian</Text>
-                        </ListItem>
-                        <ListItem onPress={() => setShowDatePicker(true)}>
-                            <Body style={{ alignItems: "flex-end", flex: 1 }}>
+                        </View>
+                        <View onPress={() => setShowDatePicker(true)}>
+                            <View style={{ alignItems: "flex-end", flex: 1 }}>
                                 <Text>{`${start ? moment(start, DATE).format(DATE_FORMAT) : moment().startOf("weeks").format(DATE_FORMAT)} - ${end ? moment(end, DATE).format(DATE_FORMAT) : moment().endOf("weeks").format(DATE_FORMAT)} `}
                                     <Icon type="FontAwesome" name="caret-down" color="red" style={{ fontSize: 16, color: '#000' }} />
                                 </Text>
-                            </Body>
-                        </ListItem>
+                            </View>
+                        </View>
                     </View>}
                     {enableFilterOrg && <View>
-                        <ListItem itemHeader itemDivider style={{ borderTopLeftRadius: enableDatePicker ? 0 : 10, borderTopRightRadius: enableDatePicker ? 0 : 10 }}>
+                        <View itemHeader itemDivider style={{ borderTopLeftRadius: enableDatePicker ? 0 : 10, borderTopRightRadius: enableDatePicker ? 0 : 10 }}>
                             <Text>Phòng ban/đơn vị</Text>
-                        </ListItem>
-                        <ListItem>
+                        </View>
+                        <View>
                             <DepartmentSelect
                                 single
                                 handleSelectObjectItems={handleChangeOrg}
@@ -122,15 +123,15 @@ const FilterModal = (props) => {
                                 emptyText='Tất cả'
                                 buttonStyles={{ height: 'auto' }}
                             />
-                        </ListItem>
+                        </View>
                     </View>}
 
                     {enableFilterEmp &&
                         <View>
-                            <ListItem itemHeader itemDivider>
+                            <View itemHeader itemDivider>
                                 <Text>Người phụ trách</Text>
-                            </ListItem>
-                            <ListItem>
+                            </View>
+                            <View>
                                 <SingleAPISearch
                                     API={API_USERS}
                                     selectedItems={selectedEmp}
@@ -142,15 +143,15 @@ const FilterModal = (props) => {
                                     emptyText='Tất cả'
                                     buttonStyles={{ height: 'auto' }}
                                 />
-                            </ListItem>
+                            </View>
                         </View>
                     }
                     {enableEmployee &&
                         <View>
-                            <ListItem itemHeader itemDivider>
+                            <View itemHeader itemDivider>
                                 <Text>Nhân viên</Text>
-                            </ListItem>
-                            <ListItem>
+                            </View>
+                            <View>
                                 <SingleAPISearch
                                     API={API_USERS}
                                     selectedItems={personnelAll}
@@ -162,14 +163,14 @@ const FilterModal = (props) => {
                                     emptyText='Tất cả'
                                     buttonStyles={{ height: 'auto' }}
                                 />
-                            </ListItem>
+                            </View>
                         </View>
                     }
                     {enableTaskConfig && <View>
-                        <ListItem itemHeader itemDivider>
+                        <View itemHeader itemDivider>
                             <Text>Trạng thái công việc</Text>
-                        </ListItem>
-                        <ListItem>
+                        </View>
+                        <View>
                             <Search
                                 single
                                 items={kanbanTaskConfigs}
@@ -180,10 +181,10 @@ const FilterModal = (props) => {
                                 emptyText='Tất cả'
                                 buttonStyles={{ height: 'auto' }}
                             />
-                        </ListItem>
+                        </View>
                     </View>}
 
-                </List>
+                </View>
                 <View padder style={{ flexDirection: 'row', marginTop: 20 }}>
                     <Button block onPress={handleSave} style={{ flex: 1, borderRadius: 10, marginRight: 5 }}>
                         <Icon name="check" type="Feather" />
@@ -203,7 +204,7 @@ const FilterModal = (props) => {
                     showDatePicker={showDatePicker}
                 />
             }
-        </Modal >
+        </Modal>
     );
 };
 
