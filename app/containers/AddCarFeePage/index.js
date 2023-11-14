@@ -286,7 +286,7 @@ export function AddCarFeePage(props) {
           <Icon name="plus" type="Entypo" />
         </LoadingButton>
       </Content>
-    </Fragment >
+    </Fragment>
   );
 }
 

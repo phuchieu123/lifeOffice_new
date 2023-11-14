@@ -56,7 +56,7 @@ function ApartmentPage(props) {
         </View>
       </View>
       {/* <CustomFooter activePage="Hrm" /> */}
-    </Container >
+    </Container>
   );
 }
 

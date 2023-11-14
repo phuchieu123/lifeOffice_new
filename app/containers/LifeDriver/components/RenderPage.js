@@ -1,26 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {
-  Badge,
-  Body,
-  Button,
-  Container,
-  Input,
-  Item,
-  Label,
-  Left,
-  List,
-  ListItem,
-  Right,
-  Tab,
-  TabHeading,
-  Tabs,
-  Text,
-  View,
-  ActionSheet,
-} from 'native-base';
-import Icon from 'react-native-vector-icons/Entypo'
+import {ActionSheet} from 'native-base';
+import {Text, View} from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
 import {REQUEST_METHOD} from '../../../utils/constants';
 import DriverPage from '../../../components/ListPage/DriverPage';
 import RenderItem from './RenderItem';
@@ -213,12 +196,12 @@ const RenderPage = props => {
   };
 
   return (
-    <View style={{flex: 1, flexDirection:'column'}}>
+    <View style={{flex: 1, flexDirection: 'column'}}>
       <SearchBox onChange={onChangeSearchContent} />
-      <View style={{padding: 5,}}>
+      <View style={{padding: 5}}>
         <Icon name="home" style="Entypo" onPress={toMainpage} />
         {path === '/' ? (
-        <Text numberOfLines={1}>{'Trang chủ '}</Text>
+          <Text numberOfLines={1}>{'Trang chủ '}</Text>
         ) : (
           <Text>{`../${path
             .substr(0, path.length - 1)

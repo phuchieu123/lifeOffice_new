@@ -136,7 +136,7 @@ export function NotificationPage(props) {
           />
         }
       />
-      <ListPage
+      {/* <ListPage
         reload={reload}
         query={query}
         api={API_NOTIFICATION}
@@ -148,9 +148,8 @@ export function NotificationPage(props) {
             {!notificationPage.loading && <Text>Đánh dấu đã đọc</Text>}
           </Button>
         }
-      />
-
-      <Modal isVisible={openFilterModal} style={{ height: 'auto' }}>
+      /> */}
+      {/* <Modal isVisible={openFilterModal} style={{ height: 'auto' }}>
         <View style={{ backgroundColor: '#fff', borderRadius: 10 }}>
           <View>
             <ListItem itemHeader itemDivider style={{ borderRadius: 10 }}>
@@ -175,7 +174,7 @@ export function NotificationPage(props) {
             </Button>
           </View>
         </View>
-      </Modal >
+      </Modal> */}
 
     </>
   );
