@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { makeSelectDepartmentsByLevel } from '../../containers/App/selectors';
-import Footer from './components/Footer'
-import ToggleIcon from './components/ToggleIcon';
-import SearchHeader from './components/SearchHeader';
+import Footer from '../components/Footer'
+import ToggleIcon from '../components/ToggleIcon';
+import SearchHeader from '../components/SearchHeader';
 import { getListById } from '../../utils/common';
 import _ from 'lodash';
 import styles from './styles';

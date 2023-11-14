@@ -2,8 +2,8 @@ import theme from '../../utils/customTheme';
 
 export default styles = {
   view: {
-    flex: 1,
     marginRight: 5,
+    paddingVertical: 10,
   },
   button: {
     flexDirection: 'row',

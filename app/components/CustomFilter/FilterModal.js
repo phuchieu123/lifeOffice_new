@@ -2,7 +2,8 @@ import SingleAPISearch from '../../components/CustomMultiSelect/SingleAPISearch'
 import { API_USERS } from '../../configs/Paths';
 import moment from 'moment';
 import { Text, View} from 'react-native'
-import { Body, Button, Icon } from 'native-base';
+import { Body, Button,  } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-native-modal';
 import { connect } from 'react-redux';
@@ -98,12 +99,12 @@ const FilterModal = (props) => {
         <Modal isVisible={isVisible} style={{ height: 'auto', borderRadius: 10 }}>
             <View style={{ backgroundColor: '#fff', borderRadius: 10 }}>
                 <View>
-                    {enableDatePicker && <View>
-                        <View itemHeader itemDivider style={{ borderRadius: 10 }}>
+                    {enableDatePicker && <View style={{}}>
+                        <View itemHeader itemDivider style={{...styles,borderRadius: 10,  }}>
                             <Text>Thời gian</Text>
                         </View>
                         <View onPress={() => setShowDatePicker(true)}>
-                            <View style={{ alignItems: "flex-end", flex: 1 }}>
+                            <View style={{ alignItems: "flex-end", ...styleRight  }}>
                                 <Text>{`${start ? moment(start, DATE).format(DATE_FORMAT) : moment().startOf("weeks").format(DATE_FORMAT)} - ${end ? moment(end, DATE).format(DATE_FORMAT) : moment().endOf("weeks").format(DATE_FORMAT)} `}
                                     <Icon type="FontAwesome" name="caret-down" color="red" style={{ fontSize: 16, color: '#000' }} />
                                 </Text>
@@ -111,7 +112,7 @@ const FilterModal = (props) => {
                         </View>
                     </View>}
                     {enableFilterOrg && <View>
-                        <View itemHeader itemDivider style={{ borderTopLeftRadius: enableDatePicker ? 0 : 10, borderTopRightRadius: enableDatePicker ? 0 : 10 }}>
+                        <View itemHeader itemDivider style={{ borderTopLeftRadius: enableDatePicker ? 0 : 10, borderTopRightRadius: enableDatePicker ? 0 : 10 , ...styles}}>
                             <Text>Phòng ban/đơn vị</Text>
                         </View>
                         <View>
@@ -128,7 +129,7 @@ const FilterModal = (props) => {
 
                     {enableFilterEmp &&
                         <View>
-                            <View itemHeader itemDivider>
+                            <View itemHeader itemDivider style={styles}>
                                 <Text>Người phụ trách</Text>
                             </View>
                             <View>
@@ -148,7 +149,7 @@ const FilterModal = (props) => {
                     }
                     {enableEmployee &&
                         <View>
-                            <View itemHeader itemDivider>
+                            <View itemHeader itemDivider style={styles}>
                                 <Text>Nhân viên</Text>
                             </View>
                             <View>
@@ -167,7 +168,7 @@ const FilterModal = (props) => {
                         </View>
                     }
                     {enableTaskConfig && <View>
-                        <View itemHeader itemDivider>
+                        <View itemHeader itemDivider style={styles}>
                             <Text>Trạng thái công việc</Text>
                         </View>
                         <View>
@@ -208,6 +209,9 @@ const FilterModal = (props) => {
     );
 };
 
+
+const styles={ paddingVertical: 10, paddingLeft: 10, backgroundColor:'#ddd'}
+const styleRight={paddingVertical: 10, paddingRight: 10}
 const mapStateToProps = createStructuredSelector({
     kanbanTaskConfigs: makeSelectKanbanTaskConfigs(),
     departments: makeSelectDepartmentsByLevel(),

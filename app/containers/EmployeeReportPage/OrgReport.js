@@ -141,7 +141,7 @@ const OrgReport = (props) => {
                         <Text>Xem báo cáo</Text>
                     </LoadingButton>
                 </View>
-            </View >
+            </View>
 
             <Content style={styles.content}>{<PieChartOrg data={dataOrg} />}</Content>
         </Container>

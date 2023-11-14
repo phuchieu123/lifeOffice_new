@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { TouchableOpacity, FlatList } from 'react-native';
-import { ListItem, Text, View, Button, Radio, Icon } from 'native-base';
+import { ListItem, Text, View, Button, Radio } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -153,9 +154,9 @@ const RenderItem = ({ item, onShow, onSelect, isShow, selected }) => {
       <Text>{' '.repeat(name.length - name.trimLeft().length)}</Text>
       {hasChild ? (
         isShow ? (
-          <Icon name="chevron-down" type="Entypo" />
+          <Icon type="FontAwesome" name="caret-down"  />
         ) : (
-          <Icon name="chevron-right" type="Entypo" />
+          <Icon type="FontAwesome" name="caret-down"  />
         )
       ) : (
         <Text> </Text>
