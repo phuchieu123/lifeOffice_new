@@ -37,9 +37,23 @@ const LifeDriver = () => {
   return (
       <View style={{ flex: 1 }}>
         <CustomHeader title='Kho dữ liệu' />
-        <Tab.Navigator>
+        <Tab.Navigator
+        tabBarOptions={{
+          style: {
+            backgroundColor: 'rgba(46, 149, 46, 1)', // Màu nền của toàn bộ thanh tab
+            borderTopWidth: 1,
+            borderTopColor:'#aaa',
+          },
+          activeTintColor: 'white', // Màu chữ của tab đang được chọn
+          inactiveTintColor: 'white', // Màu chữ của tab không được chọn
+          indicatorStyle: {
+            backgroundColor: 'white', // Màu của thanh dưới chữ khi tab được chọn
+          },
+        }}
+        >
           <Tab.Screen
             name="Công ty"
+            
             component={() => <RenderPage api={API_FILE_COMPANY} folder="company" allowAdd allowShare />}
           />
           <Tab.Screen

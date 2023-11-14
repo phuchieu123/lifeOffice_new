@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity} from 'react-native'
 import theme from '../../utils/customTheme';
-import Icon from 'react-native-vector-icons/Entypo'
+
 export default FabLayout = props => {
     const { children, onPress, backgroundColor = theme.fabBackgroundColor, style  } = props
 

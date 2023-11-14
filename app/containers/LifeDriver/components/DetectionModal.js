@@ -125,7 +125,7 @@ const DetectionModal = (props) => {
                 </View>
             </View>
 
-        </Modal >
+        </Modal>
     );
 };
 

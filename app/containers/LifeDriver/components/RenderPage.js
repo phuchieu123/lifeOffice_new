@@ -213,7 +213,7 @@ const RenderPage = props => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, flexDirection:'column'}}>
       <SearchBox onChange={onChangeSearchContent} />
       <View style={{padding: 5,}}>
         <Icon name="home" style="Entypo" onPress={toMainpage} />
