@@ -69,7 +69,7 @@ const SearchBox = props => {
       </TouchableOpacity>
       <TouchableOpacity>
         <View style={{paddingHorizontal: 10,}} onPress={onClose}>
-          <Text style={{color:"rgba(46, 149, 46, 1)"}} >ĐÓNG</Text>
+          <Text onPress={onClose} style={{color:"rgba(46, 149, 46, 1)"}} >ĐÓNG</Text>
         </View>
       </TouchableOpacity>
      
