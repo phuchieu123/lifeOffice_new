@@ -197,10 +197,16 @@ const RenderPage = props => {
 
   return (
     <View style={{flex: 1}}>
-      <View style={{ flexDirection:'colum'}}>
+      <View style={{flexDirection: 'colum'}}>
         <SearchBox onChange={onChangeSearchContent} />
-        <View style={{padding: 5}}>
-          <Icon name="home" style="Entypo" onPress={toMainpage} />
+        <View style={{padding: 5, flexDirection: 'row', alignItems: 'center'}}>
+          <Icon
+            size={15}
+            style={{paddingHorizontal: 5, color: 'rgba(46, 149, 46, 1)', fontSize: 15}}
+            name="home"
+            type="Entypo"
+            onPress={toMainpage}
+          />
           {path === '/' ? (
             <Text numberOfLines={1}>{'Trang chủ '}</Text>
           ) : (

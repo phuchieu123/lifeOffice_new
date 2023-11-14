@@ -45,7 +45,6 @@ const SearchBox = props => {
         height: 40,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
       }}>
       <Icon
         name="search"
@@ -58,6 +57,7 @@ const SearchBox = props => {
         onChangeText={handleSearch}
         onSubmitEditing={Keyboard.dismiss}
         autoCapitalize="none"
+        style={{flex: 1}}
       />
       <IconMaterialIcons
         name="remove"
