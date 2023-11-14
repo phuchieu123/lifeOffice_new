@@ -196,26 +196,28 @@ const RenderPage = props => {
   };
 
   return (
-    <View style={{flex: 1, flexDirection: 'column'}}>
-      <SearchBox onChange={onChangeSearchContent} />
-      <View style={{padding: 5}}>
-        <Icon name="home" style="Entypo" onPress={toMainpage} />
-        {path === '/' ? (
-          <Text numberOfLines={1}>{'Trang chủ '}</Text>
-        ) : (
-          <Text>{`../${path
-            .substr(0, path.length - 1)
-            .split('/')
-            .pop()}`}</Text>
-        )}
-        {_.get(body, 'body.path') === '/' ? null : (
-          <Icon
-            name="arrow-bold-left"
-            type="Entypo"
-            onPress={goBack}
-            style={{position: 'absolute', right: 0}}
-          />
-        )}
+    <View style={{flex: 1}}>
+      <View style={{ flexDirection:'colum'}}>
+        <SearchBox onChange={onChangeSearchContent} />
+        <View style={{padding: 5}}>
+          <Icon name="home" style="Entypo" onPress={toMainpage} />
+          {path === '/' ? (
+            <Text numberOfLines={1}>{'Trang chủ '}</Text>
+          ) : (
+            <Text>{`../${path
+              .substr(0, path.length - 1)
+              .split('/')
+              .pop()}`}</Text>
+          )}
+          {_.get(body, 'body.path') === '/' ? null : (
+            <Icon
+              name="arrow-bold-left"
+              type="Entypo"
+              onPress={goBack}
+              style={{position: 'absolute', right: 0}}
+            />
+          )}
+        </View>
       </View>
       <DriverPage
         reload={reload}

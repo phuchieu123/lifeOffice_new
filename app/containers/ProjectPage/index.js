@@ -237,6 +237,7 @@ const styles = {
   justifyContent: 'center',
   alignItems: 'center',
   borderRadius: 50,
+
 };
 const mapStateToProps = createStructuredSelector({
   projectPage: makeSelectProjectPage(),

@@ -32,7 +32,7 @@
                     />}
                     <Text style={{ marginLeft: 10, fontSize: 20, color:'white'}}>{title}</Text>
                 </View>
-                <View style={{ top: 2 }}>
+                <View style={{flex: 0.2, top: 2}}>
                     {rightHeader}
                     {/* <MsgIcon /> */}
                 </View>
