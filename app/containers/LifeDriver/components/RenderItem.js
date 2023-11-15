@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ActionSheet, Icon, Item, Text, View, Alert, Input, Label, Badge, Button, Container } from 'native-base';
+import { ActionSheet} from 'native-base';
+import Icon from "react-native-vector-icons/MaterialIcons";
 import { REQUEST_METHOD } from '../../../utils/constants';
 import { rename, downloadFile, shareFile } from '../../../api/fileSystem';
-import { PermissionsAndroid, Platform, Linking, Modal } from 'react-native';
+import { PermissionsAndroid, Platform, Linking, Modal, View, Text } from 'react-native';
 import { API_FILE } from '../../../configs/Paths';
 import { navigate } from '../../../RootNavigation';
 import ToastCustom from '../../../components/ToastCustom';
@@ -211,19 +212,19 @@ export function RenderItem(props) {
     return <>
         <View style={{ flex: 1 }}>
             {data.isFile
-                ? <Item style={{ padding: 5 }} onPress={onItemPress}>
+                ? <View style={{ padding: 5 }} onPress={onItemPress}>
                     <View style={{ width: 40, height: 40, backgroundColor: '#DDD', marginRight: 10, borderRadius: 10, justifyContent: 'center', alignItems: 'center' }}>
                         <Text style={{ fontSize: 12, color: '#777' }}>{data.type}</Text>
                     </View>
                     <Text numberOfLines={1} style={{ width: '80%' }}>{data.name}</Text>
-                </Item>
-                : <Item style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
+                </View>
+                : <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
                     <TouchableOpacity onPress={onFolderPress} style={{ flexDirection: 'row' }}>
                         <Icon name='folder' type="MaterialIcons" style={{ color: 'gray', fontSize: 40 }} />
                         <Text style={{ alignSelf: 'center' }}>{data.name}</Text>
                     </TouchableOpacity>
                     <Icon onPress={seLectonItemPress} name='menu' type="Entypo" style={{ color: 'gray', fontSize: 30, }} />
-                </Item>
+                </View>
             }
 
             {modal && <FolderModal isVisible={modal} onClose={() => setModal(false)} data={data} updateSuccess={updateSuccess} />}

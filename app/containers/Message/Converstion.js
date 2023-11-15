@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Item, Left, List, View, Text, Thumbnail, Right } from 'native-base';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
@@ -11,7 +10,7 @@ import { navigate } from '../../RootNavigation';
 import moment from 'moment';
 import { createNewMessage, getAvatar } from '../../utils/common';
 import SearchBox from './components/SearchBox';
-import { DeviceEventEmitter } from 'react-native';
+import { DeviceEventEmitter, Image,View, Text } from 'react-native';
 import { getMessage, getMessageCoutAll } from '../../api/message';
 
 const Converstion = props => {
@@ -98,7 +97,7 @@ const Converstion = props => {
 
     return <>
         <SearchBox handleReload={handleReload} query={query} setQuery={setQuery} />
-        <List style={{ flex: 1, paddingHorizontal: 5 }}>
+        <View style={{ flex: 1, paddingHorizontal: 5 }}>
             <ListPage
                 limit={20}
                 reload={reload}
@@ -109,7 +108,7 @@ const Converstion = props => {
                 forceList={localData}
                 itemComponent={({ item }) => <RenderItem item={item} profile={profile} />}
             />
-        </List>
+        </View>
     </>
 }
 
@@ -130,10 +129,10 @@ const RenderItem = ({ item, profile }) => {
         setToUser(emp[0])
     }, [])
 
-    return <Item onPress={() => navigate('MessageChat', { conversation: item, toUser: toUser })}>
-        <Left style={{ flexDirection: 'row' }}>
+    return <View onPress={() => navigate('MessageChat', { conversation: item, toUser: toUser })}>
+        <View style={{ flexDirection: 'row' }}>
             <View style={{ margin: 5 }}>
-                <Thumbnail source={getAvatar(toUser && toUser.avatar)} />
+                <Image source={getAvatar(toUser && toUser.avatar)} />
             </View>
             <View style={{ margin: 10 }}>
                 <Text numberOfLines={1}>{toUser ? toUser.name : null}</Text>
@@ -143,10 +142,10 @@ const RenderItem = ({ item, profile }) => {
                     </Text>
                 }
             </View>
-        </Left>
-        {item.updatedAt && <Right style={{ justifyContent: 'center' }}>
+        </View>
+        {item.updatedAt && <View style={{ justifyContent: 'center' }}>
             <Text note>{moment(item.updatedAt).format('HH:mm')}</Text>
             <Text note>{moment(item.updatedAt).format('DD/MM/YYYY')}</Text>
-        </Right>}
-    </Item>
+        </View>}
+    </View>
 }

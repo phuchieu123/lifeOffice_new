@@ -14,7 +14,7 @@ import {
   makeSelectHasApprove,
   makeSelectKanbanBosConfigs,
   makeSelectKanbanTaskConfigs,
-  makeSelectProfile,
+  makeSelectProfile,Message,
   makeSelectSocket,
   makeSelectUserRole,
 } from '../App/selectors';

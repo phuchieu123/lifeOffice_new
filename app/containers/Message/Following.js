@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Body, Icon, Input, Item, Left, List, ListItem, View, Text, Thumbnail, Button } from 'native-base';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import ListPage from '../../components/ListPage';
 import { API_USERS } from '../../configs/Paths';
 import { getAvatar, getFilterOr } from '../../utils/common';
-import { Alert, DeviceEventEmitter, ToastAndroid, TouchableNativeFeedback } from 'react-native'
+import { Alert, DeviceEventEmitter, ToastAndroid, TouchableNativeFeedback, Image, TouchableOpacity, View, Text } from 'react-native'
 import { makeSelectProfile, makeSelectSocket } from '../App/selectors';
 import { navigate } from '../../RootNavigation';
 import SearchBox from './components/SearchBox';
@@ -42,9 +41,10 @@ const Following = props => {
         return data.filter(e => e._id !== profile._id)
     }
 
-    return <>
+    return <View style={{flex: 1}}>
+        <View  style={{flexDirection: 'colum'}}>
         <SearchBox handleReload={handleReload} query={query} setQuery={setQuery} />
-        <List style={{ flex: 1, paddingHorizontal: 5 }}>
+        <View  style={{alignItems: 'center'}}>
             <ListPage
                 limit={20}
                 reload={reload}
@@ -57,23 +57,24 @@ const Following = props => {
                     const color = item.online ? 'rgba(46, 149, 46, 1)' : 'red'
                     const status = item.online ? 'Trực tuyến' : 'Ngoại tuyến'
                     return <TouchableNativeFeedback onPress={() => navigate('MessageChat', { toUser: item })}>
-                        <ListItem avatar>
-                            <Left>
-                                <Thumbnail
+                        <TouchableOpacity avatar>
+                            <View>
+                                <Image
                                     source={getAvatar(item.avatar, item.gender)}
                                 // style={{ borderColor: color, borderWidth: 3 }}
                                 />
-                            </Left>
-                            <Body>
+                            </View>
+                            <View>
                                 <Text>{item.name}</Text>
                                 <Text note style={{ color }}>{status}</Text>
-                            </Body>
-                        </ListItem>
+                            </View>
+                        </TouchableOpacity>
                     </TouchableNativeFeedback>
                 }}
             />
-        </List>
-    </>
+        </View>
+        </View>
+    </View>
 }
 
 const mapStateToProps = createStructuredSelector({

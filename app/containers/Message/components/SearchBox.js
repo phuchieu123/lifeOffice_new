@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import { Icon, Input, Item } from 'native-base';
+import {View, TextInput} from 'react-native'
 import { getFilterOr } from '../../../utils/common';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 export default SearchBox = props => {
     const { handleReload, query, setQuery } = props
 
@@ -16,8 +16,8 @@ export default SearchBox = props => {
         }, 500);
     }
 
-    return <Item style={{ paddingHorizontal: 10 }}>
-        <Input placeholder="Tìm kiếm" onChangeText={onChangeText} />
+    return <View style={{ paddingHorizontal: 10 }}>
+        <TextInput placeholder="Tìm kiếm" onChangeText={onChangeText} />
         <Icon name="search" onPress={handleReload} />
-    </Item>
+    </View>
 }
