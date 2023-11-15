@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text } from 'native-base';
+import { View, Text } from 'react-native';
 import ToggleIcon from './ToggleIcon';
 import _ from 'lodash';
 

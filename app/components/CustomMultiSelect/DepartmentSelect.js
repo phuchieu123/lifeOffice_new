@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { TouchableOpacity, FlatList } from 'react-native';
-import { ListItem, Text, View, Button, Radio } from 'native-base';
+import {Text, View, TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -29,7 +28,7 @@ const DepartmentSelect = (props) => {
 
   const dataId = useRef([]);
   const showId = useRef([]);
-
+  
   useEffect(() => {
     if (Array.isArray(selectedItems)) {
       dataId.current = selectedItems;
@@ -99,19 +98,20 @@ const DepartmentSelect = (props) => {
           data={departments}
           selectedItems={selectedItems}
           uniqueKey={'_id'}
-          displayKey={'name'}
+          displayKey={'name'}S
         />
       </TouchableOpacity>
 
       <Modal isVisible={isVisible} style={styles.modal}>
         {/* <SearchHeader {...{ onSearch, loading, setLoading }} /> */}
         <View style={{ flex: 1, padding: 0 }}>
-          <ListItem itemHeader itemDivider style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>
-            <Text>Phòng ban/đơn vị</Text>
-          </ListItem>
+          <View itemHeader itemDivider style={{ borderTopLeftRadius: 10, borderTopRightRadius: 10, paddingVertical: 10, backgroundColor:'#ddd' }}>
+            <Text style={{paddingLeft: 10}} >Phòng ban/đơn vị</Text>
+          </View>
           {!items.length ? <NoItem /> : null}
           <FlatList
-            data={items}
+          style={{ marginHorizontal: 10}}
+                        data={items}
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => {
               return (
@@ -132,6 +132,8 @@ const DepartmentSelect = (props) => {
         <Footer onClose={onClose} handleSave={handleSave} />
       </Modal>
     </View>
+    
+
   );
 };
 
@@ -150,13 +152,13 @@ const RenderItem = ({ item, onShow, onSelect, isShow, selected }) => {
   const toggleRadio = () => onSelect(item, !selected);
 
   return (
-    <ListItem style={{ flex: 1, flexDirection: 'row' }} onPress={onItemPress}>
+    <TouchableOpacity activeOpacity={1} style={{ flex: 1, flexDirection: 'row', paddingVertical: 10, alignItems: 'center', }} onPress={onItemPress}>
       <Text>{' '.repeat(name.length - name.trimLeft().length)}</Text>
       {hasChild ? (
         isShow ? (
-          <Icon type="FontAwesome" name="caret-down"  />
+          <Icon type="FontAwesome" name="chevron-right" style={styleRen.Icon}  />
         ) : (
-          <Icon type="FontAwesome" name="caret-down"  />
+          <Icon type="FontAwesome" name="chevron-down"  />
         )
       ) : (
         <Text> </Text>
@@ -165,6 +167,12 @@ const RenderItem = ({ item, onShow, onSelect, isShow, selected }) => {
       <View style={{ flexDirection: 'row' }}>
         <RadioCustom selected={selected} toggleRadio={toggleRadio} />
       </View>
-    </ListItem>
+    </TouchableOpacity>
   );
 };
+
+const styleRen={
+  Icon:{
+    
+  }
+}

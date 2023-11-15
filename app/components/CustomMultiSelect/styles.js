@@ -38,5 +38,6 @@ export default styles = {
     padding: 0,
     alignSelf: 'center',
     zIndex: 39,
+   
   },
 };

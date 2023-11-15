@@ -164,7 +164,7 @@ const MultiAPISearch = (props) => {
         stickyFooterComponent={< Footer handleSave={onConfirm} onClose={onCancel} />}
         searchPlaceholderText="Chọn"
       />
-    </View >
+    </View>
   );
 };
 
