@@ -163,7 +163,7 @@ console.log(fromDate, 'đây nè');
             <CalendarList
               {...props}
               markingType={'period'}
-              current={fromDate}
+              current={fromDate }
               markedDates={markedDates}
               onDayPress={onDayPress}
               theme={styles.calender}
