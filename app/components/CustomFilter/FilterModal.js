@@ -48,7 +48,7 @@ const FilterModal = props => {
   const [kanbanStatus, setKanbanStatus] = useState([]);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [employeeFilter, setEmployeeFilter] = useState();
-
+  const [isCheck, setIsCheck] = useState(true)
   const [employeesOption, setEmployeesOption] = useState([]);
   const [employeesPersonnel, setEmployeesPersonnel] = useState([]);
 
@@ -84,6 +84,8 @@ const FilterModal = props => {
 
   const handleChangeOrg = org => {
     const result = org.map(e => e._id);
+
+    
     setSelectedOrg(result);
 
     const newFilter = {};
@@ -123,14 +125,14 @@ const FilterModal = props => {
         <View>
           {enableDatePicker && (
             <View style={{}}>
-              <View
+              {isCheck ?<View
                 itemHeader
                 itemDivider
                 style={{...styles, borderRadius: 10}}>
                 <Text>Thời gian</Text>
-              </View>
-              <View onPress={() => setShowDatePicker(true)}>
-                <View style={{alignItems: 'flex-end', ...styleRight}}>
+              </View> : null}
+              <TouchableOpacity onPress={() => setShowDatePicker(true)}>
+                <View  style={{alignItems: 'flex-end', ...styleRight}}>
                   <Text>
                     {`${
                       start
@@ -149,7 +151,7 @@ const FilterModal = props => {
                     />
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
           )}
           {enableFilterOrg && (
