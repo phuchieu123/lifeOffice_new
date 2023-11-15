@@ -218,7 +218,7 @@ export function EditAccount(props) {
           <Icon name="close" type="AntDesign" />
         </Button> */}
       </View>
-    </View >
+    </View>
   );
 }
 

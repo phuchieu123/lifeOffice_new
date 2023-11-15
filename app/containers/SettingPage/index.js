@@ -11,7 +11,9 @@ import { createStructuredSelector } from 'reselect';
 
 import _ from 'lodash';
 import moment from 'moment';
-import { Button, Content, Icon, Text } from 'native-base';
+import { Button } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import {View, Text} from 'react-native'
 import { BackHandler } from 'react-native';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -141,17 +143,17 @@ export function SettingPage(props) {
           </>
         }
       />
-      <Content padder>
-        {isEdit
+      <View padder>
+        {/* {isEdit
           ? <EditAccount profile={profile || {}} updateAvatar={onUpdateAvatar} uploadingAvatar={uploadingAvatar} onSave={onSave} onCancel={() => setIsEdit(false)} updating={updating} />
           : <AccountTab profile={profile || {}} updateAvatar={onUpdateAvatar} uploadingAvatar={uploadingAvatar} />
-        }
+        } */}
         {isEdit ? null :
           <Button block onPress={logout} style={{ borderRadius: 30 }}>
             <Text style={{ color: '#fff' }}>Đăng xuất</Text>
           </Button>
         }
-      </Content>
+      </View>
     </>
   );
 }

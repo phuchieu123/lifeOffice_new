@@ -18,9 +18,10 @@ function BackHeader(props) {
         height: 50,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'center'
       }}>
-      <View style={{flexDirection: 'row', flex: 1}}>
+      <View style={{flexDirection: 'row', flex: 1,   justifyContent: 'space-between',
+        alignItems: 'center',}}>
         {navigation || onGoBack ? (
           <Icon
             name="arrow-back"
@@ -30,12 +31,12 @@ function BackHeader(props) {
           />
         ) : null}
 
-        <Text style={{marginLeft: 10, fontSize: 20, color: 'white'}}>
+        <Text style={{marginLeft: 10, fontSize: 20, color: 'white', flex: 1}}>
           {title}
         </Text>
       </View>
-      <View style={{flex: 0.2, top: 2}}>{rightHeader}</View>
-    </View>
+      <View style={{paddingRight: 10}}>{rightHeader}</View>
+    </View> 
   );
 }
 
