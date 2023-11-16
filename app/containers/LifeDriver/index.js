@@ -26,7 +26,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import RenderPage from './components/RenderPage';
 import CustomHeader from '../../components/Header';
 import { API_FILE_COMPANY, API_FILE_SHARE, API_FILE_USERS, } from '../../configs/Paths';

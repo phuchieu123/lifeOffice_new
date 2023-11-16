@@ -131,7 +131,7 @@ const AccountTab = props => {
             type="FontAwesome"
           />
 
-          <Text>Email: </Text>
+          <Text>Email:  </Text>
           <View style={{justifyContent: 'flex-end', flex: 1, paddingEnd: 10}}>
             <Text style={{textAlign: 'right', fontWeight: '700'}}>
               {profile.email}

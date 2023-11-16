@@ -49,7 +49,7 @@ export function AddApprovePage(props) {
   }, []);
 
   return (
-    <Container>
+    <View>
       <BackHeader navigation={navigation} title="Yêu cầu phê duyệt" />
       <Content>
         {!hrmOverTime.POST ? null : <ListItem icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveOverTime')}>
@@ -141,7 +141,7 @@ export function AddApprovePage(props) {
           </Right>
         </ListItem>}
       </Content>
-    </Container>
+    </View>
   );
 }
 

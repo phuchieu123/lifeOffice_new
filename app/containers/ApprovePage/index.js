@@ -2,26 +2,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState, useCallback } from 'react';
-import { BackHandler, DeviceEventEmitter, StyleSheet } from 'react-native';
+import { BackHandler, DeviceEventEmitter, StyleSheet, Text,
+  View } from 'react-native';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import Icon from 'react-native-vector-icons/Entypo';
 import { useInjectSaga } from '../../utils/injectSaga';
 import { useInjectReducer } from '../../utils/injectReducer';
 import makeSelectApprovePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { getApprove, updateApprove, cleanup, updateCount } from './actions';
-import {
-  Text,
-  Container,
-  View,
-  Tab,
-  TabHeading,
-  Tabs,
-  Icon,
-} from 'native-base';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import BackHeader from '../../components/Header/BackHeader';
 import ApprovalStatusView from './ApprovalStatusView';
 import { API_APPROVE, API_MODULE_DYNAMIC } from '../../configs/Paths';
@@ -35,7 +28,7 @@ import { getCoutApprove, getDataApprove } from '../../api/approve';
 import BadgeView from './BadgeView';
 import { makeSelectProfile } from '../App/selectors';
 import request from '../../utils/request';
-
+const Tab = createMaterialTopTabNavigator();
 export function ApprovePage(props) {
   useInjectReducer({ key: 'approvePage', reducer });
   useInjectSaga({ key: 'approvePage', saga });
@@ -152,17 +145,23 @@ export function ApprovePage(props) {
   }
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       <BackHeader navigation={navigation} title="Danh sách phê duyệt" />
-      <Tabs>
-        <Tab
-          heading={
-            <TabHeading>
-              <Text numberOfLines={1} style={{ fontSize: 14 }}>Chờ phê duyệt</Text>
-              <BadgeView type={0} countApprove={countApprove && countApprove.countNotApproved} />
-            </TabHeading>
-          }>
-          <ListPage
+      <Tab.Navigator tabBarOptions={{
+          style: {
+            backgroundColor: 'rgba(46, 149, 46, 1)', // Màu nền của toàn bộ thanh tab
+            borderTopWidth: 0.5,
+            borderTopColor: '#aaa',
+          },
+          activeTintColor: 'white', // Màu chữ của tab đang được chọn
+          inactiveTintColor: 'white', // Màu chữ của tab không được chọn
+          indicatorStyle: {
+            backgroundColor: 'white', // Màu của thanh dưới chữ khi tab được chọn
+          },
+        }}>
+        <Tab.Screen
+         name='chờ phê duyệt'
+          component={() =>{return <ListPage
             func={handleSearchAprove}
             query={{
               filter: {
@@ -173,16 +172,24 @@ export function ApprovePage(props) {
             customData={customData}
             api={API_APPROVE}
             itemComponent={({ item }) => <ApproveItem item={item} profile={profile} handleOpenModal={handleOpenModal} />}
-          />
-        </Tab>
-        <Tab
-          heading={
-            <TabHeading>
-              <Text numberOfLines={1} style={{ fontSize: 14 }}>Đã phê duyệt</Text>
-              <BadgeView type={1} countApprove={countApprove && countApprove.countApproved} />
-            </TabHeading>
-          }>
-          <ListPage
+          /> } }
+
+          options={{
+    tabBarLabel: ({ focused }) => (
+      <View>
+        <Text numberOfLines={1} style={{ fontSize: 14, color: focused ? 'white' : 'black' }}>
+          Chờ phê duyệt
+        </Text>
+        <BadgeView type={0} countApprove={countApprove && countApprove.countNotApproved} />
+      </View>
+    ),
+  }}
+          >
+          
+        </Tab.Screen>
+        <Tab.Screen
+          name="Đã phê duyệt"
+        omponent={() =>{return   <ListPage
             func={handleSearchAprove}
             query={{
               filter: {
@@ -193,33 +200,42 @@ export function ApprovePage(props) {
             customData={customData}
             api={API_APPROVE}
             itemComponent={({ item }) => <ApproveItem item={item} handleOpenModal={handleOpenModal} />}
-          />
-        </Tab>
-        <Tab
-          heading={
-            <TabHeading>
-              <Text numberOfLines={1} style={{ fontSize: 14 }}>Không phê duyệt</Text>
-              {/* <BadgeView type={2} /> */}
-            </TabHeading>
-          }>
-          <ListPage
-            func={handleSearchAprove}
-            query={{
-              filter: {
-                'groupInfo.approve': 2
-              }
-            }}
-            reload={reload}
-            customData={customData}
-            api={API_APPROVE}
-            itemComponent={({ item }) => <ApproveItem item={item} handleOpenModal={handleOpenModal} />}
-          />
-        </Tab>
-      </Tabs>
-      <FabLayout onPress={() => navigation.navigate('AddApprovePage')}>
+          />}}
+         options={{
+    tabBarLabel: ({ focused }) => (
+      <View>
+        <Text numberOfLines={1} style={{ fontSize: 14, color: focused ? 'white' : 'black' }}>Đã phê duyệt</Text>
+              <BadgeView type={1} countApprove={countApprove && countApprove.countApproved} />
+      </View>
+   ),
+  }}
+/>
+         
+        {/* <Tab
+           heading={
+             <TabHeading>
+               <Text numberOfLines={1} style={{ fontSize: 14 }}>Không phê duyệt</Text>
+             
+             </TabHeading>
+           }>
+           <ListPage
+             func={handleSearchAprove}.g
+             query={{
+               filter: {
+                 'groupInfo.approve': 2
+               }
+             }}
+             reload={reload}
+             customData={customData}
+          api={API_APPROVE}
+           itemComponent={({ item }) => <ApproveItem item={item} handleOpenModal={handleOpenModal} />}
+           />
+         </Tab> */}
+      </Tab.Navigator>
+      <FabLayout onPress={() => navigation.navigate('AddApprovePage')} style={styles}>
         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
       </FabLayout>
-    </Container >
+    </View>
   );
 }
 
@@ -240,3 +256,13 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(ApprovePage);
+const styles = {
+  position: 'absolute',
+  bottom: 10,
+  right: 10,
+  width: 40,
+  height: 40,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 50,
+};
