@@ -27,7 +27,7 @@ function BackHeader(props) {
             name="arrow-back"
             type="MaterialIcons"
             onPress={handleGoBack}
-            style={{color: '#fff', top: 3, justifyContent: 'center'}}
+            style={{color: '#fff', top: 3, justifyContent: 'center',paddingLeft: 10, fontSize: 25}}
           />
         ) : null}
 

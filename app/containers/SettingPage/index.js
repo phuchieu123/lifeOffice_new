@@ -149,7 +149,7 @@ export function SettingPage(props) {
               <Icon
                 name="edit"
                 type="MaterialIcons"
-                style={{color: '#fff'}}
+                style={{color: '#fff', fontSize: 25}}
                 onPress={onEdit}
               />
             )}

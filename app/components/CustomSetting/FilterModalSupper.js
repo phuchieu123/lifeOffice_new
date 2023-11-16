@@ -1,4 +1,5 @@
-import { Button, Icon, List, Text, View } from 'native-base';
+import { Button, Text, View } from 'native-base';
+import Icon from "react-native-vector-icons/AntDesign"
 import React, { useEffect, useState } from 'react';
 import { launchCamera } from 'react-native-image-picker';
 import Modal from 'react-native-modal';
@@ -92,7 +93,7 @@ const FilterModalSupper = (props) => {
 
             <View style={{ backgroundColor: '#fff', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
                 <AvatarInput source={uri} type='detail' loading={insertingFace} />
-                <List>
+                <View>
                     <View>
                         <View padder style={{ flexDirection: 'row', marginTop: 10 }}>
                             <LoadingButton isBusy={insertingFace} block onPress={() => pickupImage()} full style={{ flex: 1, borderRadius: 10, marginRight: 5, backgroundColor: '#009900' }} warning>
@@ -110,16 +111,16 @@ const FilterModalSupper = (props) => {
                         </View>
                     </View>
 
-                </List>
+                </View>
                 <View padder style={{ flexDirection: 'row', marginTop: 10, marginBottom: 10 }}>
 
-                    <Button block onPress={onClose} full style={{ flex: 1, borderRadius: 10, marginRight: 5, }} warning>
-                        <Icon name="close" type="AntDesign" />
+                    <Button block onPress={onClose} full style={{ flex: 1, borderRadius: 10, marginHorizontal: 5, backgroundColor:'orange' }} warning>
+                        <Icon name="close" type="AntDesign" size={20} color='white' />
                     </Button>
                 </View>
             </View>
 
-        </Modal >
+        </Modal>
 
     );
 };
