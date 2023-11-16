@@ -9,7 +9,7 @@ export default ImageInput = props => {
 
     const onPress = () => pickupImage(onSave)
 
-    return <View style={{ height: 160 }}>
+    return <View style={{ height: 160, }}>
         {loading ?
             <View style={{ flex: 1 }}>
                 <ActivityIndicator size="large" color="#0000ff" style={{ alignSelf: 'center', marginTop: 50 }} />
@@ -37,5 +37,5 @@ export default ImageInput = props => {
                 {/* <Icon name="edit" type="AntDesign" style={{ position: 'absolute', right: 0, bottom: 0 }} onPress={onPress} /> */}
             </>
         }
-    </View >
+    </View>
 }

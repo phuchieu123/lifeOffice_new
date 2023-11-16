@@ -85,17 +85,17 @@ export function EditAccount(props) {
   return (
     <View>
       <AvatarInput loading={uploadingAvatar} onSave={onChangeAvatar} source={getAvatar(avatarProfile.avatar, profile.gender)} />
-      <Card style={{ marginTop: 10 }}>
-        <CardItem bordered>
+      <View style={{ marginTop: 10 }}>
+        <View bordered>
           <Button transparent iconRight small>
             <Icon name="key" type="FontAwesome" />
           </Button>
           <Text>Mã nhân viên: </Text>
-          <Right style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <Text style={{ textAlign: 'right', fontWeight: '700' }}>{profile.code}</Text>
-          </Right>
-        </CardItem>
-        <CardItem bordered>
+          <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <Text style={{ textAlign: 'View', fontWeight: '700' }}>{profile.code}</Text>
+          </View>
+        </View>
+        {/* <View bordered>
           <Button transparent iconRight small>
             <Icon name="user" type="FontAwesome" />
           </Button>
@@ -103,8 +103,8 @@ export function EditAccount(props) {
           <Right style={{ flex: 1, justifyContent: 'flex-end' }}>
             <Text style={{ textAlign: 'right', fontWeight: '700' }}>{localData.username}</Text>
           </Right>
-        </CardItem>
-        <CardItem bordered style={styles.cardbig}>
+        </View>
+        <View bordered style={styles.cardbig}>
           <View style={styles.inputText}>
             <Button style={{ alignItems: 'center' }} transparent iconRight small>
               <Icon active name="address-book-o" type="FontAwesome" />
@@ -119,8 +119,8 @@ export function EditAccount(props) {
             }} onChangeText={val => handleChange('name', val)} />
             <Icon active type="Entypo" name="keyboard" style={styles.icon} />
           </Right>
-        </CardItem>
-        <CardItem bordered style={styles.cardbig}>
+        </View>
+        <View bordered style={styles.cardbig}>
           <View style={styles.inputText}>
             <Button transparent iconRight small style={{ alignItems: 'center' }}>
               <Icon active name="envelope-o" type="FontAwesome" />
@@ -134,8 +134,8 @@ export function EditAccount(props) {
             }} onChangeText={val => handleChange('email', val)} />
             <Icon active type="Entypo" name="keyboard" style={styles.icon} />
           </Right>
-        </CardItem>
-        <CardItem bordered style={styles.cardbig}>
+        </View>
+        <View bordered style={styles.cardbig}>
           <View style={styles.inputText}>
             <Button transparent iconRight small style={{ alignItems: 'center' }}>
               <Icon active name="transgender" type="FontAwesome" />
@@ -148,8 +148,8 @@ export function EditAccount(props) {
               <Icon type="FontAwesome" name="caret-down" color="red" style={styles.icon} />
             </TouchableOpacity>
           </Right>
-        </CardItem>
-        <CardItem bordered style={styles.cardbig}>
+        </View>
+        <View bordered style={styles.cardbig}>
           <View style={styles.inputText}>
             <Button transparent iconRight small style={{ alignItems: 'center' }}>
               <Icon active name="mobile-phone" type="FontAwesome" />
@@ -160,8 +160,8 @@ export function EditAccount(props) {
             <Input value={localData.phoneNumber} onChangeText={val => handleChange('phoneNumber', val)} keyboardType='numeric' style={{ fontWeight: '700', textAlign: 'right' }} />
             <Icon active type="Entypo" name="keyboard" style={styles.icon} />
           </Right>
-        </CardItem>
-        <CardItem bordered style={styles.cardbig}>
+        </View>
+        <View bordered style={styles.cardbig}>
           <View style={styles.inputText}>
             <Button transparent iconRight small style={{ alignItems: 'center' }}>
               <Icon active name="address-book" type="FontAwesome" />
@@ -172,8 +172,8 @@ export function EditAccount(props) {
             <Input value={localData.address} style={{ fontWeight: '700', textAlign: 'right' }} onChangeText={val => handleChange('address', val)} />
             <Icon active type="Entypo" name="keyboard" style={styles.icon} />
           </Right>
-        </CardItem>
-        <CardItem bordered>
+        </View>
+        <View bordered>
           <Button transparent iconRight small>
             <Icon active name="birthday-cake" type="FontAwesome" />
           </Button>
@@ -185,7 +185,7 @@ export function EditAccount(props) {
               textStyle={{ fontWeight: 'bold', fontSize: 15, }}
             />
           </Right>
-        </CardItem>
+        </View> */}
         {/* <CardItem bordered>
           <Button transparent iconRight small>
             <Icon active name="briefcase" type="FontAwesome" />
@@ -200,7 +200,7 @@ export function EditAccount(props) {
             />
           </Right>
         </CardItem> */}
-      </Card>
+      </View>
       <View padder style={{ flexDirection: 'row' }}>
 
 
