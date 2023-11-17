@@ -16,6 +16,7 @@ import {
   TextInput,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 import images from '../../../images';
 import moment from 'moment';
 import {
@@ -129,7 +130,13 @@ export function EditAccount(props) {
 
           <Text>Mã nhân viên: </Text>
           <View style={{flex: 1, justifyContent: 'flex-end'}}>
-            <Text style={{textAlign: 'right', fontWeight: '700',  color: '#000',marginRight: 5}}>
+            <Text
+              style={{
+                textAlign: 'right',
+                fontWeight: '700',
+                color: '#000',
+                marginRight: 5,
+              }}>
               {profile.code}
             </Text>
           </View>
@@ -139,7 +146,13 @@ export function EditAccount(props) {
 
           <Text>Tài khoản: </Text>
           <View style={{flex: 1, justifyContent: 'flex-end'}}>
-            <Text style={{textAlign: 'right', fontWeight: '700',  color: '#000',marginRight: 5}}>
+            <Text
+              style={{
+                textAlign: 'right',
+                fontWeight: '700',
+                color: '#000',
+                marginRight: 5,
+              }}>
               {localData.username}
             </Text>
           </View>
@@ -160,12 +173,19 @@ export function EditAccount(props) {
               value={localData.name}
               style={{
                 textAlign: 'right',
-                fontWeight: '700',  color: '#000',marginRight: 5,
-                padding:0
+                fontWeight: '700',
+                color: '#000',
+                marginRight: 5,
+                padding: 0,
               }}
               onChangeText={val => handleChange('name', val)}
             />
-            <Icon active type="Entypo" name="keyboard" style={styles.icon} />
+            <IconEntypo
+              active
+              type="Entypo"
+              name="keyboard"
+              style={styleUse.icon}
+            />
           </View>
         </View>
         <View style={styleUse.View}>
@@ -184,11 +204,19 @@ export function EditAccount(props) {
               value={localData.email}
               style={{
                 textAlign: 'right',
-                fontWeight: '700',  color: '#000',marginRight: 5,  padding:0
+                fontWeight: '700',
+                color: '#000',
+                marginRight: 5,
+                padding: 0,
               }}
               onChangeText={val => handleChange('email', val)}
             />
-            <Icon active type="Entypo" name="keyboard" style={styles.icon} />
+            <IconEntypo
+              active
+              type="Entypo"
+              name="keyboard"
+              style={styleUse.icon}
+            />
           </View>
         </View>
         <View style={styleUse.View}>
@@ -212,15 +240,20 @@ export function EditAccount(props) {
                 marginRight: 3,
               }}>
               <TextInput
-                style={{fontWeight: '700', marginRight: 5, textAlign: 'right',  color: '#000',marginRight: 5 }}
+                style={{
+                  fontWeight: '700',
+                  marginRight: 5,
+                  textAlign: 'right',
+                  color: '#000',
+                  marginRight: 5,
+                }}
                 value={convertGenderToText(localData.gender)}
                 disabled={true}
               />
               <Icon
                 type="FontAwesome"
                 name="caret-down"
-              
-                style={{fontSize: 16, textAlign:'right', flex: 1}}
+                style={{fontSize: 16, textAlign: 'right', flex: 1}}
               />
             </TouchableOpacity>
           </View>
@@ -241,9 +274,20 @@ export function EditAccount(props) {
               value={localData.phoneNumber}
               onChangeText={val => handleChange('phoneNumber', val)}
               keyboardType="numeric"
-              style={{fontWeight: '700', textAlign: 'right',  color: '#000',marginRight: 5,  padding:0 }}
+              style={{
+                fontWeight: '700',
+                textAlign: 'right',
+                color: '#000',
+                marginRight: 5,
+                padding: 0,
+              }}
             />
-            <Icon active type="Entypo" name="keyboard" style={styles.icon} />
+            <IconEntypo
+              active
+              type="Entypo"
+              name="keyboard"
+              style={styleUse.icon}
+            />
           </View>
         </View>
         <View style={styleUse.View}>
@@ -260,10 +304,21 @@ export function EditAccount(props) {
           <View style={styleUse.rightText}>
             <TextInput
               value={localData.address}
-              style={{fontWeight: '700', textAlign: 'right',  color: '#000',marginRight: 5,  padding:0}}
+              style={{
+                fontWeight: '700',
+                textAlign: 'right',
+                color: '#000',
+                marginRight: 5,
+                padding: 0,
+              }}
               onChangeText={val => handleChange('address', val)}
             />
-            <Icon active type="Entypo" name="keyboard" style={styles.icon} />
+            <IconEntypo
+              active
+              type="Entypo"
+              name="keyboard"
+              style={styleUse.icon}
+            />
           </View>
         </View>
         <View style={styleUse.View}>
@@ -300,19 +355,43 @@ export function EditAccount(props) {
           </Right>
         </CardItem> */}
       </View>
-      <View padder style={{flexDirection: 'row'}}>
+      <View
+        padder
+        style={{
+          flexDirection: 'row',
+          marginHorizontal: 20,
+          marginVertical: 10,
+        }}>
         <LoadingButton
           isBusy={updating || uploadingAvatar}
           handlePress={() => onSave(localData)}
-          style={{flex: 1, borderRadius: 10, marginLeft: 0, marginRight: 5}}>
-          <Icon name="check" type="Feather" />
+          style={{
+            flex: 1,
+            borderRadius: 10,
+            marginLeft: 0,
+            marginRight: 5,
+     
+            backgroundColor: 'rgba(46, 149, 46, 1)',
+            paddingVertical: 10,
+   
+          }}>
+          <Icon name="check" type="Feather" style={{ color: 'white',  textAlign: 'center',}} />
         </LoadingButton>
         <LoadingButton
           handlePress={onCancel}
           full
-          style={{flex: 1, borderRadius: 10, marginRight: 0, marginLeft: 5}}
+          style={{
+            flex: 1,
+            borderRadius: 10,
+            marginRight: 0,
+            marginLeft: 5,
+          
+            backgroundColor: 'orange',
+            paddingVertical: 10,
+           
+          }}
           warning>
-          <Icon name="close" type="AntDesign" />
+          <Icon name="close" type="AntDesign"  style={{ color: 'white',  textAlign: 'center',}}/>
         </LoadingButton>
 
         {/* <Button block onPress={() => onSave(localData)} style={{ flex: 1, borderRadius: 10, marginRight: 5 }}>
@@ -375,18 +454,20 @@ const styleUse = {
     paddingVertical: 15,
     borderRadius: 2,
   },
+  icon: {paddingRight: 5},
   Icon: {
     paddingHorizontal: 10,
     color: 'rgba(46, 149, 46, 1)',
-  }, inputText: {
-     flexDirection: 'row',
-    alignItems: 'center'
-      },
-      rightText: {
-            flex: 1,
-            flexDirection: 'row',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            padidng: 0
-          }
+  },
+  inputText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rightText: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    padidng: 0,
+  },
 };

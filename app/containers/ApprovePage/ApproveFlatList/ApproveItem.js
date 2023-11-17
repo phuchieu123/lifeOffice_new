@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, Card, CardItem, Right, Button, Icon } from 'native-base';
+import {Text, View, TouchableOpacity} from 'react-native';
 import { formartDate } from '../../../utils/common';
 import { DATE_FORMAT } from '../../../utils/constants';
 
@@ -16,11 +16,11 @@ export default ApproveItem = ({ item, profile, handleOpenModal }) => {
         return false;
     };
 
-    return <Card style={{ borderRadius: 18 }} >
-        <CardItem header bordered style={{ flex: 1, borderTopLeftRadius: 18, borderTopRightRadius: 18 }}>
+    return <View style={{ borderRadius: 18 }} >
+        <View header bordered style={{ flex: 1, borderTopLeftRadius: 18, borderTopRightRadius: 18 }}>
             <Text style={{ fontWeight: 'bold' }}>{item.name}</Text>
-        </CardItem>
-        <CardItem>
+        </View>
+        <View>
             <Text note style={{ fontWeight: 'bold' }}>
                 {item.subCode}
             </Text>
@@ -29,26 +29,26 @@ export default ApproveItem = ({ item, profile, handleOpenModal }) => {
                     {formartDate(item.createdAt, DATE_FORMAT.DATE)}
                 </Text>
             </Right>
-        </CardItem>
-        <CardItem>
+        </View>
+        <View>
             <Text>
                 {item.approveStatus}
             </Text>
-        </CardItem>
-        <CardItem style={{ borderBottomLeftRadius: 18, borderBottomRightRadius: 18 }} >
+        </View>
+        <View style={{ borderBottomLeftRadius: 18, borderBottomRightRadius: 18 }} >
             {profile
                 ? !checkValidUser(item)
-                    ? <Button warning small block rounded style={{ flex: 1 }} onPress={() => handleOpenModal(item)}>
+                    ? <TouchableOpacity warning small block rounded style={{ flex: 1 }} onPress={() => handleOpenModal(item)}>
                         <Icon name='hourglass-empty' type='MaterialIcons' style={{ marginRight: 5, paddingRight: 0 }} />
                         <Text style={{ marginLeft: 0, paddingLeft: 0 }} >Đang chờ phê duyệt</Text>
-                    </Button>
-                    : <Button small block rounded style={{ flex: 1 }} onPress={() => handleOpenModal(item)}>
+                    </TouchableOpacity>
+                    : <TouchableOpacity small block rounded style={{ flex: 1 }} onPress={() => handleOpenModal(item)}>
                         <Text>Phê duyệt</Text>
-                    </Button>
-                : <Button small block rounded style={{ flex: 1 }} onPress={() => handleOpenModal(item)}>
+                    </TouchableOpacity>
+                : <TouchableOpacity small block rounded style={{ flex: 1 }} onPress={() => handleOpenModal(item)}>
                     <Text>Thông tin phê duyệt</Text>
-                </Button>}
-        </CardItem>
-    </Card>
+                </TouchableOpacity>}
+        </View>
+    </View>
 }
 

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { TouchableOpacity } from 'react-native';
-import { Icon, Input, Text, View } from 'native-base';
+import { Input, Text, View } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment'
 import CustomDateTimePicker from './'
 import { DATE_FORMAT } from '../../utils/constants';
