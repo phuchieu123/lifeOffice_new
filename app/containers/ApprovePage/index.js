@@ -177,7 +177,7 @@ export function ApprovePage(props) {
           options={{
     tabBarLabel: ({ focused }) => (
       <View>
-        <Text numberOfLines={1} style={{ fontSize: 14, color: focused ? 'white' : 'black' }}>
+        <Text numberOfLines={1} style={{ fontSize: 14, color: focused ? 'white' : '#eee'  }}>
           Chờ phê duyệt
         </Text>
         <BadgeView type={0} countApprove={countApprove && countApprove.countNotApproved} />
@@ -189,7 +189,7 @@ export function ApprovePage(props) {
         </Tab.Screen>
         <Tab.Screen
           name="Đã phê duyệt"
-        omponent={() =>{return   <ListPage
+          component={() =>{return   <ListPage
             func={handleSearchAprove}
             query={{
               filter: {
@@ -204,22 +204,17 @@ export function ApprovePage(props) {
          options={{
     tabBarLabel: ({ focused }) => (
       <View>
-        <Text numberOfLines={1} style={{ fontSize: 14, color: focused ? 'white' : 'black' }}>Đã phê duyệt</Text>
+        <Text numberOfLines={1} style={{ fontSize: 14, color: focused ? 'white' : '#eee' }}>Đã phê duyệt</Text>
               <BadgeView type={1} countApprove={countApprove && countApprove.countApproved} />
       </View>
    ),
   }}
 />
          
-        {/* <Tab
-           heading={
-             <TabHeading>
-               <Text numberOfLines={1} style={{ fontSize: 14 }}>Không phê duyệt</Text>
-             
-             </TabHeading>
-           }>
-           <ListPage
-             func={handleSearchAprove}.g
+        <Tab.Screen
+           name="Không phê duyệt"
+          component={() =>{return  <ListPage
+             func={handleSearchAprove}
              query={{
                filter: {
                  'groupInfo.approve': 2
@@ -229,8 +224,16 @@ export function ApprovePage(props) {
              customData={customData}
           api={API_APPROVE}
            itemComponent={({ item }) => <ApproveItem item={item} handleOpenModal={handleOpenModal} />}
-           />
-         </Tab> */}
+           />}}
+         options={{
+    tabBarLabel: ({ focused }) => (
+      <View>
+        <Text numberOfLines={1} style={{ fontSize: 14, color: focused ? 'white' : '#eee' }}>không phê duyệt</Text>
+            
+      </View>
+   ),
+  }}  />
+        
       </Tab.Navigator>
       <FabLayout onPress={() => navigation.navigate('AddApprovePage')} style={styles}>
         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
