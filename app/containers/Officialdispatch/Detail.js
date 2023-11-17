@@ -119,12 +119,12 @@ function Officialdispatch(props) {
 
     return (
 
-        <Container>
+        <View>
             <BackHeader
                 navigation={navigation}
                 title={localData.name}
             />
-            <Tabs>
+            {/* <Tabs>
 
                 <Tab
                     heading={
@@ -132,26 +132,26 @@ function Officialdispatch(props) {
                             <Text>Chi Tiết</Text>
                         </TabHeading>
                     }>
-                    <DetailContent localData={localData} params={params.item} navigation={navigation} />
+                    <DetailContent localData={localData} params={params.item} navigation={navigation} /> */}
                     {/* <RenderPage api={API_FILE_USERS} folder="users" /> */}
-                </Tab>
+                {/* </Tab>
                 <Tab
                     heading={
                         <TabHeading>
                             <Text>Tài Liệu</Text>
                         </TabHeading>
-                    }>
+                    }> */}
                     {/* <RenderPage api={API_FILE_SHARE} folder="share" /> */}
-
+{/* 
                     <FileView id={localData._id} code={code} visible={true} reload={reload} />
                     <FabLayout onPress={handleAdd}>
                         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
                     </FabLayout>
                 </Tab>
-            </Tabs>
+            </Tabs> */}
 
 
-        </Container >
+        </View>
     )
 }
 

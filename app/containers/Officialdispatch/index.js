@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Body, Card, CardItem, Container, Content, Icon, Text, View } from 'native-base';
 import CustomHeader from '../../components/Header';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import ListPage from '../../components/ListPage';
 import { INCOMING_DOCUMENT } from '../../configs/Paths';
 import moment from 'moment';
 import { navigate } from '../../RootNavigation';
-import { BackHandler, DeviceEventEmitter, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { BackHandler, DeviceEventEmitter, TouchableOpacity, TouchableWithoutFeedback,Text, View } from 'react-native';
 import { DATE_FORMAT } from '../../utils/constants';
 import RightHeader from '../../components/CustomFilter/RightHeader';
 import SearchBox from '../../components/SearchBox'
@@ -139,14 +139,14 @@ export default function Officialdispatch(props) {
 
 
     return (
-        <Container>
+        <View style={{flex:1,  backgroundColor:'#ccc'}}>
             {isSeaching && <SearchBox isSeaching={isSeaching} onChange={onSearchText} setIsSearching={setIsSearching} />}
             <CustomHeader
                 navigation={navigation}
                 title={type === 1 ? 'Công văn đi' : type === 2 ? 'Công văn đến' : ''}
                 rightHeader={
                     <RightHeader
-                        children={<Icon name="search" type="FontAwesome" onPress={() => setIsSearching(true)} style={{ color: '#fff', marginHorizontal: 10 }} />}
+                        children={<Icon name="search" type="FontAwesome" onPress={() => setIsSearching(true)} style={{ color: '#fff', marginHorizontal: 10, fontSize: 25 }} />}
                         enableFilterModal
                         enableFilterOrg
                         organizationUnitId={_.get(query, 'filter.organizationUnit')}
@@ -159,7 +159,7 @@ export default function Officialdispatch(props) {
                     />
                 }
             />
-            <View style={{ flex: 1, marginHorizontal: 5 }}>
+              <View style={{ flex: 1, marginHorizontal: 5,}}>
                 {console.log(query)}
                 <ListPage
                     reload={reload}
@@ -168,9 +168,9 @@ export default function Officialdispatch(props) {
                     customData={customData}
                     itemComponent={({ item }) => {
                         return <TouchableWithoutFeedback onPress={() => navigate('DetailsOfficialDispatch', { item })}>
-                            <Card style={{ borderRadius: 10 }}>
-                                <CardItem style={{ borderRadius: 10 }}>
-                                    <Body>
+                            <View style={{ borderRadius: 10,   }}>
+                                <View style={{borderWidth: 0.5, borderBlockColor: 'gray', backgroundColor:'#fff', paddingVertical: 10}}>
+                                    <View>
                                         <View style={styles.view}>
                                             <View style={{ flex: 1 }}>
                                                 <Text numberOfLines={1}>{item.name}</Text>
@@ -194,29 +194,39 @@ export default function Officialdispatch(props) {
                                                 <Text note>{item.receiveTimeCustom}</Text>
                                             </View>
                                         </View>
-                                    </Body>
-                                </CardItem>
-                            </Card></TouchableWithoutFeedback>
+                                    </View>
+                                </View>
+                            </View></TouchableWithoutFeedback>
                     }}
                 />
             </View>
-
-            <FabLayout onPress={() => navigate('CreatDocumentary', { type })}>
+                   
+            <FabLayout style={styles.Fab} onPress={() => navigate('CreatDocumentary', { type })}>
                 <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
-            </FabLayout>
-        </Container >
+            </FabLayout> 
+        </View>
     )
 }
 
 const styles = {
     view: {
-        display: 'flex',
         flexDirection: 'row',
-        marginBottom: 2
+        marginBottom: 2,
+        paddingHorizontal: 10
     },
     icon: {
         fontSize: 18,
         opacity: 0.4,
         marginTop: 0
+    },
+    Fab:{
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 50,
     }
 }
