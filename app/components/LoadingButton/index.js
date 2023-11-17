@@ -10,9 +10,9 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {ActivityIndicator} from 'react-native';
 function LoadingButton(props) {
-  const { handlePress, onPress, isBusy, children } = props;
+  const { handlePress, onPress, isBusy, children, } = props;
   return (
-    <TouchableOpacity {...props} onPress={handlePress || onPress} disabled={isBusy} style={{ justifyContent: 'center', marginHorizontal: 5, marginBottom: 4, borderRadius: 10, ...(props.style || {}) }}>
+    <TouchableOpacity {...props} onPress={handlePress || onPress} disabled={isBusy} style={{ justifyContent: 'center', marginHorizontal: 10, marginVertical: 10, borderRadius: 10, ...(props.style || {}) }}>
       {isBusy && <ActivityIndicator color="#aaa" />}
       {!isBusy && children}
 

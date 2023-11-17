@@ -2,10 +2,10 @@ import React, { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { ActionSheet, Content, Input, Item, Label } from 'native-base';
+import { ActionSheet, } from 'native-base';
 import IconFeather from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/Entypo';
-import {Text, View} from 'react-native';
+import {Text, View, TextInput} from 'react-native';
 import BackHeader from '../../components/Header/BackHeader';
 import AvatarInput from '../../components/CustomInput/AvatarInput';
 import _, { set } from 'lodash'
@@ -226,21 +226,25 @@ export function AddCustomer(props) {
                     />
                 }
             />
-
-            <View padder>
-                <LoadingLayout isLoading={loading}>
+{/* 
+            <View padder style={{justifyContent:'space-between' ,backgroundColor: '#ddd', flex: 1
+                }}>
+            <View> */}
+                
+            <LoadingLayout isLoading={loading} style={{backgroundColor: '#ddd'}} >
+             
                     <AvatarInput source={getAvatar(ava, localData.gender)} onSave={setAvatar} view={view} />
-
+                    
                     <View inlineLabel error={error.code} style={styles.item} disabled >
-                        <Label>Mã khách hàng</Label>
-                        <Input style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChange('code', e)} value={localData.code} disabled />
+                        <Text>Mã khách hàng</Text>
+                        <TextInput style={{ textATextInput: 'right', marginRight: 5 }} onChangeText={e => handleChange('code', e)} value={localData.code} disabled />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
                     </View>
-                    {/* {!_.get(customerRoles, 'name.checkedShowForm') ? null :
-                        <Item inlineLabel style={styles.item} error={error.name}>
-                            <Label>{convertLabel(_.get(customerRoles, 'name.title') || 'Tên khách hàng')}:</Label>
-                            <Input
-                                style={{ textAlign: 'right', marginRight: 5, paddingTop: 10 }}
+                    {!_.get(customerRoles, 'name.checkedShowForm') ? null :
+                        <View inlineLabel style={styles.item} error={error.name}>
+                            <Text>{convertLabel(_.get(customerRoles, 'name.title') || 'Tên khách hàng')}:</Text>
+                            <TextInput
+                                style={{ textAlign: 'right', marginRight: 5,padding: 0 }}
                                 onChangeText={e => handleChange('name', e)}
                                 value={localData.name}
                                 placeholderTextColor="#ccc"
@@ -248,24 +252,24 @@ export function AddCustomer(props) {
                                 disabled={!putAuth}
                             />
                             <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                        </Item>}
+                        </View>}
 
                     {!_.get(customerRoles, 'nickName.checkedShowForm') ? null :
-                        <Item inlineLabel style={styles.item} error={error.nickName} >
-                            <Label>{convertLabel(_.get(customerRoles, 'nickName.title') || 'Biệt danh')}:</Label>
-                            <Input
-                                style={{ textAlign: 'right', marginRight: 5 }}
+                        <View inlineLabel style={styles.item} error={error.nickName} >
+                            <Text>{convertLabel(_.get(customerRoles, 'nickName.title') || 'Biệt danh')}:</Text>
+                            <TextInput
+                                style={{ textAlign: 'right', marginRight: 5,padding: 0 }}
                                 onChangeText={e => handleChange('nickName', e)}
                                 value={localData.nickName}
                                 disabled={!putAuth}
                                 placeholderTextColor="#ccc" />
                             <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                        </Item>}
+                        </View>}
 
-                    {!_.get(customerRoles, 'phoneNumber.checkedShowForm') ? null : <Item inlineLabel style={styles.item} error={error.phoneNumber}>
-                        <Label >{convertLabel(_.get(customerRoles, 'phoneNumber.title') || 'Số điện thoại')}:</Label>
-                        <Input
-                            style={{ textAlign: 'right', marginRight: 5 }}
+                    {!_.get(customerRoles, 'phoneNumber.checkedShowForm') ? null : <View inlineLabel style={styles.item} error={error.phoneNumber}>
+                        <Text >{convertLabel(_.get(customerRoles, 'phoneNumber.title') || 'Số điện thoại')}:</Text>
+                        <TextInput
+                            style={{ textAlign: 'right', marginRight: 5,padding: 0 }}
                             onChangeText={e => handleChange('phoneNumber', e)}
                             maxLength={13}
                             value={localData.phoneNumber}
@@ -273,47 +277,48 @@ export function AddCustomer(props) {
                             disabled={!putAuth}
                         />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                    </Item>}
+                    </View>}
 
-                    <Item style={styles.item} error={error.idetityCardNumber}>
-                        <Label >{convertLabel(_.get(customerRoles, 'idetityCardNumber.title') || 'Số CMND/CCCD')}:</Label>
-                        <Input keyboardType="decimal-pad" maxLength={13} style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChange('idetityCardNumber', e)} value={localData.idetityCardNumber} disabled={!putAuth} />
+                    <View style={styles.item} error={error.idetityCardNumber}>
+                        <Text >{convertLabel(_.get(customerRoles, 'idetityCardNumber.title') || 'Số CMND/CCCD')}:</Text>
+                        <TextInput keyboardType="decimal-pad" maxLength={13} style={{ textAlign: 'right', marginRight: 5,padding: 0 }} onChangeText={e => handleChange('idetityCardNumber', e)} value={localData.idetityCardNumber} disabled={!putAuth} />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
 
-                    </Item>
+                    </View>
 
-                    {!_.get(customerRoles, 'email.checkedShowForm') ? null : <Item inlineLabel style={styles.item} error={error.email}>
-                        <Label >{convertLabel(_.get(customerRoles, 'email.title') || 'Email')}:</Label>
-                        <Input style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChange('email', e)} value={localData.email} disabled={!putAuth} />
+                    {!_.get(customerRoles, 'email.checkedShowForm') ? null : <View inlineLabel style={styles.item} error={error.email}>
+                        <Text >{convertLabel(_.get(customerRoles, 'email.title') || 'Email')}:</Text>
+                        <TextInput style={{ textAlign: 'right', marginRight: 5, padding: 0 }} onChangeText={e => handleChange('email', e)} value={localData.email} disabled={!putAuth} />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                    </Item>}
+                    </View>}
 
-                    {!_.get(customerRoles, 'address.checkedShowForm') ? null : <Item inlineLabel style={styles.item} error={error.address}>
-                        <Label >{convertLabel(_.get(customerRoles, 'address.title') || 'Địa chỉ')}:</Label>
-                        <Input style={{ textAlign: 'right', marginRight: 5, paddingTop: 10 }} onChangeText={e => handleChange('address', e)} value={localData.address} multiline={false} disabled={!putAuth} />
+                    {!_.get(customerRoles, 'address.checkedShowForm') ? null : <View inlineLabel style={styles.item} error={error.address}>
+                        <Text >{convertLabel(_.get(customerRoles, 'address.title') || 'Địa chỉ')}:</Text>
+                        <TextInput style={{ textAlign: 'right', marginRight: 5,padding: 0 }} onChangeText={e => handleChange('address', e)} value={localData.address} multiline={false} disabled={!putAuth} />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                    </Item>} */}
+                    </View>}
 
-                    {/* {!_.get(_.get(customerRoles, 'detailInfo.represent.name'), 'checkedShowForm') ? null : <Item inlineLabel style={styles.item}>
-                        <Label >{convertLabel(_.get(customerRoles['detailInfo.represent.name'], 'title') || 'Tên người đại diện')}:</Label>
-                        <Input style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChanRepresent('name', e)} value={_.get(localData, 'detailInfo.represent.name')} />
+                    {/* {!_.get(_.get(customerRoles, 'detailInfo.represent.name'), 'checkedShowForm') ? null : <View inlineLabel style={styles.item}>
+                        <Text >{convertLabel(_.get(customerRoles['detailInfo.represent.name'], 'title') || 'Tên người đại diện')}:</Text>
+                        <TextInput style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChanRepresent('name', e)} value={_.get(localData, 'detailInfo.represent.name')} />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                    </Item>}
+                    </View>}
 
                     {!_.get(_.get(customerRoles, 'detailInfo.represent.phoneNumber'), 'checkedShowForm') ? null : <Item inlineLabel style={styles.item} >
 
-                        <Label >{convertLabel(_.get(customerRoles['detailInfo.represent.phoneNumber'], 'title') || 'Số điện thoại NDD')}:</Label>
-                        <Input style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChanRepresent('phoneNumber', e)} value={_.get(localData, 'detailInfo.represent.phoneNumber')} keyboardType="decimal-pad" maxLength={13} />
+                        <Text >{convertLabel(_.get(customerRoles['detailInfo.represent.phoneNumber'], 'title') || 'Số điện thoại NDD')}:</Text>
+                        <TextInput style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChanRepresent('phoneNumber', e)} value={_.get(localData, 'detailInfo.represent.phoneNumber')} keyboardType="decimal-pad" maxLength={13} />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
                     </Item>} */}
 
                     {!customerRole.POST || view ? null :
-                        <LoadingButton isBusy={saving} block handlePress={handleSubmit}>
-                            <IconFeather name="check" type="Feather" />
+                        <LoadingButton style={{ paddingVertical: 10, backgroundColor:'rgba(46, 149, 46, 1)'}} isBusy={saving} block handlePress={handleSubmit}>
+                            <IconFeather style={{textAlign:'center', fontSize: 25, color:'white'}} name="check" type="Feather" />
                         </LoadingButton>
                     }
                 </LoadingLayout>
-            </View>
+            {/* </View>
+            </View> */}
         </>
     );
 }
@@ -331,3 +336,22 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect, memo)(AddCustomer);
+const styles={
+    item: {
+        paddingHorizontal: 5,
+          marginHorizontal: 10,
+          backgroundColor: '#fff',
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 5,
+          },
+          shadowOpacity: 0.36,
+          shadowRadius: 6.68,
+
+          elevation: 11,
+          borderBottomWidth: 1,
+          borderColor: 'gray'
+      
+    }
+}

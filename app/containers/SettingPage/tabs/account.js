@@ -67,7 +67,7 @@ const AccountTab = props => {
   };
 
   return (
-    <View >
+    <View  >
       <AvatarInput
         loading={uploadingAvatar}
         type="detail"
