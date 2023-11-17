@@ -4,7 +4,7 @@
  *
  */
 
-import { Item, Label } from 'native-base';
+import {View, Text} from 'react-native'
 import React, { memo } from 'react';
 // import styled from 'styled-components';
 
@@ -12,10 +12,14 @@ function CustomInput(props) {
   const { label, children, error } = props;
 
   return (
-    <Item inlineLabel error={error}>
-      <Label>{label}</Label>
+    <View style={{ 
+      marginHorizontal: 10,
+      paddingVertical: 5,
+      borderBottomWidth: 0.7,
+      borderColor: 'gray'}} inlineLabel error={error}>
+      <Text>{label}</Text>
       {children}
-    </Item>
+    </View>
   );
 }
 

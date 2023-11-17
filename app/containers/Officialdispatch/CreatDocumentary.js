@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Body, Card, CardItem, Container, Content, Icon, Input, Text, View, Label, Item, ListItem, Right, Button, ActionSheet } from 'native-base';
 import _ from 'lodash';
+import Icon from 'react-native-vector-icons/Feather';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import {Text, View, TextInput, ScrollView} from 'react-native';
 import CustomHeader from '../../components/Header';
 import CustomInput from '../../components/CustomInput';
 import moment from 'moment';
@@ -10,7 +12,6 @@ import { API_TASK, API_CUSTOMER, API_DOCUMENTARY, API_USERS, API_ROLE_GROUPS } f
 import { compose } from 'redux';
 import SingleAPISearch from '../../components/CustomMultiSelect/SingleAPISearch';
 import MultiAPISearch from '../../components/CustomMultiSelect/MultiAPISearch';
-import { ScrollView } from 'react-native';
 import LoadingButton from '../../components/LoadingButton';
 import { crmSourceCode, makeSelectViewConfig, makeSelectClientId } from '../App/selectors';
 import { DATE_FORMAT, MODULE } from '../../utils/constants';
@@ -172,28 +173,35 @@ function CreatDocumentary(props) {
     };
 
     return (
-
-        <Container>
+        <View style={{flex: 1}}>
             <BackHeader
                 navigation={navigation}
                 title={type === 2 ? 'Thêm mới công văn đến' : 'Thêm mới công văn đi'}
             />
-            <Content style={{ marginHorizontal: 5 }}>
+            <ScrollView style={{ marginHorizontal: 5, shadowColor: '#000',
+        shadowOffset: {
+          width: 0,
+          height: 5,
+        },
+        shadowOpacity: 0.36,
+        shadowRadius: 6.68,
 
-                {!_.get(docuentaryConfig, 'code.checkedShowForm') ? null : <Item inlineLabel error={error.code} >
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'code.title')) || 'Mã công văn'}:</Label>
-                    <Input value={localData.code} style={styles.input} disabled={true} />
-                    <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                </Item>}
+        elevation: 11, }} showsVerticalScrollIndicator={false}>
 
-                {!_.get(docuentaryConfig, 'name.checkedShowForm') ? null : <Item inlineLabel error={error.name}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'name.title')) || 'Tên công văn'}:</Label>
-                    <Input value={localData.name} style={styles.input} onChangeText={(e) => handleChange('name', e)} />
-                    <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                </Item>}
+                {!_.get(docuentaryConfig, 'code.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.code} >
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'code.title')) || 'Mã công văn'}:</Text>
+                    <TextInput value={localData.code} style={styles.input} disabled={true} />
+                    <IconEntypo active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
+                </View>}
 
-                {!_.get(docuentaryConfig, 'typeDocument.checkedShowForm') ? null : <Item inlineLabel error={error.typeDocument}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'typeDocument.title')) || 'Loại công văn'}:</Label>
+                {!_.get(docuentaryConfig, 'name.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.name}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'name.title')) || 'Tên công văn'}:</Text>
+                    <TextInput value={localData.name} style={styles.input} onChangeText={(e) => handleChange('name', e)} />
+                    <IconEntypo active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
+                </View>}
+
+                {!_.get(docuentaryConfig, 'typeDocument.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.typeDocument}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'typeDocument.title')) || 'Loại công văn'}:</Text>
                     <Search
                         single
                         handleSelectItems={(value) => handleChange('typeDocument', value[0])}
@@ -204,10 +212,10 @@ function CreatDocumentary(props) {
                         items={crmSourceCode['S19']}
                     />
 
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'task.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.task}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'task.title')) || 'Công việc dự án'}:</Label>
+                {!_.get(docuentaryConfig, 'task.checkedShowForm') ? null : <View  inlineLabel style={{ display: 'flex', justifyContent: 'space-between',...styles.view }} error={error.task}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'task.title')) || 'Công việc dự án'}:</Text>
                     <SingleAPISearch
                         Single
                         API={API_TASK}
@@ -215,26 +223,26 @@ function CreatDocumentary(props) {
                         selectedItems={_.get(localData, 'task._id')}
 
                     />
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'customers.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.customers}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'customers.title')) || 'Khách hàng'}:</Label>
+                {!_.get(docuentaryConfig, 'customers.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between',...styles.view }} error={error.customers}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'customers.title')) || 'Khách hàng'}:</Text>
                     <MultiAPISearch
                         API={API_CUSTOMER}
                         onSelectedItemObjectsChange={(e) => handleChange('customers', e)}
                         selectedItems={Array.isArray(_.get(localData, 'customers')) && localData.customers.map(e => e._id)}
 
                     />
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'abstract.checkedShowForm') ? null : <Item inlineLabel error={error.abstract}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'abstract.title')) || 'Tóm lược'}:</Label>
-                    <Input value={_.get(localData, 'abstract')} style={styles.input} onChangeText={(e) => handleChange('abstract', e)} />
-                    <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                </Item>}
+                {!_.get(docuentaryConfig, 'abstract.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.abstract}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'abstract.title')) || 'Tóm lược'}:</Text>
+                    <TextInput value={_.get(localData, 'abstract')} style={styles.input} onChangeText={(e) => handleChange('abstract', e)} />
+                    <IconEntypo active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
+                </View>}
 
-                {!_.get(docuentaryConfig, 'replyDispatch.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.replyDispatch}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'replyDispatch.title')) || 'Công văn trả lời'}:</Label>
+                {!_.get(docuentaryConfig, 'replyDispatch.checkedShowForm') ? null : <View  inlineLabel style={{ display: 'flex', justifyContent: 'space-between',...styles.view }} error={error.replyDispatch}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'replyDispatch.title')) || 'Công văn trả lời'}:</Text>
                     <SingleAPISearch
                         API={API_DOCUMENTARY}
                         onSelectedItemObjectsChange={(value) => handleChange('replyDispatch', value.length ? value[0] : null)}
@@ -242,20 +250,20 @@ function CreatDocumentary(props) {
 
                     />
 
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'officialDispatch.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.officialDispatch}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'officialDispatch.title')) || 'Công văn chính thức'}:</Label>
+                {!_.get(docuentaryConfig, 'officialDispatch.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between',...styles.view }} error={error.officialDispatch}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'officialDispatch.title')) || 'Công văn chính thức'}:</Text>
                     <SingleAPISearch
                         API={API_DOCUMENTARY}
                         onSelectedItemObjectsChange={(value) => handleChange('officialDispatch', value.length ? value[0] : null)}
                         selectedItems={_.get(localData, 'officialDispatch._id')}
 
                     />
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'where.checkedShowForm') ? null : <Item inlineLabel error={error.where}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'where.title')) || 'Nơi phát hành công văn'}:</Label>
+                {!_.get(docuentaryConfig, 'where.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.where}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'where.title')) || 'Nơi phát hành công văn'}:</Text>
                     <Search
                         single
                         handleSelectItems={(value) => handleChange('where', value[0])}
@@ -265,28 +273,28 @@ function CreatDocumentary(props) {
                         displayKey="title"
                         items={crmSourceCode['S23']}
                     />
-                </Item>}
-                {!_.get(docuentaryConfig, 'toDate.checkedShowForm') ? null : <Item inlineLabel error={error.toDate}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'toDate.title')) || 'Ngày gửi'}:</Label>
+                </View>}
+                {!_.get(docuentaryConfig, 'toDate.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.toDate}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'toDate.title')) || 'Ngày gửi'}:</Text>
                     <DateTimePicker
                         mode="datetime"
                         onSave={(e) => handleChange('toDate', e)}
                         value={localData.toDate && moment(localData.toDate).format(DATE_FORMAT.DATE_TIME)}
                     />
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'signer.checkedShowForm') ? null : <Item inlineLabel error={error.singner}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'signer.title')) || 'Người ký'}:</Label>
-                    <Input value={_.get(localData, 'signer')} style={styles.input} onChangeText={(e) => handleChange('signer', e)} />
-                </Item>}
+                {!_.get(docuentaryConfig, 'signer.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.singner}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'signer.title')) || 'Người ký'}:</Text>
+                    <TextInput value={_.get(localData, 'signer')} style={styles.input} onChangeText={(e) => handleChange('signer', e)} />
+                </View>}
 
-                {!_.get(docuentaryConfig, 'signerPosition.checkedShowForm') ? null : <Item inlineLabel error={error.signerPosition}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'signerPosition.title')) || 'Chức vụ'}:</Label>
-                    <Input value={_.get(localData, 'signerPosition')} style={styles.input} onChangeText={(e) => handleChange('signerPosition', e)} />
-                </Item>}
+                {!_.get(docuentaryConfig, 'signerPosition.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.signerPosition}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'signerPosition.title')) || 'Chức vụ'}:</Text>
+                    <TextInput value={_.get(localData, 'signerPosition')} style={styles.input} onChangeText={(e) => handleChange('signerPosition', e)} />
+                </View>}
 
-                {!_.get(docuentaryConfig, 'receivingUnit.checkedShowForm') ? null : <Item inlineLabel error={error.receivingUnit}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'receivingUnit.title')) || 'Đơn vị nhận'}:</Label>
+                {!_.get(docuentaryConfig, 'receivingUnit.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.receivingUnit}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'receivingUnit.title')) || 'Đơn vị nhận'}:</Text>
                     <DepartmentSelect
                         single
                         handleSelectItems={(value) => {
@@ -294,10 +302,10 @@ function CreatDocumentary(props) {
                         }}
                         selectedItems={_.get(localData, 'receivingUnit') ? _.get(localData, 'receivingUnit') : []}
                     />
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'toUsers.checkedShowForm') ? null : <Item inlineLabel error={error.toUsers}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'toUsers.title')) || 'Người Nhận'}:</Label>
+                {!_.get(docuentaryConfig, 'toUsers.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.toUsers}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'toUsers.title')) || 'Người Nhận'}:</Text>
                     <MultiAPISearch
                         API={API_USERS}
                         // onSelectedItemChange={(value) => handleChange('toUsers', value)}
@@ -308,10 +316,10 @@ function CreatDocumentary(props) {
 
                         onRemove={(e) => handleChange('toUsers', [])}
                     />
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'recieverPosition.checkedShowForm') ? null : <Item inlineLabel error={error.recieverPosition}>
-                    <Label >{convertLabel(_.get(docuentaryConfig['recieverPosition.name'], 'title') || 'Vai trò người nhận')}:</Label>
+                {!_.get(docuentaryConfig, 'recieverPosition.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.recieverPosition}>
+                    <Text >{convertLabel(_.get(docuentaryConfig['recieverPosition.name'], 'title') || 'Vai trò người nhận')}:</Text>
                     <MultiAPISearch
                         query={{ clientId, moduleCode: code }}
                         API={API_ROLE_GROUPS}
@@ -320,26 +328,27 @@ function CreatDocumentary(props) {
 
                         onRemove={(e) => handleChange('recieverPosition', [])}
                     />
-                </Item>}
+                </View>}
 
-                {!_.get(docuentaryConfig, 'receiveTime.checkedShowForm') ? null : <Item inlineLabel error={error.receiveTime}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'receiveTime.title')) || 'Thời gian nhận'}:</Label>
+                {!_.get(docuentaryConfig, 'receiveTime.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.receiveTime}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'receiveTime.title')) || 'Thời gian nhận'}:</Text>
                     <DateTimePicker
                         mode="datetime"
                         onSave={(e) => handleChange('receiveTime', e)}
                         value={_.get(localData, 'receiveTime') && moment(_.get(localData, 'receiveTime')).format(DATE_FORMAT.DATE_TIME)}
 
                     />
-                </Item>}
+                </View>}
                 {!_.get(docuentaryConfig, 'replyDeadline.checkedShowForm') ? null : <CustomInput inlineLabel label={'Thời hạn trả lời'} error={error.replyDeadline}>
                     <DateTimePicker
+                    
                         mode="datetime"
                         onSave={(e) => handleChange('replyDeadline', e)}
                         value={_.get(localData, 'replyDeadline') && moment(_.get(localData, 'replyDeadline')).format(DATE_FORMAT.DATE_TIME)}
                     />
                 </CustomInput>}
-                {!_.get(docuentaryConfig, 'storage.checkedShowForm') ? null : <Item inlineLabel error={error.storage}>
-                    <Label >{convertLabel(_.get(docuentaryConfig, 'storage.title')) || 'Nơi lưu trữ công văn'}:</Label>
+                {!_.get(docuentaryConfig, 'storage.checkedShowForm') ? null : <View style={styles.view} inlineLabel error={error.storage}>
+                    <Text >{convertLabel(_.get(docuentaryConfig, 'storage.title')) || 'Nơi lưu trữ công văn'}:</Text>
                     <Search
                         single
                         handleSelectItems={(value) => handleChange('storage', value)}
@@ -349,8 +358,8 @@ function CreatDocumentary(props) {
                         displayKey="title"
                         items={crmSourceCode['S22']}
                     />
-                </Item>}
-                {!_.get(docuentaryConfig, 'urgency.checkedShowForm') ? null : <CustomInput inlineLabel label={'Độ khẩn'} error={error.urgency}>
+                </View>}
+                {!_.get(docuentaryConfig, 'urgency.checkedShowForm') ? null : <CustomInput style={styles.view} inlineLabel label={'Độ khẩn'} error={error.urgency}>
                     <Search
                         single
                         handleSelectItems={(value) => handleChange('urgency', value)}
@@ -361,7 +370,7 @@ function CreatDocumentary(props) {
                         items={crmSourceCode['S20']}
                     />
                 </CustomInput>}
-                {!_.get(docuentaryConfig, 'density.checkedShowForm') ? null : <CustomInput inlineLabel label={'Độ mật'} error={error.density}>
+                {!_.get(docuentaryConfig, 'density.checkedShowForm') ? null : <CustomInput style={styles.view} inlineLabel label={'Độ mật'} error={error.density}>
                     <Search
                         single
                         handleSelectObjectItems={(value) => handleChange('density', value[0])}
@@ -374,7 +383,7 @@ function CreatDocumentary(props) {
 
                 </CustomInput>}
 
-                {!_.get(docuentaryConfig, 'receiverSign.checkedShowForm') ? null : <CustomInput inlineLabel label={'Người ký nhận'} error={error.receiverSign}>
+                {!_.get(docuentaryConfig, 'receiverSign.checkedShowForm') ? null : <CustomInput style={styles.view} inlineLabel label={'Người ký nhận'} error={error.receiverSign}>
                     <SingleAPISearch
                         Single
                         API={API_USERS}
@@ -393,15 +402,15 @@ function CreatDocumentary(props) {
                 </CustomInput>}
 
                 {!_.get(docuentaryConfig, 'content.checkedSshowForm') ? null : <CustomInput inlineLabel label={'Nội dung'} error={error.content}>
-                    <Input value={_.get(localData, 'content')} style={styles.input} onChangeText={(e) => handleChange('content', e)} />
-                    <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
+                    <TextInput value={_.get(localData, 'content')} style={styles.input} onChangeText={(e) => handleChange('content', e)} />
+                    <IconEntypo active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
                 </CustomInput>}
-            </Content>
+            </ScrollView>
 
-            <LoadingButton isBusy={saving} block handlePress={handleAdd}>
-                <Icon name="check" type="Feather" />
+            <LoadingButton style={{paddingVertical: 10, backgroundColor:'rgba(46, 149, 46, 1)' }} isBusy={saving} block handlePress={handleAdd}>
+                <Icon style={{textAlign:'center', color:'white',fontSize: 25,}} name="check" type="Feather" />
             </LoadingButton>
-        </Container >
+        </View>
     )
 }
 
@@ -425,9 +434,13 @@ export default compose(withConnect)(CreatDocumentary);
 
 const styles = {
     view: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginBottom: 2
+        
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        marginHorizontal: 10,
+        backgroundColor: '#fff',
+        borderBottomWidth: 0.7,
+        borderColor: 'gray'
     },
     icon: {
         fontSize: 18,
@@ -438,6 +451,6 @@ const styles = {
         textAlign: 'right',
         marginRight: 5,
         minHeight: 45,
-        paddingTop: 10,
+        padding: 0
     }
 }

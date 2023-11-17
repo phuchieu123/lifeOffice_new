@@ -202,7 +202,7 @@ export default function Officialdispatch(props) {
             </View>
                    
             <FabLayout style={styles.Fab} onPress={() => navigate('CreatDocumentary', { type })}>
-                <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
+                <Icon type="Entypo" name="plus" style={{ color: '#fff' ,}} />
             </FabLayout> 
         </View>
     )
