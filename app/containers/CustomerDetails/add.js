@@ -2,7 +2,10 @@ import React, { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { ActionSheet, Content, Icon, Input, Item, Label } from 'native-base';
+import { ActionSheet, Content, Input, Item, Label } from 'native-base';
+import IconFeather from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/Entypo';
+import {Text, View} from 'react-native';
 import BackHeader from '../../components/Header/BackHeader';
 import AvatarInput from '../../components/CustomInput/AvatarInput';
 import _, { set } from 'lodash'
@@ -211,6 +214,7 @@ export function AddCustomer(props) {
 
     return (
         <>
+       
             <BackHeader
                 title={id ? 'Thông tin khách hàng' : "Thêm mới khách hàng"}
                 navigation={navigation}
@@ -223,16 +227,16 @@ export function AddCustomer(props) {
                 }
             />
 
-            <Content padder>
+            <View padder>
                 <LoadingLayout isLoading={loading}>
                     <AvatarInput source={getAvatar(ava, localData.gender)} onSave={setAvatar} view={view} />
 
-                    <Item inlineLabel error={error.code} style={styles.item} disabled >
+                    <View inlineLabel error={error.code} style={styles.item} disabled >
                         <Label>Mã khách hàng</Label>
                         <Input style={{ textAlign: 'right', marginRight: 5 }} onChangeText={e => handleChange('code', e)} value={localData.code} disabled />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                    </Item>
-                    {!_.get(customerRoles, 'name.checkedShowForm') ? null :
+                    </View>
+                    {/* {!_.get(customerRoles, 'name.checkedShowForm') ? null :
                         <Item inlineLabel style={styles.item} error={error.name}>
                             <Label>{convertLabel(_.get(customerRoles, 'name.title') || 'Tên khách hàng')}:</Label>
                             <Input
@@ -288,7 +292,7 @@ export function AddCustomer(props) {
                         <Label >{convertLabel(_.get(customerRoles, 'address.title') || 'Địa chỉ')}:</Label>
                         <Input style={{ textAlign: 'right', marginRight: 5, paddingTop: 10 }} onChangeText={e => handleChange('address', e)} value={localData.address} multiline={false} disabled={!putAuth} />
                         <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                    </Item>}
+                    </Item>} */}
 
                     {/* {!_.get(_.get(customerRoles, 'detailInfo.represent.name'), 'checkedShowForm') ? null : <Item inlineLabel style={styles.item}>
                         <Label >{convertLabel(_.get(customerRoles['detailInfo.represent.name'], 'title') || 'Tên người đại diện')}:</Label>
@@ -305,11 +309,11 @@ export function AddCustomer(props) {
 
                     {!customerRole.POST || view ? null :
                         <LoadingButton isBusy={saving} block handlePress={handleSubmit}>
-                            <Icon name="check" type="Feather" />
+                            <IconFeather name="check" type="Feather" />
                         </LoadingButton>
                     }
                 </LoadingLayout>
-            </Content>
+            </View>
         </>
     );
 }

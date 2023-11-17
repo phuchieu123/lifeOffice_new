@@ -129,7 +129,7 @@ const ListPage = (props) => {
         <Text style={{ alignSelf: 'center', flex: 1, textAlignVertical: 'center', position: 'absolute', top: 40 }}>{props.noDataText || 'Không có dữ liệu'}</Text>
       )}
       <FlatList
-      style={{}}
+      style={{ marginTop: 5}}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         inverted={props.inverted}

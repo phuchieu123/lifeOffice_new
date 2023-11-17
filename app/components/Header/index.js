@@ -23,12 +23,12 @@
             flexDirection: 'row',
             justifyContent:'space-between',
             alignItems: 'center'}}>
-                <View style={{ flexDirection: 'row',}}>
+                <View style={{ flexDirection: 'row', alignItems:'center'}}>
                     {navigation && <Icon
                         name="arrow-back"
                         type="MaterialIcons"
                         onPress={handleGoBack}
-                        style={{ color: '#fff', top: 3, justifyContent:'center' }}
+                        style={{ color: '#fff', justifyContent:'center', fontSize: 25, left: 5 }}
                     />}
                     <Text style={{ marginLeft: 10, fontSize: 20, color:'white'}}>{title}</Text>
                 </View>

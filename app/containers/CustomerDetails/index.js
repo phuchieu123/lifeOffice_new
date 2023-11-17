@@ -1,6 +1,9 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Icon, Container, CardItem, Body, View, Text, Button, Card, } from 'native-base';
-import { ImageBackground, TouchableOpacity, Image, TouchableWithoutFeedback, DeviceEventEmitter, BackHandler } from 'react-native';
+import { CardItem, Body, Button, Card, } from 'native-base';
+import { ImageBackground, TouchableOpacity, Image, TouchableWithoutFeedback, DeviceEventEmitter, BackHandler, View, Text, } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
+import IconEntypo from 'react-native-vector-icons/Entypo';
 import CustomHeader from '../../components/Header';
 import { navigate } from '../../RootNavigation';
 import { connect } from 'react-redux';
@@ -135,7 +138,7 @@ export function CustomerDetails(props) {
 
 
     return (
-        <Container>
+        <View style={{flex: 1}}>
             {isSeaching && <SearchBox isSeaching={isSeaching} onChange={onSearchText} setIsSearching={setIsSearching} />
             }
             <CustomHeader
@@ -143,7 +146,7 @@ export function CustomerDetails(props) {
                 title="Khách hàng"
                 rightHeader={
                     <RightHeader
-                        children={<Icon name="search" type="FontAwesome" onPress={() => setIsSearching(true)} style={{ color: '#fff', marginHorizontal: 10 }} />}
+                        children={<Icon name="search" type="FontAwesome" onPress={() => setIsSearching(true)} style={{ color: '#fff', marginHorizontal: 10, fontSize: 25 }} />}
                         enableFilterModal
                         enableFilterOrg
                         organizationUnitId={_.get(query, 'filter.organizationUnit')}
@@ -154,6 +157,7 @@ export function CustomerDetails(props) {
                 }
             />
             <ListPage
+                
                 reload={reload}
                 query={query}
                 api={async () => `${await API_CUSTOMER()}`}
@@ -161,7 +165,7 @@ export function CustomerDetails(props) {
                 itemComponent={({ item }) => {
                     return (
                         <TouchableWithoutFeedback onPress={() => navigate('AddCustomer', { id: item._id })}>
-                            <Card style={{ borderRadius: 16 }}>
+                            <View style={{ borderRadius: 16, borderWidth: 1, borderColor: 'gray', margin: 5, }}>
                                 <ImageBackground
                                     // source={images.customer}
                                     style={{ height: 100, width: '100%', flex: 1 }}
@@ -184,12 +188,12 @@ export function CustomerDetails(props) {
 
                                         <View style={{ flex: 1, justifyContent: 'space-evenly', }}>
                                             {item.name ? <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderColor: '#000', marginRight: 10 }}>
-                                                <Icon type="FontAwesome5" name="user-alt" style={{ marginRight: 10, fontSize: 14, color: theme.brandPrimary }} />
+                                                <Icon5 type="FontAwesome5" name="user-alt" style={{ marginRight: 10, fontSize: 14, color: theme.brandPrimary }} />
                                                 <Text style={{ fontSize: 14, }} numberOfLines={2}>{item.name}</Text>
                                             </View> : null}
 
                                             {item.phoneNumber ? <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderColor: '#000', marginRight: 10 }}>
-                                                <Icon type="FontAwesome5" name="phone-alt" style={{ marginRight: 10, fontSize: 14, color: theme.brandPrimary }} />
+                                                <Icon5 type="FontAwesome5" name="phone-alt" style={{ marginRight: 10, fontSize: 14, color: theme.brandPrimary }} />
                                                 <Text style={{ fontSize: 14, }} numberOfLines={2}>{item.phoneNumber}</Text>
                                             </View> : null}
                                             {item.address ? <View style={{ flexDirection: 'row', alignItems: 'center', borderBottomWidth: 0.5, borderColor: '#000', marginRight: 10 }}>
@@ -200,18 +204,18 @@ export function CustomerDetails(props) {
 
                                     </View>
                                 </ImageBackground>
-                            </Card>
+                            </View>
                         </TouchableWithoutFeedback>
                     )
                 }}
             />
 
             {!customerRole.POST ? null :
-                <FabLayout onPress={() => navigate('AddCustomer')}>
-                    <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
+                <FabLayout  style={styles} onPress={() => navigate('AddCustomer')}>
+                    <IconEntypo type="Entypo" name="plus" style={{ color: '#fff' }} />
                 </FabLayout>
             }
-        </Container>
+        </View>
     );
 }
 
@@ -222,4 +226,16 @@ export default connect(
         customerRole: makeSelectUserRole(MODULE.CUSTOMER),
     }),
 )(CustomerDetails);
+
+
+const styles = {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+  };
 

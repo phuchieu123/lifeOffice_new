@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { ActivityIndicator, Image, TouchableOpacity } from 'react-native';
-import { Button, Icon, Text, View } from 'native-base';
+import { ActivityIndicator, Image, TouchableOpacity,View } from 'react-native';
+
 import { pickupImage } from '../../utils/fileSystem';
 
 export default ImageInput = props => {

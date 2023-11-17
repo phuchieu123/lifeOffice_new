@@ -16,7 +16,7 @@ export default RightHeader = props => {
         setTimeout(() => onSave(obj), 500)
     }
 
-    return <View style={{flexDirection: 'row'}}>
+    return <View style={{flexDirection: 'row', alignItems: 'center'}}>
         {children}
         {enableFilterModal &&
             <View>
