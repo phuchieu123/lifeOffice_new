@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import { formartDate } from '../../../utils/common';
+import Icon from 'react-native-vector-icons/MaterialIcons'
 import { DATE_FORMAT } from '../../../utils/constants';
 
 export default ApproveItem = ({ item, profile, handleOpenModal }) => {
@@ -24,11 +25,11 @@ export default ApproveItem = ({ item, profile, handleOpenModal }) => {
             <Text note style={{ fontWeight: 'bold' }}>
                 {item.subCode}
             </Text>
-            <Right style={{ flex: 1, justifyContent: 'flex-end' }}>
+            <View style={{ flex: 1, justifyContent: 'flex-end' }}>
                 <Text note style={{ fontWeight: 'bold' }}>
                     {formartDate(item.createdAt, DATE_FORMAT.DATE)}
                 </Text>
-            </Right>
+            </View>
         </View>
         <View>
             <Text>
