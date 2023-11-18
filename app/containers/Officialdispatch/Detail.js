@@ -19,6 +19,7 @@ import {
   TabHeading,
 } from 'native-base';
 import _ from 'lodash';
+import IconEn from 'react-native-vector-icons/Entypo';
 import CustomHeader from '../../components/Header';
 import CustomInput from '../../components/CustomInput';
 import moment from 'moment';
@@ -214,8 +215,8 @@ function Officialdispatch(props) {
             return <>
               <RenderPage api={API_FILE_SHARE} folder="share" />
               <FileView id={localData._id} code={code} visible={true} reload={reload} />
-                    <FabLayout onPress={handleAdd}>
-                         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
+                    <FabLayout style={styles.Fab} onPress={handleAdd}>
+                         <IconEn type="Entypo" name="plus" style={{ color: '#fff',  }} />
                      </FabLayout>
             </> 
           }}
@@ -270,4 +271,16 @@ const styles = {
     textAlign: 'right',
     marginRight: 5,
   },
+  Fab:{
+    
+      position: 'absolute',
+      bottom: 10,
+      right: 10,
+      width: 40,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 50,
+  
+  }
 };

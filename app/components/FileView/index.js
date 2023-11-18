@@ -91,12 +91,12 @@ const FileView = props => {
                 return <ListItem>
                     <Icon type='MaterialCommunityIcons' name='file' />
 
-                    <Body>
+                    <View>
                         <TouchableOpacity onPress={() => { toWatch(item) }}>
                             <Text>{name}</Text>
                             <Text style={{ fontSize: 14 }}>Ngày tạo: {moment(createdAt).format(DATE_FORMAT.DATE_TIME)}</Text>
                         </TouchableOpacity>
-                    </Body>
+                    </View>
 
                     <TouchableOpacity onPress={() => { download(item) }}>
                         <Icon type='MaterialCommunityIcons' name='download' style={{ fontSize: 30 }} />

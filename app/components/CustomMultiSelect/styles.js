@@ -4,6 +4,8 @@ export default styles = {
   view: {
     marginRight: 5,
     paddingVertical: 10,
+
+    
   },
   button: {
     flexDirection: 'row',

@@ -10,7 +10,7 @@ import { API_TASK, API_CUSTOMER, API_DOCUMENTARY, API_USERS, API_ROLE_GROUPS } f
 import { compose } from 'redux';
 import SingleAPISearch from '../../components/CustomMultiSelect/SingleAPISearch';
 import MultiAPISearch from '../../components/CustomMultiSelect/MultiAPISearch';
-import { ScrollView, Text, View, TextInput} from 'react-native';
+import { ScrollView, Text, View, TextInput, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
 import LoadingButton from '../../components/LoadingButton';
 import { crmSourceCode, makeSelectViewConfig, makeSelectClientId, makeSelectUserRole } from '../App/selectors';
@@ -109,22 +109,28 @@ function DetailContent(props) {
 
     return (
 
-        <View>
-            <View style={{ marginHorizontal: 5 }}>
+        <TouchableWithoutFeedback
+        
+        onPress={Keyboard.dismiss}>
+            <ScrollView
+            keyboardShouldPersistTaps="always"
+           onScroll={()=> Keyboard.dismiss()}
+      >
+            <View style={{ marginHorizontal: 5, marginVertical: 10 }}>
 
-                {!_.get(docuentaryConfig, 'code.checkedShowForm') ? null : <View inlineLabel error={error.code} >
+                {!_.get(docuentaryConfig, 'code.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.code} >
                     <Text >{convert(_.get(docuentaryConfig, 'code.title')) || 'Mã cuộc họp'}:</Text>
                     <TextInput value={converData.code} style={styles.input} disabled={true} />
                     <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'name.checkedShowForm') ? null : <View inlineLabel error={error.name}>
+                {!_.get(docuentaryConfig, 'name.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.name}>
                     <Text >{convert(_.get(docuentaryConfig, 'name.title')) || 'Tên công văn'}:</Text>
                     <TextInput disabled={!docuentaryConfig} value={converData.name} style={styles.input} onChangeText={(e) => handleChange('name', e)} multiline={true} />
                     <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'typeDocument.checkedShowForm') ? null : <View inlineLabel error={error.typeDocument}>
+                {!_.get(docuentaryConfig, 'typeDocument.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.typeDocument}>
                     <Text >{convert(_.get(docuentaryConfig, 'typeDocument.title')) || 'Loại công văn'}:</Text>
                     <Search
                         single
@@ -140,7 +146,7 @@ function DetailContent(props) {
 
                 </View>}
 
-                {!_.get(docuentaryConfig, 'task.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.task}>
+                {!_.get(docuentaryConfig, 'task.checkedShowForm') ? null : <View  inlineLabel style={{ display: 'flex', justifyContent: 'space-between', ...styles.item }} error={error.task}>
                     <Text >{convert(_.get(docuentaryConfig, 'task.title')) || 'Công việc dự án'}:</Text>
                     <SingleAPISearch
                         Single
@@ -153,7 +159,7 @@ function DetailContent(props) {
                     />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'customers.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.customers}>
+                {!_.get(docuentaryConfig, 'customers.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between', ...styles.item }} error={error.customers}>
                     <Text >{convert(_.get(docuentaryConfig, 'customers.title')) || 'Khách hàng'}:</Text>
                     <MultiAPISearch
                         disabled={!PUT}
@@ -164,13 +170,13 @@ function DetailContent(props) {
                     />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'abstract.checkedShowForm') ? null : <View inlineLabel error={error.abstract}>
+                {!_.get(docuentaryConfig, 'abstract.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.abstract}>
                     <Text >{convert(_.get(docuentaryConfig, 'abstract.title')) || 'Tóm lược'}:</Text>
                     <TextInput disabled={!docuentaryConfig} multiline={true} value={_.get(converData, 'abstract')} style={styles.input} onChangeText={(e) => handleChange('abstract', e)} />
                     <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'replyDispatch.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.replyDispatch}>
+                {!_.get(docuentaryConfig, 'replyDispatch.checkedShowForm') ? null : <View   inlineLabel style={{ display: 'flex', justifyContent: 'space-between', ...styles.item }} error={error.replyDispatch}>
                     <Text >{convert(_.get(docuentaryConfig, 'replyDispatch.title')) || 'Công văn trả lời'}:</Text>
                     <SingleAPISearch
                         disabled={!PUT}
@@ -183,7 +189,7 @@ function DetailContent(props) {
 
                 </View>}
 
-                {!_.get(docuentaryConfig, 'officialDispatch.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.officialDispatch}>
+                {!_.get(docuentaryConfig, 'officialDispatch.checkedShowForm') ? null : <View  inlineLabel style={{ display: 'flex', justifyContent: 'space-between',...styles.item }} error={error.officialDispatch}>
                     <Text >{convert(_.get(docuentaryConfig, 'officialDispatch.title')) || 'Công văn chính thức'}:</Text>
                     <SingleAPISearch
                         disabled={!PUT}
@@ -195,7 +201,7 @@ function DetailContent(props) {
                     />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'where.checkedShowForm') ? null : <View inlineLabel error={error.where}>
+                {!_.get(docuentaryConfig, 'where.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.where}>
                     <Text >{convert(_.get(docuentaryConfig, 'where.title')) || 'Nơi phát hành công văn'}:</Text>
                     <Search
                         single
@@ -209,7 +215,7 @@ function DetailContent(props) {
                         readOnly={!docuentaryConfig}
                     />
                 </View>}
-                {!_.get(docuentaryConfig, 'toDate.checkedShowForm') ? null : <View inlineLabel>
+                {!_.get(docuentaryConfig, 'toDate.checkedShowForm') ? null : <View style={styles.item} inlineLabel>
                     <Text >{convert(_.get(docuentaryConfig, 'toDate.title')) || 'Ngày gửi'}:</Text>
                     <DateTimePicker
                         disabled={!PUT}
@@ -219,17 +225,17 @@ function DetailContent(props) {
                     />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'signer.checkedShowForm') ? null : <View inlineLabel error={error.singner}>
+                {!_.get(docuentaryConfig, 'signer.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.singner}>
                     <Text >{convert(_.get(docuentaryConfig, 'signer.title')) || 'Người ký'}:</Text>
                     <TextInput disabled={!docuentaryConfig} multiline={true} value={_.get(converData, 'signer')} style={styles.input} onChangeText={(e) => handleChange('signer', e)} />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'signerPosition.checkedShowForm') ? null : <View inlineLabel error={error.signerPosition}>
+                {!_.get(docuentaryConfig, 'signerPosition.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.signerPosition}>
                     <Text >{convert(_.get(docuentaryConfig, 'signerPosition.title')) || 'Chức vụ'}:</Text>
                     <TextInput readOnly={!docuentaryConfig} disabled={!PUT} value={_.get(converData, 'signerPosition')} style={styles.input} onChangeText={(e) => handleChange('signerPosition', e)} />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'receivingUnit.checkedShowForm') ? null : <View inlineLabel error={error.receivingUnit}>
+                {!_.get(docuentaryConfig, 'receivingUnit.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.receivingUnit}>
                     <Text >{convert(_.get(docuentaryConfig, 'receivingUnit.title')) || 'Đơn vị nhận'}:</Text>
                     <DepartmentSelect
                         single
@@ -239,7 +245,7 @@ function DetailContent(props) {
                     />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'toUsers.checkedShowForm') ? null : <View inlineLabel error={error.toUsers}>
+                {!_.get(docuentaryConfig, 'toUsers.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.toUsers}>
                     <Text >{convert(_.get(docuentaryConfig, 'toUsers.title')) || 'Người Nhận'}:</Text>
                     <MultiAPISearch
                         API={API_USERS}
@@ -254,7 +260,7 @@ function DetailContent(props) {
                     />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'recieverPosition.checkedShowForm') ? null : <View inlineLabel error={error.recieverPosition}>
+                {!_.get(docuentaryConfig, 'recieverPosition.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.recieverPosition}>
                     <Text >{convert(_.get(docuentaryConfig['recieverPosition.name'], 'title') || 'Vai trò người nhận')}:</Text>
                     <MultiAPISearch
                         disabled={!PUT}
@@ -267,7 +273,7 @@ function DetailContent(props) {
                     />
                 </View>}
 
-                {!_.get(docuentaryConfig, 'receiveTime.checkedShowForm') ? null : <View inlineLabel error={error.receiveTime}>
+                {!_.get(docuentaryConfig, 'receiveTime.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.receiveTime}>
                     <Text >{convert(_.get(docuentaryConfig, 'receiveTime.title')) || 'Thời gian nhận'}:</Text>
                     <DateTimePicker
                         disabled={!PUT}
@@ -284,7 +290,7 @@ function DetailContent(props) {
                         value={_.get(converData, 'replyDeadline') && moment(_.get(converData, 'replyDeadline')).format(DATE_FORMAT.DATE_TIME)}
                     />
                 </CustomInput>}
-                {!_.get(docuentaryConfig, 'storage.checkedShowForm') ? null : <View inlineLabel error={error.storage}>
+                {!_.get(docuentaryConfig, 'storage.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.storage}>
                     <Text >{convert(_.get(docuentaryConfig, 'storage.title')) || 'Nơi lưu trữ công văn'}:</Text>
                     <Search
                         disabled={!PUT}
@@ -298,7 +304,7 @@ function DetailContent(props) {
                         readOnly={!docuentaryConfig}
                     />
                 </View>}
-                {!_.get(docuentaryConfig, 'urgency.checkedShowForm') ? null : <CustomInput inlineLabel label={'Độ khẩn'} error={error.urgency}>
+                {!_.get(docuentaryConfig, 'urgency.checkedShowForm') ? null : <CustomInput  inlineLabel label={'Độ khẩn'} error={error.urgency}>
                     <Search
                         disabled={!PUT}
                         single
@@ -378,15 +384,16 @@ function DetailContent(props) {
 
             </View>
 
-            {!projectTask.POST ? null : <LoadingButton isBusy={saving} block handlePress={handleSubmit}>
-                <Icon name="check" type="Feather" />
+            {!projectTask.POST ? null : <LoadingButton style={{paddingVertical: 10, backgroundColor:'rgba(46, 149, 46, 1)', marginHorizontal: 20, borderRadius: 20 }} isBusy={saving} block handlePress={handleSubmit}>
+                <Icon name="check" type="Feather" style={{color:'white', textAlign:'center',fontSize: 20 }} />
             </LoadingButton>}
             {/* <View style={{ flexDirection: 'row', padding: 10, paddingRight: 20 }}>
                 <LoadingButton isBusy={'updating'} handlePress={'handleAdd'} style={{ width: '100%', justifyContent: 'center' }}>
                     <Icon name="check" type="Feather" />
                 </LoadingButton>
             </View> */}
-        </View>
+        </ScrollView>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -422,9 +429,26 @@ const styles = {
         marginTop: 0
     },
     input: {
-        textAlign: 'right',
         marginRight: 5,
-        paddingTop: 10,
+        padding: 0,
         minHeight: 45
+    },
+    item: {
+        paddingHorizontal: 5,
+          marginHorizontal: 10,
+          backgroundColor: '#fff',
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 5,
+          },
+          shadowOpacity: 0.36,
+          shadowRadius: 6.68,
+
+          elevation: 11,
+          borderBottomWidth: 1,
+          borderColor: 'gray'
+
+      
     }
 }
