@@ -125,32 +125,32 @@ function SalaryPageDetail(props) {
   }
 
   return (
-    <Container>
+    <View>
       <BackHeader title={title} navigation={navigation} />
       {data ? <FlatList
         data={Object.values(dataSource)}
         renderItem={({ item }) => {
-          return <ListItem>
-            <Body>
+          return <View>
+            <View>
               <Text>{item.name}</Text>
-            </Body>
-            <Right>
+            </View>
+            <View>
               <Text>{item.value}</Text>
-            </Right>
-          </ListItem>
+            </View>
+          </View>
         }}
         keyExtractor={item => item.code}
       /> : <Text style={{ textAlign: 'center', marginTop: 10 }} >Không có dữ liệu</Text>}
       {data ? <View style={{ flexDirection: 'row', marginBottom: 10 }}>
         <LoadingButton style={{ flex: 1, borderRadius: 10, marginLeft: 5}} handlePress={() => onConfirm()}>
-          <Body style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
+          <View style={{ flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
             <Text style={{ fontSize: 18, alignSelf: 'center', color: '#fff',}}>
               Xác nhận phiếu lương
             </Text>
-          </Body>
+          </View>
         </LoadingButton>
       </View> : null}
-    </Container>
+    </View>
   );
 }
 

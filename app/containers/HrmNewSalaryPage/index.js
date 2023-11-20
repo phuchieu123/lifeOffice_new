@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Item, Container, Card, CardItem, Icon, Form, Label, Body } from 'native-base';
+import { Item, Container, Card, CardItem, Form, Label, Body } from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 import { View, Text, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import BackHeader from "../../components/Header/BackHeader";
 import LoadingButton from '../../components/LoadingButton';
@@ -92,27 +93,27 @@ const HrmNewSalaryPage = (props) => {
     );
 
     return (
-        <Container>
+        <View style={{flex: 1}}>
             <View>
                 <BackHeader navigation={navigation} title="Thêm bảng lương" />
             </View>
-            <Card>
-                <CardItem>
-                    <Form style={{ flex: 1, backgroundColor: '#fff' }}>
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Thời gian:</Label>
+            <View style={{flex: 1}} >
+                <View style={{flex: 1}}>
+                    <View style={{ backgroundColor: '#fff' }}>
+                        <View inlineLabel style={styles.item}>
+                            <Text>Thời gian:</Text>
                             <CustomMonthYearPicker value={date} onChange={(year, month) => setLocalData({ ...localData, year: year, month: month })} />
-                        </Item>
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Phòng ban:</Label>
+                        </View>
+                        <View inlineLabel style={styles.item}>
+                            <Text>Phòng ban:</Text>
                             <DepartmentSelect
                                 handleSelectObjectItems={handleChangeOrg}
                                 selectedItems={selectedOrg}
                                 onRemoveSelectedItem={() => setSelectedOrg([])}
                             />
-                        </Item>
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Phụ trách:</Label>
+                        </View>
+                        <View inlineLabel style={styles.item}>
+                            <Text>Phụ trách:</Text>
                             <SingleAPISearch
                                 API={API_USERS}
                                 Label
@@ -122,25 +123,25 @@ const HrmNewSalaryPage = (props) => {
                                 filterOr={['name', 'code']}
                                 selectedDatas={employeesOption}
                             />
-                        </Item>
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Công thức lương: </Label>
+                        </View>
+                        <View inlineLabel style={styles.item}>
+                            <Text>Công thức lương: </Text>
                             <SingleAPISearch
                                 API={API_SALARY_FORMULA}
                                 selectedItems={selectedFor}
                                 onSelectedItemObjectsChange={handleChangeFormula}
                                 selectedDatas={formulasOption}
                             />
-                        </Item>
-                    </Form>
-                </CardItem>
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                    <LoadingButton handlePress={handleAdd} style={{ flex: 1, borderRadius: 10, marginLeft: 5 }}>
-                        <Icon name="check" type="Feather" />
+                        </View>
+                    </View>
+                </View>
+                <View style={{ bottom: 10 }}>
+                    <LoadingButton  handlePress={handleAdd} style={{ paddingVertical: 10, backgroundColor:'rgba(46, 149, 46, 1)'}}>
+                        <Icon name="check" type="Feather" style={{textAlign:'center', color:'white', fontSize:20}} />
                     </LoadingButton>
                 </View>
-            </Card>
-        </Container>
+            </View>
+        </View>
     );
 }
 
@@ -158,3 +159,6 @@ const mapStateToProps = createStructuredSelector({
 const withConnect = connect(mapStateToProps);
 
 export default compose(withConnect)(HrmNewSalaryPage);
+
+
+
