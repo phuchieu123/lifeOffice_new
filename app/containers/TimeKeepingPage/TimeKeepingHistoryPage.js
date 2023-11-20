@@ -7,7 +7,7 @@ import {
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
+import Icon from 'react-native-vector-icons/AntDesign';
 import _ from 'lodash';
 import moment from 'moment';
 
