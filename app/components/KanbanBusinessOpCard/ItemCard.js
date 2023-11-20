@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { memo } from 'react';
 import moment from 'moment';
-import { ImageBackground, View, Text } from 'react-native';
+import { ImageBackground, View, Text, TouchableOpacity } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import { compose } from 'redux';
 import { Card, CardItem, Right, Button, Body, List, ListItem, Label } from 'native-base';
@@ -14,7 +14,6 @@ import { MODULE } from '../../utils/constants';
 import { makeSelectKanbanBosConfigs, makeSelectViewConfig } from '../../containers/App/selectors';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-import { TouchableOpacity } from 'react-native';
 const GRAY_BLUR = 'rgba(52, 52, 52, 0.8)';
 const convert = (string) => {
     return string.charAt().toUpperCase() + string.slice(1).toLowerCase();
@@ -36,22 +35,24 @@ function ItemCard(props) {
                     style={{ height: 320, width: '100%' }}
                     imageStyle={{ borderRadius: 10 }}>
                     <View style={styles.cardItemView}>
-                        <Button
+                        <TouchableOpacity
                             small
                             onPress={() => openBusinessDetail(businessOp)}
-                            iconLeft
                             style={{
                                 width: '100%',
                                 // height: 35,
                                 backgroundColor: GRAY_BLUR,
-                                justifyContent: 'center',
+                                justifyContent: "flex-start",
                                 marginBottom: 5,
+                                alignItems:'center',
+                                flexDirection:'row',
+                                
                             }}>
-                            <Icon name="gear" type="EvilIcons" />
+                            <Icon name="gear" type="EvilIcons" style={{paddingHorizontal: 10}} />
                             <Text numberOfLines={1}>
                                 {businessOp.name}
                             </Text>
-                        </Button>
+                        </TouchableOpacity>
                         <View  style={{ ...styles.cardItem, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                             <Button transparent iconRight small>
                                 <Icon active name="navicon" type="FontAwesome" style={{ color: kanban.color }} />
