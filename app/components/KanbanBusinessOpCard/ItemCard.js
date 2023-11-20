@@ -58,7 +58,7 @@ function ItemCard(props) {
                                 <Icon active name="navicon" type="FontAwesome" style={{ color: kanban.color }} />
                             </Button>
                             <Text style={{ color: '#fff', fontSize: 14 }}>Trạng thái: </Text>
-                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <View style={{ flexDirection: 'row' }}>
                                 <CustomMultiSelect
                                     single
                                     items={kanbanOption}

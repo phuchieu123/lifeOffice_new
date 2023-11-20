@@ -20,12 +20,12 @@ import {
   Input,
   Item,
   Label,
-  Tab,
   TabHeading,
-  Tabs,
   Text,
   View
 } from 'native-base';
+
+
 import { TouchableWithoutFeedback } from 'react-native';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -56,6 +56,10 @@ import CommentView from '../CommentView';
 
 import { BusinessContract } from './BusinessContract';
 import QuoteSell from './QuoteSell';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
+
+const Tab = createMaterialTopTabNavigator();
+
 export function BusinessOpDetailPage(props) {
   useInjectReducer({ key: 'businessOpDetailPage', reducer });
   useInjectSaga({ key: 'businessOpDetailPage', saga });
@@ -220,13 +224,27 @@ export function BusinessOpDetailPage(props) {
 
   return (
 
-    <Container>
+    <View>
       <BackHeader
         navigation={navigation}
         title={isUpdate ? localState.name : 'Thêm mới CHKD'}
       />
-      <Tabs>
-        <Tab heading={
+        {/* {isUpdate ? null : <Icon name="information-circle" type="Ionicons" style={{ fontSize: 20 }} />} */}
+      <Tab.Navigator
+      tabBarOptions={{
+          style: {
+            backgroundColor: 'rgba(46, 149, 46, 1)', // Màu nền của toàn bộ thanh tab
+            borderTopWidth: 0.5,
+            borderTopColor: '#aaa',
+          },
+          activeTintColor: 'white', // Màu chữ của tab đang được chọn
+          inactiveTintColor: 'white', // Màu chữ của tab không được chọn
+          indicatorStyle: {
+            backgroundColor: 'white', // Màu của thanh dưới chữ khi tab được chọn
+          },
+        }}
+      >
+        <Tab.Screen heading={
           <TabHeading>
             <Text style={{ color: '#fff', fontWeight: '700' }}>Chi Tiết</Text>
           </TabHeading>
@@ -236,7 +254,7 @@ export function BusinessOpDetailPage(props) {
               {!_.get(fieldConfig, 'code.checkedShowForm') ? null : <Item inlineLabel disabled={isUpdate}>
                 <Label >{convertLabel(_.get(fieldConfig, 'code.title')) || 'Mã CHKD'}:</Label>
                 <Input style={{ textAlign: 'right', minHeight: 45 }} value={code} disabled />
-                {/* {isUpdate ? null : <Icon name="information-circle" type="Ionicons" style={{ fontSize: 20 }} />} */}
+              
               </Item>}
 
 
@@ -394,37 +412,37 @@ export function BusinessOpDetailPage(props) {
               </LoadingButton>
             </Content>
           </LoadingLayout>
-        </Tab>
-        <Tab heading={
-          <TabHeading>
-            <Text style={{ color: '#fff', fontWeight: '700' }}>Báo giá</Text>
-          </TabHeading>
+        </Tab.Screen>
+        <Tab.Screen 
+            name='báo giá'
+            component={() => {
+            return (
+               <QuoteSell localData={localState ? localState : {}} kanban={kanban} />
+              );
+          }}
+              options={{
+            tabBarLabel: ({focused}) => (<Text style={{ color: '#fff', fontWeight: '700' }}>Báo giá</Text>)
+          }}/>
 
-        }>
-
-
-          <QuoteSell localData={localState ? localState : {}} kanban={kanban} />
-
-
-
-        </Tab>
-
-        <Tab heading={
-          <TabHeading>
-            <Text style={{ color: '#fff', fontWeight: '700' }}>Hợp Đồng</Text>
-          </TabHeading>
-
-        }>
-
-          <BusinessContract localState={localState || {}} />
-
-
-        </Tab>
+      <Tab.Screen 
+            name='Hợp Đồng'
+            component={() => {
+            return (
+              <BusinessContract localState={localState || {}} />
+              );
+          }}
+              options={{
+            tabBarLabel: ({focused}) => ( <Text style={{ color: '#fff', fontWeight: '700' }}>Hợp Đồng</Text>)
+          }}/>
 
 
-      </Tabs >
+  
+
+
+      </Tab.Navigator>
       {/* <LogModal open={openLogModal} currentLog={currentLog} onClose={handleCloseLogModal} /> */}
-    </Container>
+      
+    </View>
 
   );
 }

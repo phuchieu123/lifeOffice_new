@@ -1,5 +1,6 @@
 import _ from 'lodash';
-import { Button, Icon, Text } from 'native-base';
+import { Button, Text } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 import SectionedMultiSelect from 'react-native-sectioned-multi-select';
