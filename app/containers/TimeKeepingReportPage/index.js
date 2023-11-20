@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
+import { View, Text} from "react-native";
 import {
   Body,
   Container,
@@ -11,7 +11,7 @@ import {
   List,
   ListItem,
   Right,
-  Text
+  
 } from 'native-base';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -29,10 +29,10 @@ const TimeKeepingReportPage = (props) => {
   const { navigation } = props;
 
   return (
-    <Container>
+    <View>
       <BackHeader title="Báo cáo chấm công" navigation={navigation} />
-      <Content style={styles.content}>
-        <Content style={styles.content}>
+      <View style={styles.content}>
+        <View style={styles.content}>
           <List>
             <ListItem onPress={() => navigation.navigate('TimeKeepingChart')}>
               <Body>
@@ -67,9 +67,9 @@ const TimeKeepingReportPage = (props) => {
               </Right>
             </ListItem>
           </List>
-        </Content>
-      </Content>
-    </Container>
+        </View>
+      </View>
+    </View>
   );
 };
 

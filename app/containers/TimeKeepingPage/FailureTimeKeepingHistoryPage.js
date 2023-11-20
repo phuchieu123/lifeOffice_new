@@ -1,18 +1,15 @@
 import React, { memo, useEffect, useState } from 'react';
 import {
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity, Text,
+  View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import moment from 'moment';
-import {
-  Container,
-  Text,
-  View
-} from 'native-base';
+
 import theme from '../../utils/customTheme';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -77,7 +74,7 @@ const FailureTimeKeepingHistoryPage = (props) => {
   }
 
   return (
-    <Container>
+    <View>
       <BackHeader
         title="Lịch sử thất bại"
         navigation={navigation}
@@ -88,7 +85,7 @@ const FailureTimeKeepingHistoryPage = (props) => {
         }
       />
       {/* <View style={styles.content}> */}
-      <Container style={{ padding: 10 }}>
+      <View style={{ padding: 10 }}>
         <ListPage
           query={query}
           api={api}
@@ -111,7 +108,7 @@ const FailureTimeKeepingHistoryPage = (props) => {
             </TouchableOpacity>
           }}
         />
-      </Container>
+      </View>
       {/* <FlatList
           data={timeKeepingHistoryData}
           keyExtractor={(item, index) => index.toString()}
@@ -131,7 +128,7 @@ const FailureTimeKeepingHistoryPage = (props) => {
         employee={employee}
         isVisible={modal}
       />
-    </Container>
+    </View>
   );
 };
 

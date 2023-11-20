@@ -1,7 +1,8 @@
 import React, { memo, useEffect, useState } from 'react';
 import {
   FlatList,
-  StyleSheet
+  StyleSheet, Text, View
+  
 } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -9,11 +10,7 @@ import { createStructuredSelector } from 'reselect';
 
 import _ from 'lodash';
 import moment from 'moment';
-import {
-  Container,
-  Icon,
-  View
-} from 'native-base';
+
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import CustomMonthYearPicker from '../../components/CustomMonthYearPicker';
@@ -82,7 +79,7 @@ const TimeKeepingHistoryPage = (props) => {
 
 
   return (
-    <Container>
+    <View>
       <BackHeader
         title="Lịch sử chấm công"
         navigation={navigation}
@@ -127,7 +124,7 @@ const TimeKeepingHistoryPage = (props) => {
 
       <CustomMonthYearPicker open={enable} onClose={() => setEnable(false)} onChange={(year, month) => setQuery({ ...query, year: year, month: month })} />
 
-    </Container>
+    </View>
   );
 };
 

@@ -226,6 +226,6 @@ export default Navigator = ({ isLoggedIn }) => {
 
                 </>
             }
-        </AppStack.Navigator >
-    </NavigationContainer >
+        </AppStack.Navigator>
+    </NavigationContainer>
 }

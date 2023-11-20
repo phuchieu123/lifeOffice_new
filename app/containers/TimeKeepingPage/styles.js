@@ -30,7 +30,7 @@ export default StyleSheet.create({
   title: {
     fontSize: 18,
     alignSelf: 'flex-start',
-    color: '#111',
+    color:  '#fff',
     marginTop: 6
   },
   detail: {
