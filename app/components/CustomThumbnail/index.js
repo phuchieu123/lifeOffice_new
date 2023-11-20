@@ -8,7 +8,7 @@
 import React, { useEffect, useState } from 'react';
 // import styled from 'styled-components';
 
-import { Thumbnail } from 'native-base';
+import { Image} from 'react-native';
 import images from '../../images';
 
 function CustomThumbnail(props) {
@@ -22,7 +22,7 @@ function CustomThumbnail(props) {
     setSource(image);
   }, []);
 
-  return <Thumbnail onError={handleLoadFallback} {...props} source={source} />;
+  return <Image onError={handleLoadFallback} {...props} source={source} style={{ width: 100, height: 100 }} />;
 }
 
 export default CustomThumbnail;

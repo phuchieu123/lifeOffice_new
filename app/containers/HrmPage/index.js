@@ -94,7 +94,7 @@ export function HrmPage(props) {
         </View>
       </View>
       {/* <CustomFooter activePage="Hrm" /> */}
-    </View >
+    </View>
   );
 }
 
