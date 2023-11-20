@@ -35,7 +35,7 @@ function BackHeader(props) {
           {title}
         </Text>
       </View>
-      <View style={{paddingRight: 10}}>{rightHeader}</View>
+      {rightHeader? <View style={{paddingRight: 10}}>{rightHeader}</View> : null}
     </View> 
   );
 }

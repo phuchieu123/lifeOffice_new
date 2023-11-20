@@ -150,7 +150,7 @@ function SalaryPageDetail(props) {
           </Body>
         </LoadingButton>
       </View> : null}
-    </Container >
+    </Container>
   );
 }
 

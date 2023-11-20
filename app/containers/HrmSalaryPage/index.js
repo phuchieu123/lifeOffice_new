@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Body, Container, Content, Icon, List, ListItem, Right, Text } from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';  
 import ListPage from '../../components/ListPage';
 import CustomHeader from '../../components/Header';
 import { API_HRM_WAGE } from '../../configs/Paths';
@@ -12,10 +12,10 @@ import { getData } from '../../utils/storage';
 import { makeSelectProfile } from '../App/selectors';
 import BackHeader from '../../components/Header/BackHeader';
 import { navigate } from '../../RootNavigation';
-import { BackHandler, DeviceEventEmitter } from 'react-native';
+import { BackHandler, DeviceEventEmitter, Text , View, TouchableOpacity } from 'react-native';
+
 
 function SalaryPage(props) {
-
   const { navigation, route } = props;
   const { params } = route
   const [query, setQuery] = useState({});
@@ -56,7 +56,7 @@ function SalaryPage(props) {
   };
 
   return (
-    <Container>
+    <View style={{flex:1}}>
       <BackHeader title="Bảng lương" navigation={navigation} />
       <ListPage
         query={query}
@@ -68,23 +68,23 @@ function SalaryPage(props) {
           const inCharge = _.get(item, 'inChargedEmployeeId.name')
           const department = _.get(item, 'organizationUnitId.name')
 
-          return <ListItem onPress={() => navigation.navigate('HrmSalaryPageDetail', { item: item })}>
-            <Body>
+          return <TouchableOpacity activeOpacity={1}  onPress={() => navigation.navigate('HrmSalaryPageDetail', { item: item }) }>
+            <View>
               <Text>{`Bảng lương tháng ${month} năm ${year}`}</Text>
               {inCharge && <Text note numberOfLines={1}>{`Phụ trách: ${inCharge}`}</Text>}
               {department && <Text note numberOfLines={1}>{`Phòng ban: ${department}`}</Text>}
 
-            </Body>
-            <Right>
+            </View>
+            <View>
               <Icon name="chevron-right" type="Entypo" />
-            </Right>
-          </ListItem>
+            </View>
+          </TouchableOpacity>
         }}
       />
-      <FabLayout>
+      <FabLayout style={styles}>
         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} onPress={() => navigate('HrmNewSalaryPage')} />
       </FabLayout>
-    </Container>
+    </View>
   );
 }
 
@@ -100,3 +100,14 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(SalaryPage);
+
+const styles = {
+  position: 'absolute',
+  bottom: 10,
+  right: 10,
+  width: 40,
+  height: 40,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 50,
+};
