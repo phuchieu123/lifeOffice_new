@@ -1,15 +1,18 @@
 import React, { memo, useEffect, useState } from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon5 from 'react-native-vector-icons/FontAwesome5';
+import IconMate from 'react-native-vector-icons/MaterialIcons';
+import IconIon from 'react-native-vector-icons/Ionicons';
 
 import {
   Body,
   Button,
   Container,
   Content,
-  Icon,
   Text
 } from 'native-base';
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -50,56 +53,59 @@ const TimeKeepingPage = (props) => {
   }, []);
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       <BackHeader title="Chấm công" navigation={navigation} />
-
-      <Content style={styles.content}>
+      
+      <View style={styles.content}>
         {/* <AccountTab profile={profile || {}} /> */}
 
-        <Button style={styles.button} onPress={() => navigation.navigate('CheckTheFace')}>
-          <Body style={{ flexDirection: 'row', flex: 1 }}>
-            <Icon name="person-sharp" type="Ionicons" style={styles.icon} />
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CheckTheFace')}>
+        
+          <View style={{ flexDirection: 'row', flex: 1 }}>
+          
+            <IconIon name="person-sharp" type="Ionicons" style={styles.icon} />
+            
             <Text style={styles.title}>Chấm công</Text>
-          </Body>
-        </Button>
+          </View>
+        </TouchableOpacity>
 
-        {/* <Button style={styles.button} onPress={() => navigation.navigate('VerifyTimeKeepingHistoryPage')}> */}
-        <Button style={styles.button} onPress={() => navigation.navigate('TimeKeepingHistoryPage')}>
-          <Body style={{ flexDirection: 'row', flex: 1 }}>
-            <Icon name="history" type="MaterialIcons" style={styles.icon} />
+        {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('VerifyTimeKeepingHistoryPage')}> */}
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TimeKeepingHistoryPage')}>
+          <View style={{ flexDirection: 'row', flex: 1 }}>
+            <IconMate name="history" type="MaterialIcons" style={styles.icon} />
             <Text style={styles.title}>Lịch sử chấm công</Text>
-          </Body>
-        </Button>
+          </View>
+        </TouchableOpacity>
 
-        <Button style={styles.button} onPress={() => navigation.navigate('TimeKeepingTable')}>
-          <Body style={{ flexDirection: 'row', flex: 1 }}>
-            <Icon name="database" type="FontAwesome5" style={styles.icon} />
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TimeKeepingTable')}>
+          <View style={{ flexDirection: 'row', flex: 1 }}>
+            <Icon5 name="database" type="FontAwesome5" style={styles.icon} />
             <Text style={styles.title}>Bảng công</Text>
-          </Body>
-        </Button>
+          </View>
+        </TouchableOpacity>
 
-        {/* <Button style={styles.button} onPress={() => navigation.navigate('SalaryPage')}>
-          <Body style={{ flexDirection: 'row', flex: 1 }}>
+        {/* <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SalaryPage')}>
+          <View style={{ flexDirection: 'row', flex: 1 }}>
             <Icon name="money" type="FontAwesome" style={styles.icon} />
             <Text style={styles.title}>Bảng lương</Text>
-          </Body>
-        </Button> */}
+          </View>
+        </TouchableOpacity> */}
 
-        <Button style={styles.button} onPress={() => navigation.navigate('DaysOffBoardPage')}>
-          <Body style={{ flexDirection: 'row', flex: 1 }}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('DaysOffBoardPage')}>
+          <View style={{ flexDirection: 'row', flex: 1 }}>
             <Icon name="calendar-times-o" type="FontAwesome" style={styles.icon} />
             <Text style={styles.title}>Nghỉ phép</Text>
-          </Body>
-        </Button>
+          </View>
+        </TouchableOpacity>
 
-        <Button style={styles.button} onPress={() => navigation.navigate('OvertimePage')}>
-          <Body style={{ flexDirection: 'row', flex: 1 }}>
-            <Icon name="timelapse" type="MaterialIcons" style={styles.icon} />
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('OvertimePage')}>
+          <View style={{ flexDirection: 'row', flex: 1 }}>
+            <IconMate name="timelapse" type="MaterialIcons" style={styles.icon} />
             <Text style={styles.title}>Thời gian OT</Text>
-          </Body>
-        </Button>
-      </Content>
-    </Container>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 

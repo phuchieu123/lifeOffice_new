@@ -6,15 +6,17 @@ const deviceHeight = Dimensions.get('window').height;
 
 export default StyleSheet.create({
   content: {
+    flex: 1,
     padding: 20,
     // backgroundColor: '#9FE2BF',
     backgroundColor: '#fff',
+    justifyContent: 'center'
   },
   button: {
     height: 80,
     padding: 20,
     marginBottom: 20,
-    // backgroundColor: '#6495ED',
+    backgroundColor: 'rgba(46, 149, 46, 1)',
     borderRadius: 15,
     justifyContent: 'flex-start',
     textAlign: 'left',
@@ -28,7 +30,7 @@ export default StyleSheet.create({
   title: {
     fontSize: 18,
     alignSelf: 'flex-start',
-    color: '#fff',
+    color: '#111',
     marginTop: 6
   },
   detail: {
