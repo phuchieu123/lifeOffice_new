@@ -117,8 +117,8 @@ const DepartmentSelect = (props) => {
       </View>
 
       <Footer onClose={onClose} handleSave={handleSave} />
-    </Modal >
-  </View >
+    </Modal>
+  </View>
 };
 
 const mapStateToProps = createStructuredSelector({

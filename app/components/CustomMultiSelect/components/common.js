@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 
 export const icons = ({ name }) => {
     let iconName;
@@ -32,13 +32,13 @@ export const icons = ({ name }) => {
 const styles = {
     icon: {
         fontSize: 16,
-        color: '#000',
+        color: 'rgba(46, 149, 46, 1)',
         paddingLeft: 5,
         paddingRight: 5,
     },
     icon2: {
         fontSize: 16,
-        color: '#FFF',
+        color: 'rgba(46, 149, 46, 1)',
         paddingLeft: 5,
         paddingRight: 5,
     },

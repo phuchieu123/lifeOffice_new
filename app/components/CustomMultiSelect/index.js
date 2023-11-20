@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Button, Text } from 'native-base';
+import { TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import React, { memo, useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
@@ -107,14 +107,14 @@ const CustomMultiSelect = (props) => {
                 <Text style={{ opacity: 0.5, marginRight: 10, textAlignVertical: 'center' }}>Lựa chọn</Text>
               )}
               {canRemove && onRemoveSelectedItem && selectedItems && selectedItems.length > 0 && (
-                <Button transparent onPress={onRemoveSelectedItem} iconRight>
+                <TouchableOpacity  onPress={onRemoveSelectedItem} iconRight>
                   <Icon
                     type="FontAwesome"
                     name="remove"
                     color="red"
                     style={{ fontSize, color: iconColor, marginRight: 10 }}
                   />
-                </Button>
+                </TouchableOpacity>
               )}
               <Icon type="FontAwesome" name="caret-down" color="red" style={{ fontSize, color: iconColor }} />
             </View>
