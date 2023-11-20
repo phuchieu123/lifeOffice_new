@@ -36,8 +36,7 @@ function ItemCard(props) {
                     style={{ height: 320, width: '100%' }}
                     imageStyle={{ borderRadius: 10 }}>
                     <View style={styles.cardItemView}>
-                        {/* <Button
-                            rounded
+                        <Button
                             small
                             onPress={() => openBusinessDetail(businessOp)}
                             iconLeft
@@ -53,12 +52,12 @@ function ItemCard(props) {
                                 {businessOp.name}
                             </Text>
                         </Button>
-                        <View bordered style={{ ...styles.cardItem, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                        <View  style={{ ...styles.cardItem, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                             <Button transparent iconRight small>
                                 <Icon active name="navicon" type="FontAwesome" style={{ color: kanban.color }} />
                             </Button>
                             <Text style={{ color: '#fff', fontSize: 14 }}>Trạng thái: </Text>
-                            <Right style={{ flex: 1, flexDirection: 'row' }}>
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
                                 <CustomMultiSelect
                                     single
                                     items={kanbanOption}
@@ -72,15 +71,15 @@ function ItemCard(props) {
                                     textColor="#fff"
                                     height={30}
                                 />
-                            </Right>
+                            </View>
                         </View>
 
                         {_.get(businessOp, 'responsibilityPerson.length', 0) > 0
-                            ? <View bordered style={styles.cardItem}>
+                            ? <View style={styles.cardItem}>
                                 <Button transparent iconRight small>
                                     <Icon active name="user-circle" type="FontAwesome" style={{ color: kanban.color }} />
                                 </Button>
-                                <Label style={{ color: '#fff', fontSize: 14 }} >{convert(_.get(fieldConfig, 'responsibilityPerson.title')) || 'Người chịu trách nhiệm'}: </Label>
+                                <Text style={{ color: '#fff', fontSize: 14 }} >{convert(_.get(fieldConfig, 'responsibilityPerson.title')) || 'Người chịu trách nhiệm'}: </Text>
                                 <Text numberOfLines={1} style={{ color: '#fff' }}>
                                     {businessOp.responsibilityPerson && businessOp.responsibilityPerson.name}
                                 </Text>
@@ -94,7 +93,7 @@ function ItemCard(props) {
                                     </Text>
                                 }
                             </View>
-                            : null} */}
+                            : null}
 
                         {/* <View bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }}> */}
                         <TouchableOpacity onPress={() => openBusinessDetail(businessOp)} >
