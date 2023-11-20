@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { memo } from 'react';
 import moment from 'moment';
-import { ImageBackground } from 'react-native';
+import { ImageBackground, View, Text } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import { compose } from 'redux';
-import { Card, CardItem, View, Text, Right, Icon, Button, Body, List, ListItem, Label } from 'native-base';
+import { Card, CardItem, Right, Button, Body, List, ListItem, Label } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import images from '../../images';
 import CustomMultiSelect from '../CustomMultiSelect';
 import { formatNumber } from '../../utils/common';
@@ -22,8 +23,8 @@ function ItemCard(props) {
     const { kanban, kanbanOption, updateBusinessOp, openBusinessDetail, businessOp, fieldConfig } = props;
 
     return (
-        <Card style={{ height: 320, marginTop: 0, borderRadius: 20 }}>
-            <CardItem bordered cardBody>
+        <View style={{ height: 320, margin: 5, borderRadius: 20 }}>
+            <View bordered cardBody>
                 <ImageBackground
                     source={
                         businessOp.avatar
@@ -35,7 +36,7 @@ function ItemCard(props) {
                     style={{ height: 320, width: '100%' }}
                     imageStyle={{ borderRadius: 10 }}>
                     <View style={styles.cardItemView}>
-                        <Button
+                        {/* <Button
                             rounded
                             small
                             onPress={() => openBusinessDetail(businessOp)}
@@ -52,7 +53,7 @@ function ItemCard(props) {
                                 {businessOp.name}
                             </Text>
                         </Button>
-                        <CardItem bordered style={{ ...styles.cardItem, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                        <View bordered style={{ ...styles.cardItem, borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                             <Button transparent iconRight small>
                                 <Icon active name="navicon" type="FontAwesome" style={{ color: kanban.color }} />
                             </Button>
@@ -72,10 +73,10 @@ function ItemCard(props) {
                                     height={30}
                                 />
                             </Right>
-                        </CardItem>
+                        </View>
 
                         {_.get(businessOp, 'responsibilityPerson.length', 0) > 0
-                            ? <CardItem bordered style={styles.cardItem}>
+                            ? <View bordered style={styles.cardItem}>
                                 <Button transparent iconRight small>
                                     <Icon active name="user-circle" type="FontAwesome" style={{ color: kanban.color }} />
                                 </Button>
@@ -92,14 +93,14 @@ function ItemCard(props) {
                                         {_.get(businessOp, 'responsibilityPerson[0].name', '')}
                                     </Text>
                                 }
-                            </CardItem>
-                            : null}
+                            </View>
+                            : null} */}
 
-                        {/* <CardItem bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }}> */}
+                        {/* <View bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }}> */}
                         <TouchableOpacity onPress={() => openBusinessDetail(businessOp)} >
-                            <CardItem style={{ ...styles.cardItem, borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
+                            <View style={{ ...styles.cardItem, borderBottomLeftRadius: 20, borderBottomRightRadius: 20 }}>
 
-                                <Body>
+                                <View>
 
                                     <View
                                         style={{
@@ -119,17 +120,17 @@ function ItemCard(props) {
                                             </Text>
                                             <Text style={{ fontSize: 14, textAlign: 'center', color: '#fff' }}>ngày chưa cập nhật</Text>
                                         </ProgressCircle>
-                                        <List style={{ flex: 1 }}>
+                                        <View style={{ flex: 1 }}>
                                             {businessOp.customerId && (
-                                                <ListItem style={{ paddingTop: 0 }}>
+                                                <View style={{ paddingTop: 0 }}>
                                                     <Icon name="user" type="FontAwesome" style={{ fontSize: 20, paddingRight: 8, color: '#fff' }} />
                                                     <Text numberOfLines={1} style={{ color: '#fff', fontSize: 16 }}>
                                                         {businessOp.customerId.name}
                                                     </Text>
-                                                </ListItem>
+                                                </View>
                                             )}
 
-                                            <ListItem style={styles.listItem}>
+                                            <View style={styles.listItem}>
                                                 <Icon
                                                     name="calendar"
                                                     type="FontAwesome"
@@ -138,9 +139,9 @@ function ItemCard(props) {
                                                 <Text numberOfLines={1} style={{ color: '#fff', fontSize: 16 }}>
                                                     {moment(businessOp.createdAt).format('DD/MM/YYYY')}
                                                 </Text>
-                                            </ListItem>
+                                            </View>
                                             {businessOp.value && businessOp.value.amount && (
-                                                <ListItem style={styles.listItem}>
+                                                <View style={styles.listItem}>
                                                     <Icon
                                                         name="money"
                                                         type="FontAwesome"
@@ -149,19 +150,20 @@ function ItemCard(props) {
                                                     <Text numberOfLines={1} style={{ color: '#fff' }}>
                                                         {formatNumber(businessOp.value.amount)}
                                                     </Text>
-                                                </ListItem>
+                                                </View>
                                             )}
-                                        </List>
+                                        </View>
                                     </View>
 
-                                </Body>
+                                </View>
 
-                            </CardItem>
+                            </View>
                         </TouchableOpacity>
                     </View>
                 </ImageBackground>
-            </CardItem>
-        </Card>
+            </View>
+           
+        </View>
     );
 }
 

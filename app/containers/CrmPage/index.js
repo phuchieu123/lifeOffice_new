@@ -8,7 +8,9 @@ import { useInjectReducer } from '../../utils/injectReducer';
 import makeSelectCrmPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { Container, Header, Icon } from 'native-base';
+import { View} from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import IconEn from 'react-native-vector-icons/Entypo';
 import { makeSelectKanbanBosConfigs } from '../App/selectors';
 import {
   deleteBusinessOpportunity,
@@ -124,13 +126,13 @@ export function CrmPage(props) {
   }
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       {isSeaching && <SearchBox isSeaching={isSeaching} onChange={onChangeText} setIsSearching={setIsSearching} />}
       <CustomHeader
         title="Cơ hội kinh doanh"
         rightHeader={
           <RightHeader
-            children={<Icon name="search" type="FontAwesome" onPress={() => setIsSearching(true)} style={{ color: '#fff', marginHorizontal: 10 }} />}
+            children={<Icon name="search" type="FontAwesome" onPress={() => setIsSearching(true)} style={{ color: '#fff', marginHorizontal: 10, fontSize: 20 }} />}
             enableFilterModal
             enableFilterOrg
             organizationUnitId={query.filter.organizationUnitId}
@@ -164,12 +166,12 @@ export function CrmPage(props) {
           </Swiper>
           : null}
 
-        {(Array.isArray(kanbanOption) && kanbanOption.length) ? <FabLayout>
-          <Icon type="Entypo" name="plus" style={{ color: '#fff' }} onPress={() => navigation.navigate('BusinessOpDetail', { kanban: kanbanOption[0], onCreateSuccess: handleReload })} />
+        {(Array.isArray(kanbanOption) && kanbanOption.length) ? <FabLayout style={styles} >
+          <IconEn type="Entypo" name="plus" style={{ color: '#fff' }} onPress={() => navigation.navigate('BusinessOpDetail', { kanban: kanbanOption[0], onCreateSuccess: handleReload })} />
         </FabLayout> : null}
       </LoadingLayout>
       {/* <CustomFooter activePage="Crm" /> */}
-    </Container>
+    </View>
   );
 }
 
@@ -192,3 +194,15 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(CrmPage);
+
+
+const styles = {
+  position: 'absolute',
+  bottom: 10,
+  right: 10,
+  width: 40,
+  height: 40,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 50,
+};

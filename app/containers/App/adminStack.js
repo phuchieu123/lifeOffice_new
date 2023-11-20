@@ -92,16 +92,16 @@ export function AdminStackScreen(props) {
         />
       )}
 
-      {/* {!bosRole.GET ? null : <AdminTab.Screen
+      {!bosRole.GET ? null : <AdminTab.Screen
         options={{
           tabBarLabel: "CRM",
           tabBarIcon: ({ color }) => (
-            <Icon name="call-split" type="MaterialIcons" style={{ color: color, fontSize: 25 }} />
+            <MaterialIcons name="call-split" type="MaterialIcons" style={{ color: color, fontSize: 25 }} />
           ),
         }}
         name="Crm"
         component={CrmPage}
-      />} */}
+      />}
       {/* <AdminTab.Screen
         options={{
           tabBarLabel: "Quản lí",

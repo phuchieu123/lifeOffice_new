@@ -9,8 +9,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { StyleSheet } from 'react-native';
-
+import { StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 import { useInjectSaga } from '../../utils/injectSaga';
 import { useInjectReducer } from '../../utils/injectReducer';
 import makeSelectAddApprovePage from './selectors';
@@ -18,7 +18,6 @@ import reducer from './reducer';
 import saga from './saga';
 import {
   Text,
-  Icon,
   Container,
   Right,
   ListItem,
@@ -51,96 +50,96 @@ export function AddApprovePage(props) {
   return (
     <View>
       <BackHeader navigation={navigation} title="Yêu cầu phê duyệt" />
-      <Content>
-        {!hrmOverTime.POST ? null : <ListItem icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveOverTime')}>
+      <View>
+        {!hrmOverTime.POST ? null : <View icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveOverTime')}>
           {/* <Left style={styles.left}>
             <Thumbnail style={styles.thumbnail} />
           </Left> */}
-          <Body style={styles.body}>
+          <View style={styles.body}>
             <Text>Làm thêm giờ</Text>
-          </Body>
-          <Right>
+          </View>
+          <View>
             <Icon name="right" type="AntDesign" />
-          </Right>
-        </ListItem>}
+          </View>
+        </View>}
 
-        {!caledarWorkOut.POST ? null : <ListItem icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveWorkOut')}>
+        {!caledarWorkOut.POST ? null : <View icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveWorkOut')}>
           {/* <Left style={styles.left}>
             <Thumbnail style={styles.thumbnail}/>
           </Left> */}
-          <Body style={styles.body}>
+          <View style={styles.body}>
             <Text>Công tác</Text>
-          </Body>
-          <Right>
+          </View>
+          <View>
             <Icon name="right" type="AntDesign" />
-          </Right>
-        </ListItem>}
+          </View>
+        </View>}
 
-        {!projectTask.POST ? null : <ListItem icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveProject')}>
+        {!projectTask.POST ? null : <View icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveProject')}>
           {/* <Left style={styles.left}>
             <Thumbnail style={styles.thumbnail} />
           </Left> */}
-          <Body style={styles.body}>
+          <View style={styles.body}>
             <Text>Công việc/Dự án</Text>
-          </Body>
-          <Right>
+          </View>
+          <View>
             <Icon name="right" type="AntDesign" />
-          </Right>
-        </ListItem>}
+          </View>
+        </View>}
 
-        {!priceCrm.POST ? null : <ListItem icon style={styles.listItem} onPress={() => navigation.navigate('AddApprovePrice')}>
+        {!priceCrm.POST ? null : <View icon style={styles.listItem} onPress={() => navigation.navigate('AddApprovePrice')}>
           {/* <Left style={styles.left}>
             <Thumbnail style={styles.thumbnail} />
           </Left> */}
-          <Body style={styles.body}>
+          <View style={styles.body}>
             <Text>Báo giá</Text>
-          </Body>
-          <Right>
+          </View>
+          <View>
             <Icon name="right" type="AntDesign" />
-          </Right>
-        </ListItem>}
+          </View>
+        </View>}
 
 
-        {!contract.POST ? null : <ListItem icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveContract')}>
+        {!contract.POST ? null : <View icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveContract')}>
           {/* <Left style={styles.left}>
             <Thumbnail style={styles.thumbnail} />
           </Left> */}
-          <Body style={styles.body}>
+          <View style={styles.body}>
             <Text>Hợp đồng</Text>
-          </Body>
-          <Right>
+          </View>
+          <View>
             <Icon name="right" type="AntDesign" />
-          </Right>
-        </ListItem>}
+          </View>
+        </View>}
 
 
-        {!documentary.POST ? null : <ListItem icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveDocumentary')}>
+        {!documentary.POST ? null : <View icon style={styles.listItem} onPress={() => navigation.navigate('AddApproveDocumentary')}>
           {/* <Left style={styles.left}>
             <Thumbnail style={styles.thumbnail} />
           </Left> */}
-          <Body style={styles.body}>
+          <View style={styles.body}>
             <Text>Công văn</Text>
-          </Body>
-          <Right>
+          </View>
+          <View>
             <Icon name="right" type="AntDesign" />
-          </Right>
-        </ListItem>}
+          </View>
+        </View>}
 
-        {!require.POST ? null : <ListItem icon style={styles.listItem} onPress={() => {
+        {!require.POST ? null : <View icon style={styles.listItem} onPress={() => {
           // ToastCustom({ text: 'Bạn Chưa Có Quyền Truy Cập', type: 'danger' });
           navigation.navigate('AddApproveSalaryAdvance')
         }}>
           {/* <Left style={styles.left}>
             <Thumbnail style={styles.thumbnail} />
           </Left> */}
-          <Body style={styles.body}>
+          <View style={styles.body}>
             <Text>Tạm ứng</Text>
-          </Body>
-          <Right>
+          </View>
+          <View>
             <Icon name="right" type="AntDesign" />
-          </Right>
-        </ListItem>}
-      </Content>
+          </View>
+        </View>}
+      </View>
     </View>
   );
 }
@@ -170,6 +169,11 @@ export default compose(withConnect)(AddApprovePage);
 const styles = StyleSheet.create({
   listItem: {
     margin: 5,
+    flexDirection:'row',
+    justifyContent:'space-between',
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    
   },
   left: {
     // margin: 10,

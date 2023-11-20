@@ -181,8 +181,8 @@ export function AddProjectPage(props) {
         title={data.isProject ? 'Thêm dự án' : 'Thêm công việc'}
       />
 
-      <Content>
-        <Card>
+      <View>
+        <View>
           <CardItem bordered style={{ backgroundColor: '#f2f2f2' }} cardBody>
             <Form style={{ flex: 1, backgroundColor: 'white' }}>
               <ImageInput source={avatar} onSave={setAvatar} />
@@ -356,12 +356,12 @@ export function AddProjectPage(props) {
               </CollapseView>
             </Form>
           </CardItem>
-        </Card>
+        </View>
         <LoadingButton isBusy={isLoading} block handlePress={handleSubmit}>
           <Icon name="check" type="Feather" />
         </LoadingButton>
-      </Content>
-    </Fragment >
+      </View>
+    </Fragment>
   );
 }
 
