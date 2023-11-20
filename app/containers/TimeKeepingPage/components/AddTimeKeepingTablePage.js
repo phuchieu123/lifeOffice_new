@@ -85,27 +85,27 @@ const AddTimeKeepingTablePage = (props) => {
     );
 
     return (
-        <Container>
+        <View>
             <View>
                 <BackHeader navigation={navigation} title="Thêm bảng công" />
             </View>
-            <Card>
-                <CardItem>
-                    <Form style={{ flex: 1, backgroundColor: '#fff' }}>
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Thời gian:</Label>
+            <View>
+                <View>
+                    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                        <View inlineLabel style={styles.item}>
+                            <Text>Thời gian:</Text>
                             <CustomMonthYearPicker value={date} onChange={(year, month) => setLocalData({ ...localData, year: year, month: month })} />
-                        </Item>
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Phòng ban:</Label>
+                        </View>
+                        <View inlineLabel style={styles.item}>
+                            <Text>Phòng ban:</Text>
                             <DepartmentSelect
                                 handleSelectObjectItems={handleChangeOrg}
                                 selectedItems={selectedOrg}
                                 onRemoveSelectedItem={() => setSelectedOrg([])}
                             />
-                        </Item>
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Phụ trách:</Label>
+                        </View>
+                        <View inlineLabel style={styles.item}>
+                            <Text>Phụ trách:</Text>
                             <SingleAPISearch
                                 API={API_USERS}
                                 Label
@@ -115,16 +115,16 @@ const AddTimeKeepingTablePage = (props) => {
                                 filterOr={['name', 'code']}
                                 selectedDatas={employeesOption}
                             />
-                        </Item>
-                    </Form>
-                </CardItem>
+                        </View>
+                    </View>
+                </View>
                 <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                     <LoadingButton handlePress={handleAdd} style={{ flex: 1, borderRadius: 10, marginLeft: 5 }}>
                         <Icon name="check" type="Feather" />
                     </LoadingButton>
                 </View>
-            </Card>
-        </Container>
+            </View>
+        </View>
     );
 }
 
