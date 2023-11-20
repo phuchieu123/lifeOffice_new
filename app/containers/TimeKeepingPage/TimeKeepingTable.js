@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Container, View, Text, Body, ListItem, List, Right, Icon, Content } from 'native-base';
+import {View, Text, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -37,7 +38,7 @@ export function TimeKeepingTable(props) {
     const handleReload = () => setReload((e) => e + 1)
 
     return (
-        <Container>
+        <View style={{flex: 1}}>
             <BackHeader title="Bảng công" navigation={navigation} />
             <ListPage
                 reload={reload}
@@ -45,22 +46,22 @@ export function TimeKeepingTable(props) {
                 api={API_TIMEKEEPING_TABLE}
                 itemComponent={({ item }) => {
                     const { month, year, inChargedEmployeeId, organizationUnitId } = item
-                    return <ListItem onPress={() => onItemPress(item)}>
-                        <Body>
+                    return <TouchableOpacity onPress={() => onItemPress(item)}>
+                        <View>
                             <Text>Bảng công tháng {month} năm {year}</Text>
                             {inChargedEmployeeId ? <Text note>{`Phụ trách: ${inChargedEmployeeId.name}`}</Text> : null}
                             {organizationUnitId ? <Text note>{`Phòng ban: ${organizationUnitId.name}`}</Text> : null}
-                        </Body>
-                        <Right>
+                        </View>
+                        <View>
                             <Icon name="chevron-right" type="Entypo" />
-                        </Right>
-                    </ListItem>
+                        </View>
+                    </TouchableOpacity>
                 }}
             />
-            <FabLayout>
+            <FabLayout style={styles}>
                 <Icon type="Entypo" name="plus" style={{ color: '#fff' }} onPress={() => navigate('AddTimeKeepingTablePage')} />
             </FabLayout>
-        </Container>
+        </View>
     );
 }
 
@@ -77,3 +78,13 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(TimeKeepingTable);
+const styles = {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+  };

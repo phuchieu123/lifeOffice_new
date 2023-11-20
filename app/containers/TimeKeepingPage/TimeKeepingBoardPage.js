@@ -139,7 +139,7 @@ const TimeKeepingBoardPage = (props) => {
   }
 
   return (
-    <Container>
+    <View>
       <BackHeader
         title={title}
         navigation={navigation}
@@ -258,7 +258,7 @@ const TimeKeepingBoardPage = (props) => {
         onSetDateRange={handleSetDateRange}
         showDatePicker={showDatePicker}
       /> */}
-    </Container>
+    </View>
   );
 };
 

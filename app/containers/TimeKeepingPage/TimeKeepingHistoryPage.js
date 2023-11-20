@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/AntDesign';
 import _ from 'lodash';
 import moment from 'moment';
@@ -72,7 +73,7 @@ const TimeKeepingHistoryPage = (props) => {
     setQuery(newQuery)
   };
 
-  const onPress = e => {
+  const onPress = e => {timeKeepingHistoryData
     setItem({ ...e, type: _.has(e, 'in') ? 'IN' : 'OUT' })
     setModal(true)
   }
@@ -84,16 +85,17 @@ const TimeKeepingHistoryPage = (props) => {
         title="Lịch sử chấm công"
         navigation={navigation}
         rightHeader={
-          <>
-            <Icon name="history" type="MaterialCommunityIcons" onPress={() => navigation.navigate('FailureTimeKeepingHistoryPage')} style={{ color: '#fff', marginHorizontal: 10 }} />
+          <View style={{flexDirection:'row'}}>
+            <IconMaterialCommunityIcons size={25} name="history" type="MaterialCommunityIcons" onPress={() => navigation.navigate('FailureTimeKeepingHistoryPage')} style={{ color: '#fff', marginHorizontal: 10 }} />
             <Icon
+            size={25}
               name="calendar"
               type="AntDesign"
               // onPress={() => setShowDatePicker(true)}
               onPress={() => setEnable(true)}
               style={{ color: '#fff', marginHorizontal: 10 }}
             />
-          </>
+          </View>
         }
       />
 
