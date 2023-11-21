@@ -120,43 +120,43 @@ function CalenderForm(props) {
 
     return (
         <LoadingLayout isLoading={isLoading || loading}>
-            <ScrollView>
-                <View style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Form style={{ flex: 1, backgroundColor: '#fff' }}>
-                        {!_.get(calendarConfig, 'name.checkedShowForm') ? null : <Item inlineLabel style={{}} error={error.name}>
-                            <Label>{convertLabel(_.get(calendarConfig, 'name.title'))}</Label>
-                            <Input disabled={!PUT} value={localData.name} onChangeText={e => handleChange('name', e.replace('  ', ' '))} style={styles.input} />
+            <ScrollView style={{flex: 1}}>
+                <View style={{flex: 1, justifyContent: 'center' }}>
+                    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                        {!_.get(calendarConfig, 'name.checkedShowForm') ? null : <View inlineLabel style={{}} error={error.name}>
+                            <Text style={{paddingVertical: 10}}>{convertLabel(_.get(calendarConfig, 'name.title'))}</Text>
+                            <TextInput disabled={!PUT} value={localData.name} onChangeText={e => handleChange('name', e.replace('  ', ' '))} style={styles.input} />
                             <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                        </Item>}
+                        </View>}
 
-                        {!_.get(calendarConfig, 'code.checkedShowForm') ? null : <Item inlineLabel style={{}} error={error.code}>
-                            <Label>{convertLabel(_.get(calendarConfig, 'code.title'))}</Label>
-                            <Input disabled={!PUT} value={localData.code} onChangeText={e => handleChange('code', e.replace('  ', ' '))} style={styles.input} />
+                        {!_.get(calendarConfig, 'code.checkedShowForm') ? null : <View inlineLabel style={{}} error={error.code}>
+                            <Text>{convertLabel(_.get(calendarConfig, 'code.title'))}</Text>
+                            <TextInput disabled={!PUT} value={localData.code} onChangeText={e => handleChange('code', e.replace('  ', ' '))} style={styles.input} />
                             <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                        </Item>}
+                        </View>}
 
-                        {!_.get(calendarConfig, 'timeStart.checkedShowForm') ? null : <Item inlineLabel error={error.timeStart}>
-                            <Label >{convertLabel(_.get(calendarConfig, 'timeStart.title')) || 'Thời gian bắt đầu'}:</Label>
+                        {!_.get(calendarConfig, 'timeStart.checkedShowForm') ? null : <View inlineLabel error={error.timeStart}>
+                            <Text >{convertLabel(_.get(calendarConfig, 'timeStart.title')) || 'Thời gian bắt đầu'}:</Text>
                             <DateTimePicker
                                 disabled={!PUT}
                                 mode="datetime"
                                 onSave={(e) => handleChange('timeStart', e)}
                                 value={localData.timeStart && moment(localData.timeStart).format(DATE_FORMAT.DATE_TIME)}
                             />
-                        </Item>}
+                        </View>}
 
-                        {!_.get(calendarConfig, 'timeEnd.checkedShowForm') ? null : <Item inlineLabel error={error.timeEnd}>
-                            <Label >{convertLabel(_.get(calendarConfig, 'timeEnd.title')) || 'Thời gian kết thúc'}:</Label>
+                        {!_.get(calendarConfig, 'timeEnd.checkedShowForm') ? null : <View inlineLabel error={error.timeEnd}>
+                            <Text >{convertLabel(_.get(calendarConfig, 'timeEnd.title')) || 'Thời gian kết thúc'}:</Text>
                             <DateTimePicker
                                 disabled={!PUT}
                                 mode="datetime"
                                 onSave={(e) => handleChange('timeEnd', e)}
                                 value={localData.timeEnd && moment(localData.timeEnd).format(DATE_FORMAT.DATE_TIME)}
                             />
-                        </Item>}
+                        </View>}
 
-                        {!_.get(calendarConfig, 'customers.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.customers}>
-                            <Label >{convertLabel(_.get(calendarConfig, 'customers.title')) || 'Khách hàng'}:</Label>
+                        {!_.get(calendarConfig, 'customers.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.customers}>
+                            <Text >{convertLabel(_.get(calendarConfig, 'customers.title')) || 'Khách hàng'}:</Text>
 
                             <MultiAPISearch
                                 disabled={!PUT}
@@ -166,9 +166,9 @@ function CalenderForm(props) {
                                 selectedDatas={_.get(meeting, 'customers')}
                                 onRemove={(e) => handleChange('customers', [])}
                             />
-                        </Item>}
-                        {!_.get(calendarConfig, 'people.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.people}>
-                            <Label >{convertLabel(_.get(calendarConfig, 'people.title')) || 'Người tham gia'}:</Label>
+                        </View>}
+                        {!_.get(calendarConfig, 'people.checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.people}>
+                            <Text >{convertLabel(_.get(calendarConfig, 'people.title')) || 'Người tham gia'}:</Text>
 
                             <MultiAPISearch
                                 disabled={!PUT}
@@ -180,10 +180,10 @@ function CalenderForm(props) {
                                 customData={arr => arr.map(e => ({ ...e, employeeId: e.employeeId || e._id }))}
                                 onRemove={(e) => handleChange('people', [])}
                             />
-                        </Item>}
+                        </View>}
 
-                        {!_.get(_.get(calendarConfig, 'organizer.name'), 'checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.organizer}>
-                            <Label >{convertLabel(_.get(calendarConfig, 'organizer.name').title) || 'Người tổ chức'}:</Label>
+                        {!_.get(_.get(calendarConfig, 'organizer.name'), 'checkedShowForm') ? null : <View inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.organizer}>
+                            <Text >{convertLabel(_.get(calendarConfig, 'organizer.name').title) || 'Người tổ chức'}:</Text>
                             <SingleAPISearch
                                 disabled={!PUT}
                                 readOnly={!calendarConfig}
@@ -195,11 +195,11 @@ function CalenderForm(props) {
                                 customData={arr => arr.map(e => ({ ...e, employeeId: e.employeeId || e._id }))}
                                 onRemove={(e) => handleChange('organizer', null)}
                             />
-                        </Item>}
+                        </View>}
 
                         {!_.get(calendarConfig, 'approved.checkedShowForm') ? null :
-                            <Item inlineLabel error={error.approved}>
-                                <Label >{convertLabel(_.get(calendarConfig, 'approved.title')) || 'Người phê duyệt'}:</Label>
+                            <View inlineLabel error={error.approved}>
+                                <Text >{convertLabel(_.get(calendarConfig, 'approved.title')) || 'Người phê duyệt'}:</Text>
                                 <SingleAPISearch
                                     disabled={!PUT}
                                     API={API_USERS}
@@ -207,18 +207,19 @@ function CalenderForm(props) {
                                     selectedItems={localData.approved ? [localData.approved._id] : []}
                                     onRemove={() => handleChange('approved', [])}
                                 />
-                            </Item>}
+                            </View>}
 
                         {!_.get(calendarConfig, 'content.checkedShowForm') ? null :
                             <>
                                 <View style={{ marginLeft: 14 }} >
-                                    <Label style={{ marginTop: 10, color: '#444444' }}>{convertLabel(_.get(calendarConfig, 'content.title'))}</Label>
+                                    <Text style={{ marginTop: 10, color: '#444444' }}>{convertLabel(_.get(calendarConfig, 'content.title'))}</Text>
                                 </View>
 
                                 <View style={{ marginHorizontal: 15 }} >
-                                    <Textarea
+                                    <TextInput
                                         disabled={!PUT}
-                                        rowSpan={5}
+                                        multiline={true}
+                                     numberOfLines={5}
                                         bordered
                                         value={_.get(localData, 'result')}
                                         onChangeText={(val) => handleChange('result', val)}
@@ -229,12 +230,13 @@ function CalenderForm(props) {
                         {!_.get(calendarConfig, 'result.checkedShowForm') ? null :
                             <>
                                 <View style={{ marginLeft: 14 }} >
-                                    <Label style={{ marginTop: 10, color: '#444444' }}>{convertLabel(_.get(calendarConfig, 'result.title'))}</Label>
+                                    <Text style={{ marginTop: 10, color: '#444444' }}>{convertLabel(_.get(calendarConfig, 'result.title'))}</Text>
                                 </View>
                                 <View style={{ marginHorizontal: 15 }} >
-                                    <Textarea
-                                        disabled={!PUT}
-                                        rowSpan={5}
+                                    <TextInput
+                                         disabled={!PUT}
+                                        multiline={true}
+                                     numberOfLines={5}
                                         bordered
                                         value={_.get(localData, 'content')}
                                         onChangeText={(val) => handleChange('content', val)}
@@ -242,14 +244,14 @@ function CalenderForm(props) {
                                 </View>
                             </>
                         }
-                    </Form>
+                    </View>
                 </View>
                 {!calenderRole.POST ? null : <View style={{ flexDirection: 'row', padding: 10, paddingRight: 20 }}>
                     <LoadingButton isBusy={updating} handlePress={onSave} style={{ width: '100%', justifyContent: 'center' }}>
                         <Icon name="check" type="Feather" />
                     </LoadingButton>
                 </View>}
-            </ScrollView >
+            </ScrollView>
         </LoadingLayout>
     );
 }

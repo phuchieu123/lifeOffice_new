@@ -1,7 +1,7 @@
 import React, { useEffect, useState, memo } from 'react'
-import { DeviceEventEmitter, FlatList, Platform } from 'react-native'
-import { Body, Icon, Left, ListItem, Right, Text, View } from 'native-base'
+import { DeviceEventEmitter, FlatList, Platform, Text, View  } from 'react-native'
 import { downloadFile, getFile } from '../../api/fileSystem'
+import Icon from 'react-native-vector-icons/Entypo';
 import { navigate } from '../../RootNavigation'
 import moment from 'moment'
 import { API_FILE } from '../../configs/Paths'
@@ -79,22 +79,27 @@ const FileView = props => {
 
     //     downloadFile(item)
     // }
-
+        
+  
     return !visible ? null :
-        <FlatList
+      <View>
+          <FlatList
             refreshing={reload}
             data={data}
+            style={{flex: 1}}
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => {
                 const { name, createdAt } = item
-
-                return <ListItem>
+                    console.log(item,'ssssssssssssssssssssss')
+                return(
+                <View >
                     <Icon type='MaterialCommunityIcons' name='file' />
 
                     <View>
                         <TouchableOpacity onPress={() => { toWatch(item) }}>
                             <Text>{name}</Text>
                             <Text style={{ fontSize: 14 }}>Ngày tạo: {moment(createdAt).format(DATE_FORMAT.DATE_TIME)}</Text>
+                            <Text>sssssssssssss</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -102,10 +107,13 @@ const FileView = props => {
                         <Icon type='MaterialCommunityIcons' name='download' style={{ fontSize: 30 }} />
                     </TouchableOpacity>
 
-                </ListItem>
+                </View>
+                );
             }}
 
         />
+        
+      </View>
 }
 
 
