@@ -42,5 +42,9 @@ export default styles = {
     zIndex: 39,
    
   },
-  
+  text:{
+    paddingVertical: 10,
+    backgroundColor:'#ddd',
+    paddingLeft: 10
+}
 };

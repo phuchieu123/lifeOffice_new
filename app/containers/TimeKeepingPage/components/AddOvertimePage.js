@@ -1,11 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Container, Card, CardItem, Icon, Form, Label, Item, Input, Body } from 'native-base';
-import { View, DeviceEventEmitter, TouchableOpacity, Text } from 'react-native';
+
+import { View, DeviceEventEmitter, TouchableOpacity, Text, TextInput } from 'react-native';
 import BackHeader from "../../../components/Header/BackHeader";
 import LoadingButton from "../../../components/LoadingButton";
 import SingleAPISearch from '../../../components/CustomMultiSelect/SingleAPISearch';
 import DepartmentSelect from "../../../components/CustomMultiSelect/DepartmentSelect";
 import DateTimePicker from "../../../components/CustomDateTimePicker/DateTimePicker";
+import Icon from 'react-native-vector-icons/Feather';
+import IconEn from 'react-native-vector-icons/Entypo';
 import moment from "moment";
 import { createStructuredSelector } from "reselect";
 import { connect } from "react-redux";
@@ -100,25 +102,25 @@ const AddOvertimePage = (props) => {
     };
 
     return (
-        <Container>
+        <View style={{flex: 1}}>
             <View>
                 <BackHeader navigation={navigation} title={id ? "Thông tin thời gian OT" : "Thêm mới thời gian OT"} />
             </View>
-            <Card>
-                <CardItem>
-                    <Form style={{ flex: 1, backgroundColor: '#fff' }}>
-                        <Item inlineLabel>
-                            <Label>Phòng ban:</Label>
+            <View style={{flex: 1}}>
+                <View style={{flex: 1}}>
+                    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                        <View inlineLabel>
+                            <Text style={styles.text}>Phòng ban:</Text>
                             <DepartmentSelect
                                 single
                                 handleSelectObjectItems={handleChangeOrg}
                                 selectedItems={localData.organizationUnit ? [localData.organizationUnit] : []}
                                 onRemoveSelectedItem={() => handleChange('organizationUnit', null)}
                             />
-                        </Item>
+                        </View>
 
-                        <Item inlineLabel>
-                            <Label>Nhân viên:</Label>
+                        <View inlineLabel>
+                            <Text style={styles.text}>Nhân viên:</Text>
                             <SingleAPISearch
                                 API={API_PERSONNEL}
                                 selectedItems={localData.hrmEmployeeId ? [localData.hrmEmployeeId._id] : []}
@@ -126,45 +128,45 @@ const AddOvertimePage = (props) => {
                                 onRemove={() => handleChange('hrmEmployeeId', null)}
                                 selectedDatas={hrmOption}
                             />
-                        </Item>
+                        </View>
 
-                        <Item inlineLabel>
-                            <Label>Thời gian bắt đầu:</Label>
+                        <View inlineLabel>
+                            <Text style={styles.text}>Thời gian bắt đầu:</Text>
                             <DateTimePicker
                                 mode="time"
                                 onSave={(e) => setLocalData({...localData, timeStart: moment(e).format("HH:mm")})}
                                 value={localData.timeStart}
                             />
-                        </Item>
+                        </View>
 
-                        <Item inlineLabel>
-                            <Label>Thời gian kết thúc:</Label>
+                        <View inlineLabel>
+                            <Text style={styles.text}>Thời gian kết thúc:</Text>
                             <DateTimePicker
                                 mode="time"
                                 onSave={(e) => setLocalData({...localData, timeEnd: moment(e).format("HH:mm")})}
                                 value={localData.timeEnd}
                             />
-                        </Item>
+                        </View>
 
-                        <Item inlineLabel style={styles.item}>
-                            <Label>Tháng/Năm:</Label>
+                        <View inlineLabel style={styles.item}>
+                            <Text style={styles.text}>Tháng/Năm:</Text>
                             <CustomMonthYearPicker value={item ? new Date(item.year, (item.month - 1), 1, 0, 0, 0) : new Date()} onChange={(year, month) => setLocalData({ ...localData, year: year, month: month })} />
-                        </Item>
+                        </View>
 
-                        <Item inlineLabel>
-                            <Label>Ghi chú:</Label>
-                            <Input value={localData.reason} onChangeText={e => handleChange('reason', e)} style={{ textAlign: 'right', marginRight: 5, paddingTop: 10 }} multiline={true} />
-                            <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                        </Item>
-                    </Form>
-                </CardItem>
+                        <View inlineLabel>
+                            <Text style={styles.text}>Ghi chú:</Text>
+                            <TextInput value={localData.reason} onChangeText={e => handleChange('reason', e)} style={{ textAlign: 'right', marginRight: 5, paddingTop: 10 }} multiline={true} />
+                            <IconEn active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
+                        </View>
+                    </View>
+                </View>
                 <View style={{ flexDirection: 'row', marginBottom: 10 }}>
-                    <LoadingButton isBusy={updating} handlePress={handleAdd} style={{ flex: 1, borderRadius: 10, marginLeft: 5 }}>
-                        <Icon name="check" type="Feather" />
+                    <LoadingButton isBusy={updating} handlePress={handleAdd} style={{ flex: 1, borderRadius: 10, marginLeft: 5, backgroundColor: 'rgba(46, 149, 46, 1)' }}>
+                        <Icon name="check" type="Feather" style={{paddingVertical: 10, textAlign:'center', fontSize: 20,color: 'whites'}} />
                     </LoadingButton>
                 </View>
-            </Card>
-        </Container>
+            </View>
+        </View>
     );
 }
 
@@ -181,3 +183,5 @@ const mapStateToProps = createStructuredSelector({
 const withConnect = connect(mapStateToProps);
 
 export default compose(withConnect)(AddOvertimePage);
+
+

@@ -71,6 +71,8 @@ const DateTimePicker = (props) => {
       onCancel={onCancel}
       disabled={disabled}
     />}
+
+    
   </>
 };
 
@@ -78,7 +80,7 @@ export default DateTimePicker;
 
 const styles = {
   view: {
-    flex: 1,
+ 
     height: 42,
     justifyContent: 'center',
     textAlign: 'right',
