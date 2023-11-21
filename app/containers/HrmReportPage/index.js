@@ -1,18 +1,10 @@
 import React, { memo, useEffect } from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler, View, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-import {
-  Body,
-  Button,
-  Container,
-  Content,
-  Icon,
-  Left,
-  Text
-} from 'native-base';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import BackHeader from '../../components/Header/BackHeader';
@@ -41,27 +33,27 @@ const HrmReportPage = (props) => {
   }, []);
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       <BackHeader title="Báo cáo" navigation={navigation} />
-      <Content style={styles.content}>
-        <Button style={styles.button} onPress={() => navigation.navigate('EmployeeReportPage')}>
-          <Left style={styles.left}>
+      <View style={styles.View}>
+        <TouchableOpacity  style={styles.button} onPress={() => navigation.navigate('EmployeeReportPage')}>
+          <View style={styles.left}>
             <Icon name="person" type="Ionicons" style={styles.icon} />
-          </Left>
-          <Body>
+          </View>
+          <View>
             <Text style={styles.title}>Báo cáo nhân sự</Text>
-          </Body>
-        </Button>
-        <Button style={styles.button} onPress={() => navigation.navigate('TimeKeepingReportPage')}>
-          <Left style={styles.left}>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TimeKeepingReportPage')}>
+          <View style={styles.left}>
             <Icon name="clock-time-five-outline" type="MaterialCommunityIcons" style={styles.icon} />
-          </Left>
-          <Body>
+          </View>
+          <View>
             <Text style={styles.title}>Báo cáo chấm công</Text>
-          </Body>
-        </Button>
-      </Content>
-    </Container>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 

@@ -33,6 +33,7 @@ export function HrmPage(props) {
 
   const handleShowNotice = () => {
     ToastCustom({ text: 'Bạn Chưa Có Quyền Truy Cập', type: 'danger' });
+    console.log('chuaw duoc pheps');
   };
 
   return (

@@ -9,6 +9,7 @@ export default (props) => {
         autoHide: true, // Tự động ẩn sau thời gian hiển thị
         topOffset: 30, // Khoảng cách từ top (nếu position là 'top')
         ...props, // Các thuộc tính khác bạn muốn truyền vào });
+  
     });
     } catch (err) { }
 }

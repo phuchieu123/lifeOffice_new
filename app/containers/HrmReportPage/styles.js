@@ -41,4 +41,5 @@ export default StyleSheet.create({
     color: '#fff',
     fontSize: 32,
   },
+  View:{flex: 1}
 });
