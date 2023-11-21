@@ -8,7 +8,8 @@ import { useInjectReducer } from '../../utils/injectReducer';
 import makeSelectWorkingSchedulePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { Header, Icon, Container, Card, CardItem, Body, View, Text } from 'native-base';
+import { View, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Entypo';
 import ListPage from '../../components/ListPage';
 import CustomHeader from '../../components/Header';
 import RightHeader from '../../components/CustomFilter/RightHeader';
@@ -88,7 +89,7 @@ export function WorkingSchedulePage(props) {
   }
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       {/* {isSeaching ? (
         <Header searchBar rounded hasTabs>
           <SearchBox onSearch={onSearchText} onClose={() => setIsSearching(false)} textSearch={textSearch} />
@@ -106,12 +107,13 @@ export function WorkingSchedulePage(props) {
           api={MEETING_SCHEDULE}
           itemComponent={({ item }) => {
             return (<TouchableNativeFeedback
+              accessible={false} 
               key={`${item._id}`}
               onPress={() => navigate('WorkingScheduleDetailPage', { "item._id": item._id })}
             >
-              <Card style={{ borderRadius: 10 }}>
-                <CardItem style={{ borderRadius: 10 }}>
-                  <Body>
+              <View style={{ borderRadius: 10 }}>
+                <View style={{ borderRadius: 10 }}>
+                  <View>
                     <View style={styles.view}>
                       <View style={{ flex: 1 }}>
                         <Text numberOfLines={1}>{item.name}</Text>
@@ -134,18 +136,18 @@ export function WorkingSchedulePage(props) {
                         <Text note style={{ justifyContent: 'center' }}>{item.timeStartFormatHH} {item.timeStartFormat} - {item.timeEndFormatHH} {item.timeEndFormat}</Text>
                       </View>
                     </View>
-                  </Body>
-                </CardItem>
-              </Card>
+                  </View>
+                </View>
+              </View>
             </TouchableNativeFeedback>)
           }}
         />
-
-        <FabLayout onPress={() => RootNavigation.navigate('WorkingScheduleDetailPage')}>
+         
+        <FabLayout style={styles.sty} onPress={() => RootNavigation.navigate('WorkingScheduleDetailPage')}>
           <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
         </FabLayout>
-      </View>
-    </Container >
+      </View> 
+    </View>
   );
 }
 
@@ -173,5 +175,15 @@ const styles = {
     opacity: 0.4,
     marginTop: 1,
     marginRight: 4
+  },
+  sty:  {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
   }
 }

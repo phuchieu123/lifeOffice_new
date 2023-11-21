@@ -83,7 +83,7 @@ export function MeetingScheduleDetailPage(props) {
     }
 
     return (
-        <Container>
+        <View>
             <BackHeader
                 title={id ? localData.name : 'Thêm mới lịch công tác'}
                 navigation={navigation}
@@ -112,7 +112,7 @@ export function MeetingScheduleDetailPage(props) {
                     </Tab>
                 </Tabs>
             }
-        </Container >
+        </View>
     );
 }
 
