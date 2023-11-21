@@ -86,13 +86,13 @@ const FilterBox = (props) => {
 
 
             {enableDayPicker &&
-                <ListItem style={{ height: 55 }}>
+                <View style={{ height: 55 }}>
                     <DateTimePicker
                         mode="date"
                         onSave={onChangeDay}
                         value={dayState}
                     />
-                </ListItem>
+                </View>
             }
 
             {/* {enableDatePicker &&
@@ -105,16 +105,16 @@ const FilterBox = (props) => {
 
             {enableDatePicker && <View>
 
-                <ListItem onPress={() => setShowDatePicker(true)}>
+                <View onPress={() => setShowDatePicker(true)}>
                     <Body style={{ alignItems: "flex-end", flex: 1 }}>
                         <Text>{`${start ? moment(start, DATE).format(DATE_FORMAT) : '   '} - ${end ? moment(end, DATE).format(DATE_FORMAT) : '   '} `}
                             <Icon type="FontAwesome" name="caret-down" color="red" style={{ fontSize: 16, color: '#000' }} />
                         </Text>
                     </Body>
-                </ListItem>
+                </View>
             </View>}
 
-            {enableFilterOrg && <ListItem >
+            {enableFilterOrg && <View >
                 <DepartmentSelect
                     single
                     handleSelectObjectItems={handleChangeOrg}
@@ -123,7 +123,7 @@ const FilterBox = (props) => {
                     emptyText='Tất cả phòng ban'
                     buttonStyles={{ height: 'auto' }}
                 />
-            </ListItem>}
+            </View>}
 
             <View padder style={{ flexDirection: 'row' }}>
                 <LoadingButton isBusy={loading} block onPress={handleSave} style={{ borderRadius: 10, flex: 1 }}>
@@ -140,7 +140,7 @@ const FilterBox = (props) => {
                     showDatePicker={showDatePicker}
                 />
             }
-        </View >
+        </View>
     );
 };
 

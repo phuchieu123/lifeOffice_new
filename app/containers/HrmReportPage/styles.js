@@ -14,7 +14,7 @@ export default StyleSheet.create({
     height: 80,
     padding: 20,
     marginBottom: 20,
-    // backgroundColor: '#6495ED',
+    backgroundColor: '#6495ED',
     borderRadius: 15,
     justifyContent: 'flex-start',
     textAlign: 'left',

@@ -33,9 +33,9 @@ const HrmReportPage = (props) => {
   }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <View >
       <BackHeader title="Báo cáo" navigation={navigation} />
-      <View style={styles.View}>
+       <View >
         <TouchableOpacity  style={styles.button} onPress={() => navigation.navigate('EmployeeReportPage')}>
           <View style={styles.left}>
             <Icon name="person" type="Ionicons" style={styles.icon} />
@@ -51,8 +51,11 @@ const HrmReportPage = (props) => {
           <View>
             <Text style={styles.title}>Báo cáo chấm công</Text>
           </View>
-        </TouchableOpacity>
-      </View>
+        </TouchableOpacity> 
+
+      </View> 
+     
+      
     </View>
   );
 };

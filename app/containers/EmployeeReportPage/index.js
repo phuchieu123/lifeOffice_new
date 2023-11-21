@@ -3,15 +3,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import {
-  Body,
-  Container,
-  Content,
-  Icon,
-  List,
-  ListItem,
-  Text
-} from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
+import {Text, View, TouchableOpacity} from 'react-native';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import BackHeader from '../../components/Header/BackHeader';
@@ -27,106 +20,106 @@ const EmployeeReportPage = (props) => {
   const { navigation } = props;
 
   return (
-    <Container>
+    <View>
       <BackHeader title="Báo cáo nhân sự" navigation={navigation} />
-      <Content style={styles.content}>
-        <List>
-          <ListItem onPress={() => navigation.navigate('EmployeeAgeChart')}>
-            <Body>
+      <View style={styles.content}>
+        <View>
+          <TouchableOpacity onPress={() => navigation.navigate('EmployeeAgeChart')}>
+            <View>
               <Text>Báo cáo theo độ tuổi</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem>
-          <ListItem onPress={() => navigation.navigate('SeniorityReport')}>
-            <Body>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('SeniorityReport')}>
+            <View>
               <Text>Báo cáo theo thâm niên</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem>
-          {/* <ListItem onPress={() => navigation.navigate('EmployeeContractChart')}>
-            <Body>
+          </TouchableOpacity>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('EmployeeContractChart')}>
+            <View>
               <Text>Báo cáo theo hợp đồng</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem> */}
+          </TouchableOpacity> */}
 
-          <ListItem onPress={() => navigation.navigate('EmployeeWordChart')}>
-            <Body>
+          <TouchableOpacity onPress={() => navigation.navigate('EmployeeWordChart')}>
+            <View>
               <Text>Báo cáo theo ngày làm việc</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem>
-          <ListItem onPress={() => navigation.navigate('EmployeePositionChart')}>
-            <Body>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('EmployeePositionChart')}>
+            <View>
               <Text>Báo cáo theo chức vụ</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem>
-          <ListItem onPress={() => navigation.navigate('EmployeeSituationChart')}>
-            <Body>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('EmployeeSituationChart')}>
+            <View>
               <Text>Báo cáo tình hình nhân sự</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem>
+          </TouchableOpacity>
 
 
 
-          {/* <ListItem onPress={() => navigation.navigate('RecCostReport')}>
-            <Body>
+          {/* <TouchableOpacity onPress={() => navigation.navigate('RecCostReport')}>
+            <View>
               <Text>Báo cáo chi phí tuyển dụng</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem>
-          <ListItem onPress={() => navigation.navigate('OrgReport')}>
-            <Body>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('OrgReport')}>
+            <View>
               <Text>Báo cáo theo phòng ban</Text>
-            </Body>
+            </View>
             <Icon name="chevron-right" type="Entypo" style={styles.icon} />
-          </ListItem> */}
-          {/* <ListItem onPress={() => navigation.navigate('EmployeeBirthChart')}>
-            <Body>
+          </TouchableOpacity> */}
+          {/* <TouchableOpacity onPress={() => navigation.navigate('EmployeeBirthChart')}>
+            <View>
               <Text>Ngày sinh</Text>
-            </Body>
+            </View>
             <Right>
               <Icon name="chevron-right" type="Entypo" />
             </Right>
-          </ListItem>
-          <ListItem onPress={() => navigation.navigate('EmployeeGenderChart')}>
-            <Body>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('EmployeeGenderChart')}>
+            <View>
               <Text>Giới tính</Text>
-            </Body>
+            </View>
             <Right>
               <Icon name="chevron-right" type="Entypo" />
             </Right>
-          </ListItem>
-          <ListItem onPress={() => navigation.navigate('EmployeeSkillChart')}>
-            <Body>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('EmployeeSkillChart')}>
+            <View>
               <Text>Trình độ chuyên môn</Text>
-            </Body>
+            </View>
             <Right>
               <Icon name="chevron-right" type="Entypo" />
             </Right>
-          </ListItem>
-          <ListItem onPress={() => navigation.navigate('EmployeeSeniorityChart')}>
-            <Body>
+          </View>
+          <TouchableOpacity onPress={() => navigation.navigate('EmployeeSeniorityChart')}>
+            <View>
               <Text>Báo cáo thống kê theo thâm niên</Text>
-            </Body>
+            </View>
             <Right>
               <Icon name="chevron-right" type="Entypo" />
             </Right>
-          </ListItem>
-          </ListItem> */}
-          {/* <ListItem onPress={() => navigation.navigate('FillterDepartment')}>
-            <Body>
+          </View>
+          </View> */}
+          {/* <TouchableOpacity onPress={() => navigation.navigate('FillterDepartment')}>
+            <View>
               <Text>Theo phòng ban</Text>
-            </Body>
+            </View>
             <Right>
               <Icon name="chevron-right" type="Entypo" />
             </Right>
-          </ListItem> */}
-        </List>
-      </Content>
-    </Container>
+          </View> */}
+        </View>
+      </View>
+    </View>
   );
 };
 

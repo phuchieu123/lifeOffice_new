@@ -26,6 +26,7 @@ import FilterBox from '../../components/CustomFilter/FilterBox';
 import _ from 'lodash'
 import PieChartScreen from '../../components/CustomChartWrapper/PieChartScreen';
 import moment from 'moment';
+import BadgeView from '../ApprovePage/BadgeView';
 
 const ARR = ['< 20', '20 - 30', '30 - 40', '40 - 50', '> 50', 'Khác']
 
@@ -96,12 +97,12 @@ const EmployeeAgeChart = (props) => {
     }
 
     return (
-        <Container>
+        <View>
             <BackHeader
                 title="Báo cáo theo độ tuổi"
                 navigation={navigation}
             />
-            <Content style={styles.content}>
+            <View style={styles.content}>
                 <FilterBox
                     enableDayPicker
                     enableFilterOrg
@@ -110,13 +111,13 @@ const EmployeeAgeChart = (props) => {
                 <View style={{ height: 400, marginBottom: 80 }}>
                     <PieChartScreen data={data} description=' ' />
                 </View>
-            </Content>
+            </View>
 
             {/* <Content style={styles.content}>{<PieChart data={dataOrg} />}</Content> */}
             {/* <Content style={styles.content}>
                 {dataTotal && <BarChart data={dataTotal} />}
             </Content> */}
-        </Container>
+        </View>
     );
 };
 
