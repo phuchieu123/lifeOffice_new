@@ -58,18 +58,18 @@ export default TakeLeaveDay = (props) => {
                 const employee = _.get(item, 'name')
                 const organization = _.get(item, 'organizationUnit')
 
-                return <ListItem onPress={() => navigate('DetailsDaysOffBoardPage', { item })}>
-                    <Body>
+                return <View onPress={() => navigate('DetailsDaysOffBoardPage', { item })}>
+                    <View>
                         <Text style={{ fontWeight: 'bold' }}>{time}</Text>
                         {employee && <Text style={{ fontSize: 16, color: "black" }} note numberOfLines={1}>{`Người tạo: ${employee}`}</Text>}
                         {organization && <Text style={{ fontSize: 16, color: "black" }} note numberOfLines={1}>{`Phòng ban: ${organization}`}</Text>}
                         <Text>Tiêu đề: {item.type && item.type.title}</Text>
                         <Text>Lý do: {item.reason}</Text>
-                    </Body>
-                    <Right>
+                    </View>
+                    <View>
                         <Icon name="chevron-right" type="Entypo" />
-                    </Right>
-                </ListItem>
+                    </View>
+                </View>
             }}
         />
     );

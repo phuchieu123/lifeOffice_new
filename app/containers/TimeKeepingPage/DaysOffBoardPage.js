@@ -1,15 +1,12 @@
 import React, { memo, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View, } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { navigate } from '../../RootNavigation';
-
+import Icon from 'react-native-vector-icons/Entypo';
 import moment from 'moment';
-import {
-  Container,
-  Icon
-} from 'native-base';
+
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import BackHeader from '../../components/Header/BackHeader';
@@ -63,12 +60,12 @@ const DaysOffBoardPage = (props) => {
   };
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       <BackHeader
         title="Thông tin ngày nghỉ"
         navigation={navigation}
       // rightHeader={
-      //   <Icon name="calendar" type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff' }} />
+      //   <Icon name="calendar" type="AntDesign" onPress={()  => setShowDatePicker(true)} style={{ color: '#fff' }} />
       // }
       />
       {/* <TakeLeaveYear hrmEmployeeId={profile.hrmEmployeeId} /> */}
@@ -90,10 +87,10 @@ const DaysOffBoardPage = (props) => {
         onSetDateRange={handleSetDateRange}
         showDatePicker={showDatePicker}
       /> */}
-      <FabLayout>
+      <FabLayout style ={styles.led}>
         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} onPress={() => navigate('NewDaysOffBoardPage')} />
       </FabLayout>
-    </Container>
+    </View>
   );
 };
 
@@ -136,4 +133,13 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
   },
+  led:{ position: 'absolute',
+  bottom: 10,
+  right: 10,
+  width: 40,
+  height: 40,
+  justifyContent: 'center',
+  alignItems: 'center',
+  borderRadius: 50,}
 });
+
