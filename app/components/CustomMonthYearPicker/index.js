@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import _ from 'lodash';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;

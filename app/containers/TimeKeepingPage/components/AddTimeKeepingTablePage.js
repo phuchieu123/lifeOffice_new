@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Item, Container, Card, CardItem, Icon, Form, Label, Body } from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 import { View, Text, TouchableOpacity, DeviceEventEmitter } from 'react-native';
 import BackHeader from "../../../components/Header/BackHeader";
 import LoadingButton from '../../../components/LoadingButton';
@@ -85,19 +85,19 @@ const AddTimeKeepingTablePage = (props) => {
     );
 
     return (
-        <View>
-            <View>
+        <View style={{flex: 1}}>
+            <View >
                 <BackHeader navigation={navigation} title="Thêm bảng công" />
             </View>
-            <View>
-                <View>
-                    <View style={{ flex: 1, backgroundColor: '#fff' }}>
+            <View style={{flex: 1}} >
+                <View style={{flex: 1}}> 
+                    <View style={{  backgroundColor: '#fff' }}>
                         <View inlineLabel style={styles.item}>
-                            <Text>Thời gian:</Text>
+                            <Text style={{backgroundColor:'#ddd', paddingVertical: 10}}>Thời gian:</Text>
                             <CustomMonthYearPicker value={date} onChange={(year, month) => setLocalData({ ...localData, year: year, month: month })} />
                         </View>
                         <View inlineLabel style={styles.item}>
-                            <Text>Phòng ban:</Text>
+                            <Text style={{backgroundColor:'#ddd', paddingVertical: 10}}>Phòng ban:</Text>
                             <DepartmentSelect
                                 handleSelectObjectItems={handleChangeOrg}
                                 selectedItems={selectedOrg}
@@ -105,7 +105,7 @@ const AddTimeKeepingTablePage = (props) => {
                             />
                         </View>
                         <View inlineLabel style={styles.item}>
-                            <Text>Phụ trách:</Text>
+                            <Text style={{backgroundColor:'#ddd', paddingVertical: 10}}>Phụ trách:</Text>
                             <SingleAPISearch
                                 API={API_USERS}
                                 Label
@@ -118,9 +118,9 @@ const AddTimeKeepingTablePage = (props) => {
                         </View>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                <View style={{ flexDirection: 'row', marginBottom: 10,backgroundColor:'#00bd1c', marginHorizontal: 10, borderRadius: 10 }}>
                     <LoadingButton handlePress={handleAdd} style={{ flex: 1, borderRadius: 10, marginLeft: 5 }}>
-                        <Icon name="check" type="Feather" />
+                        <Icon name="check" type="Feather" style={{textAlign: 'center', color: 'white', fontSize: 20}}/>
                     </LoadingButton>
                 </View>
             </View>
@@ -142,3 +142,4 @@ const mapStateToProps = createStructuredSelector({
 const withConnect = connect(mapStateToProps);
 
 export default compose(withConnect)(AddTimeKeepingTablePage);
+
