@@ -4,8 +4,9 @@ import {
     ListItem,
     Body,
     Right,
-    Icon,
+    View
 } from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
 import { API_TAKE_LEAVE } from '../../../configs/Paths';
 import ListPage from '../../../components/ListPage';
 import moment from 'moment';

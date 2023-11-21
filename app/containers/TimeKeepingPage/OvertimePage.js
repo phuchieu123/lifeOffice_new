@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Container, View, Text, Body, ListItem, List, Right, Icon, Content } from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
 import { connect } from 'react-redux';
+import {View, Text} from 'react-native';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -21,7 +22,7 @@ export function OvertimePage(props) {
 
 
     return (
-        <Container>
+        <View style={{flex: 1}}>
             <BackHeader title="Quản lý thời gian OT" navigation={navigation} />
             <ListPage
                 query={{
@@ -34,24 +35,24 @@ export function OvertimePage(props) {
                 api={API_OVERTIME}
                 itemComponent={({ item }) => {
                     const { month, year, timeStart, timeEnd, hrmEmployeeId, organizationUnit } = item
-                    return <ListItem onPress={() => navigate('AddOvertimePage', { item })}>
-                        <Body>
+                    return <View onPress={() => navigate('AddOvertimePage', { item })}>
+                        <View>
                             <Text>Thời gian OT tháng {month} năm {year}</Text>
                             {timeStart ? <Text note>{`Thời gian bắt đầu: ${timeStart}`}</Text> : null}
                             {timeEnd ? <Text note>{`Thời gian kết thúc: ${timeEnd}`}</Text> : null}
                             {organizationUnit ? <Text note>{`Phòng ban: ${organizationUnit.name}`}</Text> : null}
                             {hrmEmployeeId ? <Text note>{`Nhân viên: ${hrmEmployeeId.name}`}</Text> : null}
-                        </Body>
-                        <Right>
+                        </View>
+                        <View>
                             <Icon name="chevron-right" type="Entypo" />
-                        </Right>
-                    </ListItem>
+                        </View>
+                    </View>
                 }}
             />
-            <FabLayout>
+            <FabLayout style={styles}>
                 <Icon type="Entypo" name="plus" style={{ color: '#fff' }} onPress={() => navigate('AddOvertimePage')} />
             </FabLayout>
-        </Container>
+        </View>
     );
 }
 
@@ -68,3 +69,13 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(OvertimePage);
+const styles = {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+  };
