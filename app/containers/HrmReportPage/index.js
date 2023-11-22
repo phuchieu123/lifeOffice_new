@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import IconMa from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import BackHeader from '../../components/Header/BackHeader';
@@ -40,15 +40,15 @@ const HrmReportPage = (props) => {
           <View style={styles.left}>
             <Icon name="person" type="Ionicons" style={styles.icon} />
           </View>
-          <View>
+          <View  style={{flex: 6}}>
             <Text style={styles.title}>Báo cáo nhân sự</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TimeKeepingReportPage')}>
           <View style={styles.left}>
-            <Icon name="clock-time-five-outline" type="MaterialCommunityIcons" style={styles.icon} />
+            <IconMa name="clock-time-five-outline" type="MaterialCommunityIcons" style={styles.icon} />
           </View>
-          <View>
+          <View  style={{flex: 6}}>
             <Text style={styles.title}>Báo cáo chấm công</Text>
           </View>
         </TouchableOpacity> 

@@ -11,10 +11,13 @@ export default StyleSheet.create({
     backgroundColor: '#fff',
   },
   button: {
+    flexDirection:'row',
+    alignItems:'center',
     height: 80,
     padding: 20,
-    marginBottom: 20,
-    backgroundColor: '#6495ED',
+    marginVertical: 10,
+    marginHorizontal: 5,
+    backgroundColor:  'rgba(46, 149, 46, 1)',
     borderRadius: 15,
     justifyContent: 'flex-start',
     textAlign: 'left',
@@ -23,7 +26,7 @@ export default StyleSheet.create({
     color: '#fff',
   },
   left: {
-    flex: 0.25,
+    flex: 1
   },
   right: {
     flex: 0.25,
@@ -39,7 +42,7 @@ export default StyleSheet.create({
   },
   icon: {
     color: '#fff',
-    fontSize: 32,
+    fontSize: 30,
   },
   View:{flex: 1}
 });
