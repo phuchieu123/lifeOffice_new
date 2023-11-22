@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
-import { Icon, Item, Text } from 'native-base';
+import { View, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import theme from '../../utils/customTheme'
 
 const CollapseView = props => {
@@ -10,9 +10,11 @@ const CollapseView = props => {
     const toggle = () => setShow(!show)
 
     return <>
-        <Item style={{
+        <View style={{
             flexDirection: 'row',
             justifyContent: 'flex-end',
+            paddingVertical: 10,
+borderBottomWidth: 1, borderColor: '#ccc',
             // justifyContent: 'space-between',
             height: 45
         }} onPress={toggle}>
@@ -22,7 +24,7 @@ const CollapseView = props => {
                 name={show ? 'caret-down' : 'caret-left'}
                 style={{ fontSize: 16, color: theme.brandPrimary, marginLeft: 5 }}
             />
-        </Item>
+        </View>
 
         <View style={show ? {} : { display: 'none' }}>
             {props.children}

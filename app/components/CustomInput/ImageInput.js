@@ -11,7 +11,7 @@ export default ImageInput = props => {
 
     return <TouchableOpacity onPress={onPress} style={{ flex: 1 }}>
         <ImageBackground
-            style={{ flex: 1, height: 200, alignItems: 'flex-end', justifyContent: 'flex-end', opacity: source ? 1 : 0.1, transform: [{ scale: source ? 1 : 0.8 }] }}
+            style={{ flex: 1, height: 200, alignItems: 'flex-end', justifyContent: 'flex-end', opacity: source ? 1 : 0.2, transform: [{ scale: source ? 1 : 0.8 }] }}
             resizeMode="contain"
             source={source || images.photoCamera}>
         </ImageBackground>
