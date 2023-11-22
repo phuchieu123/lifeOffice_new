@@ -125,12 +125,12 @@ const EmployeeSituationChart = (props) => {
 
 
     return (
-        <Container>
+        <View style={{flex: 1}}>
             <BackHeader
                 title="Báo cáo tình hình nhân sự"
                 navigation={navigation}
             />
-            <Content style={{ backgroundColor: '#fff' }}>
+            <View style={{ backgroundColor: '#fff' }}>
                 {/* <Item style={{ height: 55 }}>
                     <CustomMonthYearPicker value={date} onChange={(year, month) => setLocalData({ ...localData, year: year, month: month })} />
                 </Item> */}
@@ -143,8 +143,8 @@ const EmployeeSituationChart = (props) => {
                 <View style={{ height: 400, marginBottom: 80 }}>
                     <PieChartScreen data={data} description=' ' />
                 </View>
-            </Content>
-        </Container>
+            </View>
+        </View>
     );
 };
 

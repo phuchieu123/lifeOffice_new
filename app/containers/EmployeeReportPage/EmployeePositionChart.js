@@ -72,7 +72,7 @@ const EmployeePositionChart = (props) => {
     }
 
     return (
-        <View>
+        <View style={{flex: 1}}>
             <BackHeader
                 title="Báo cáo theo chức vụ"
                 navigation={navigation}

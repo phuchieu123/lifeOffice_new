@@ -45,6 +45,7 @@ const DateTimePicker = (props) => {
   const onShow = () => {
     !disabled && setShow(true)
     console.log('sssssssss')
+    console.log(disabled,'sssss')
   }
 
   const onConfirm = (date) => {
@@ -67,12 +68,13 @@ const DateTimePicker = (props) => {
     {show && 
     <CustomDateTimePicker
       date={date}
-      mode={mode}
+      mode={mode} 
       isVisible={show}
       onConfirm={onConfirm}
       onCancel={onCancel}
       disabled={disabled}
-    />
+      
+    /> 
     }
 
     
