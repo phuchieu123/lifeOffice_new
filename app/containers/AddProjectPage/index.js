@@ -17,7 +17,7 @@ import {createStructuredSelector} from 'reselect';
 import {compose} from 'redux';
 
 import Icon from 'react-native-vector-icons/Feather';
-
+import IconEn from 'react-native-vector-icons/Entypo';
 import {useInjectSaga} from '../../utils/injectSaga';
 import {useInjectReducer} from '../../utils/injectReducer';
 
@@ -253,11 +253,11 @@ export function AddProjectPage(props) {
                     style={{textAlign: 'right', marginRight: 5}}
                     multiline={true}
                   />
-                  <Icon
+                  <IconEn
                     active
                     type="Entypo"
                     name="keyboard"
-                    style={{fontSize: 16}}
+                    style={{fontSize: 16,marginRight: 8,}}
                   />
                 </View>
               )}
@@ -390,17 +390,17 @@ export function AddProjectPage(props) {
                     style={{textAlign: 'right', marginRight: 5, paddingTop: 10}}
                     multiline={true}
                   />
-                  <Icon
+                  <IconEn
                     active
                     type="Entypo"
                     name="keyboard"
-                    style={{fontSize: 16}}
+                    style={{fontSize: 16 ,marginRight: 8,}}
                   />
                 </View>
               )}
               <CollapseView title="Người tham gia" >
                 {!_.get(taskConfig, 'taskManager.checkedShowForm') ? null : (
-                  <View inlineLabel   error={error.taskManager}>
+                  <View inlineLabel style={{paddingVertical: 10, borderBottomWidth: 1, borderColor: '#ccc', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}   error={error.taskManager}>
                     <Text>
                       {convertLabel(
                         _.get(taskConfig, 'taskManager.title') || 'Quản lý',
@@ -569,7 +569,7 @@ export function AddProjectPage(props) {
           block
           handlePress={handleSubmit}>
           <Icon
-            style={{color: 'white', fontSize: 20, textAlign: 'center'}}
+            style={{color: 'white', fontSize: 20, textAlign: 'center' ,marginRight: 8,}}
             name="check"
             type="Feather"
           />

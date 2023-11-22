@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import theme from '../../utils/customTheme'
 
@@ -10,11 +10,12 @@ const CollapseView = props => {
     const toggle = () => setShow(!show)
 
     return <>
-        <View style={{
+        <TouchableOpacity activeOpacity={1} style={{
             flexDirection: 'row',
             justifyContent: 'flex-end',
+            alignItems:'center',
             paddingVertical: 10,
-borderBottomWidth: 1, borderColor: '#ccc',
+borderBottomWidth: 1, borderColor: '#ccc',marginRight: 8,
             // justifyContent: 'space-between',
             height: 45
         }} onPress={toggle}>
@@ -24,7 +25,7 @@ borderBottomWidth: 1, borderColor: '#ccc',
                 name={show ? 'caret-down' : 'caret-left'}
                 style={{ fontSize: 16, color: theme.brandPrimary, marginLeft: 5 }}
             />
-        </View>
+        </TouchableOpacity>
 
         <View style={show ? {} : { display: 'none' }}>
             {props.children}

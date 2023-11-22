@@ -102,7 +102,7 @@ const CustomMultiSelect = (props) => {
         selectedItems={dataId}
         selectToggleIconComponent={
           !disabled ? (
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 8, }}>
               {!dataId.length > 0 && (
                 <Text style={{ opacity: 0.5, marginRight: 10, textAlignVertical: 'center' }}>Lựa chọn</Text>
               )}
