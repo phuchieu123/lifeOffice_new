@@ -1,13 +1,15 @@
-import { View } from 'native-base';
+import { View,Text  } from 'native-base';
 import React from 'react';
 import Legend from './Legend';
+import { BarChart, Grid, XAxis, YAxis } from 'react-native-svg-charts';
 
 export default BarChartCustom = ({ data }) => {
   const { barData, yData, xData, legendData } = data;
 
   return (
     <View>
-      {/* <View style={styles.chartView}>
+{/*     
+      <View style={styles.chartView}>
         <YAxis
           data={yData}
           contentInset={styles.contentInsetYAsis}

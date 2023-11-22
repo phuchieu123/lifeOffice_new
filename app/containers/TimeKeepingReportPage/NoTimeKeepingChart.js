@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import DateRangePicker from '../../components/DateRangePicker';
-
+import Icon from 'react-native-vector-icons/AntDesign'
 import BarChart from '../../components/CustomChart/BarChart';
 import moment from 'moment';
 import {
-  Container,
-  Content,
-  Icon
-} from 'native-base';
+  View, Text
+} from 'react-native';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import BackHeader from '../../components/Header/BackHeader';
@@ -63,16 +61,16 @@ const NoTimeKeepingChart = (props) => {
   };
 
   return (
-    <Container>
+    <View>
       <BackHeader
         title="Báo cáo không chấm công"
         navigation={navigation}
          rightStyle={{ flex: 0.3 }}
         rightHeader={
-          <Icon name="calendar" type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff' , marginHorizontal:10 }} />
+          <Icon name="calendar" type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff' , marginHorizontal:10,fontSize:20  }} />
         }
       />
-      <Content style={styles.content}>{absentReportData && <BarChart data={absentReportData} />}</Content>
+      <View style={styles.content}>{absentReportData && <BarChart data={absentReportData} />}</View>
 
       <DateRangePicker
         initialRange={[startDate.toDate(), endDate.toDate()]}
@@ -80,7 +78,7 @@ const NoTimeKeepingChart = (props) => {
         onSetDateRange={handleSetDateRange}
         showDatePicker={showDatePicker}
       />
-    </Container>
+    </View>
   );
 };
 

@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import DateRangePicker from '../../components/DateRangePicker';
-
+import Icon from 'react-native-vector-icons/AntDesign'
 import BarChart from '../../components/CustomChart/BarChart';
 import moment from 'moment';
 import {
-  Container,
-  Content,
-  Icon
-} from 'native-base';
+ View, Text
+} from 'react-native';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
 import BackHeader from '../../components/Header/BackHeader';
@@ -94,7 +92,7 @@ const LateEarlyChart = (props) => {
   };
 
   return (
-    <Container>
+    <View>
       <BackHeader
         title="Biểu đồ chấm công trễ sớm"
         navigation={navigation}
@@ -103,9 +101,9 @@ const LateEarlyChart = (props) => {
           <Icon name="calendar" type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff', marginHorizontal: 10 }} />
         }
       />
-      <Content style={styles.content}>
+      <View style={styles.content}>
         {timeKeepingLateEarlyData && <BarChart data={timeKeepingLateEarlyData} />}
-      </Content>
+      </View>
 
       <DateRangePicker
         initialRange={[startDate.toDate(), endDate.toDate()]}
@@ -113,7 +111,7 @@ const LateEarlyChart = (props) => {
         onSetDateRange={handleSetDateRange}
         showDatePicker={showDatePicker}
       />
-    </Container>
+    </View>
   );
 };
 

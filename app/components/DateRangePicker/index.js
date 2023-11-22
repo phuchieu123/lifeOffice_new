@@ -27,7 +27,7 @@ export function DateRangePicker(props) {
 
   const {initialRange, onSetDateRange, handleCancel, showDatePicker} = props;
 
-  useEffect(() => {
+  useEffect(() => { 
     setupInitialRange();
   }, []);
 
@@ -144,7 +144,7 @@ console.log(fromDate, 'đây nè');
         }}
       />
 
-      <View style={{flex: 1, paddingTop: Platform.OS === 'ios' ? 20 : 0}}>
+     <View style={{flex: 1, paddingTop: Platform.OS === 'ios' ? 20 : 0}}>
         <View itemHeader itemDivider style={styles.header}>
           <Text style={{textAlign: 'center'}}>
             {`${
@@ -206,6 +206,7 @@ console.log(fromDate, 'đây nè');
           </View>
         </View>
       </View>
+   
     </Modal>
   );
 }
@@ -227,6 +228,7 @@ const styles = {
     justifyContent: 'center',
   },
   modal: {
+    flex: 1
     // height: '100%',
     // width: '100%',
   },
