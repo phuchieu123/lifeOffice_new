@@ -72,12 +72,12 @@ const EmployeePositionChart = (props) => {
     }
 
     return (
-        <Container>
+        <View>
             <BackHeader
                 title="Báo cáo theo chức vụ"
                 navigation={navigation}
             />
-            <Content>
+            <View>
                 <FilterBox
                     // enableFilterOrg
                     enableDayPicker
@@ -88,8 +88,8 @@ const EmployeePositionChart = (props) => {
                 <View style={{ height: 500, marginBottom: 80, }}>
                     <PieChartScreen data={data} description='Báo cáo theo chức vụ' />
                 </View>
-            </Content>
-        </Container>
+            </View>
+        </View>
     );
 };
 

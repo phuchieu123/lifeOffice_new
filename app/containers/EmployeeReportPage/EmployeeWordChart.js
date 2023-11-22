@@ -147,12 +147,12 @@ const EmployeeWordChart = (props) => {
     }
 
     return (
-        <Container>
+        <View>
             <BackHeader
                 title="Báo cáo theo ngày làm việc"
                 navigation={navigation}
             />
-            <Content style={styles.content}>
+            <View style={styles.content}>
                 <FilterBox
                     enableFilterOrg
                     onSave={onReport}
@@ -163,13 +163,13 @@ const EmployeeWordChart = (props) => {
                 <View style={{ height: 400 }}>
                     <StackedBarChartScreen data={data} description='Báo cáo theo ngày làm việc' />
                 </View>
-            </Content>
+            </View>
 
             {/* <Content style={styles.content}>{<PieChart data={dataOrg} />}</Content> */}
             {/* <Content style={styles.content}>
                 {dataTotal && <BarChart data={dataTotal} />}
             </Content> */}
-        </Container>
+        </View>
     );
 };
 

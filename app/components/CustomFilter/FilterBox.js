@@ -82,11 +82,11 @@ const FilterBox = (props) => {
     };
 
     return (
-        <View>
+        <View >
 
 
             {enableDayPicker &&
-                <View style={{ height: 55 }}>
+                <View >
                     <DateTimePicker
                         mode="date"
                         onSave={onChangeDay}
@@ -95,26 +95,26 @@ const FilterBox = (props) => {
                 </View>
             }
 
-            {/* {enableDatePicker &&
+            {enableDatePicker &&
                 <ListItem onPress={() => setShowDatePicker(true)} style={{ height: 55 }}>
                     <Text style={{ position: 'absolute', right: 28 }}>
                         {`${start ? moment(start, DATE).format(DATE_FORMAT) : '   '} - ${end ? moment(end, DATE).format(DATE_FORMAT) : ''}   `}
                         <Icon type="FontAwesome" name="caret-down" color="red" style={{ fontSize: 16, color: '#000' }} />
                     </Text>
-                </ListItem>} */}
+                </ListItem>}
 
             {enableDatePicker && <View>
 
                 <View onPress={() => setShowDatePicker(true)}>
-                    <Body style={{ alignItems: "flex-end", flex: 1 }}>
+                    <View style={{ alignItems: "flex-end", flex: 1 }}>
                         <Text>{`${start ? moment(start, DATE).format(DATE_FORMAT) : '   '} - ${end ? moment(end, DATE).format(DATE_FORMAT) : '   '} `}
                             <Icon type="FontAwesome" name="caret-down" color="red" style={{ fontSize: 16, color: '#000' }} />
                         </Text>
-                    </Body>
+                    </View>
                 </View>
             </View>}
 
-            {enableFilterOrg && <View >
+            {enableFilterOrg && <View>
                 <DepartmentSelect
                     single
                     handleSelectObjectItems={handleChangeOrg}
@@ -126,9 +126,9 @@ const FilterBox = (props) => {
             </View>}
 
             <View padder style={{ flexDirection: 'row' }}>
-                <LoadingButton isBusy={loading} block onPress={handleSave} style={{ borderRadius: 10, flex: 1 }}>
+                <LoadingButton isBusy={loading} block onPress={handleSave} style={{ borderRadius: 10, flex: 1, paddingVertical: 10, backgroundColor:'rgba(46, 149, 46, 1)',   }}>
                     {/* <Icon name="check" type="Feather" /> */}
-                    <Text>Xem báo cáo</Text>
+                    <Text style={{textAlign: 'center', color: 'white' }}>Xem báo cáo</Text>
                 </LoadingButton>
             </View>
 

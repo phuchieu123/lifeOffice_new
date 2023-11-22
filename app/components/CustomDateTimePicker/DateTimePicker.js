@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { Input, Text, View } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment'
-import CustomDateTimePicker from './'
+import CustomDateTimePicker from './index.js'
 import { DATE_FORMAT } from '../../utils/constants';
 
 const DateTimePicker = (props) => {
@@ -44,6 +44,7 @@ const DateTimePicker = (props) => {
 
   const onShow = () => {
     !disabled && setShow(true)
+    console.log('sssssssss')
   }
 
   const onConfirm = (date) => {
@@ -63,14 +64,16 @@ const DateTimePicker = (props) => {
       </Text>
     </TouchableOpacity>
 
-    {show && <CustomDateTimePicker
+    {show && 
+    <CustomDateTimePicker
       date={date}
       mode={mode}
       isVisible={show}
       onConfirm={onConfirm}
       onCancel={onCancel}
       disabled={disabled}
-    />}
+    />
+    }
 
     
   </>

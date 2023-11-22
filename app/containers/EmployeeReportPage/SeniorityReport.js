@@ -81,12 +81,12 @@ const SeniorityReport = (props) => {
     }
 
     return (
-        <Container>
+        <View>
             <BackHeader
                 title="Báo cáo theo thâm niên"
                 navigation={navigation}
             />
-            <Content>
+            <View>
                 <FilterBox
                     // enableFilterOrg
                     enableDayPicker
@@ -97,8 +97,8 @@ const SeniorityReport = (props) => {
                 <View style={{ height: 400 }}>
                     <PieChartScreen data={data} description='Báo cáo theo thâm niên' />
                 </View>
-            </Content>
-        </Container>
+            </View>
+        </View>
     );
 };
 
