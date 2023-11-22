@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { Container, Icon, View } from 'native-base';
+import { Container, } from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
+import {View, Text} from 'react-native';
 import ProjectCard from './components/ProjectCard';
 import BackHeader from '../../components/Header/BackHeader';
 import ListPage from '../../components/ListPage';
@@ -58,7 +60,7 @@ const ChildProjectPage = (props) => {
   // const openAddProject = () => navigate('AddProject', { project, parentId });
   const handleAddProject = () => navigation.navigate('AddProject', { parentId });
   return (
-    <Container>
+    <View style={{flex: 1}}>
       <BackHeader navigation={navigation} title={project.name} />
 
       <ListPage
@@ -75,10 +77,19 @@ const ChildProjectPage = (props) => {
           )
         }}
       />
-      {!taskRole.POST ? null : <FabLayout onPress={handleAddProject}>
+      {!taskRole.POST ? null : <FabLayout  style={{
+                    position: 'absolute',
+                    bottom: 10,
+                    right: 10,
+                    width: 40,
+                    height: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 50,
+                  }} onPress={handleAddProject}>
         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
       </FabLayout>}
-    </Container>
+    </View>
   );
 };
 

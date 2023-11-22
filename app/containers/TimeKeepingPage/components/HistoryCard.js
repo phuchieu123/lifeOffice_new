@@ -30,6 +30,6 @@ export default HistoryCard = (props) => {
           </TouchableOpacity>
         })}
       </Right>
-    </Button >
+    </Button>
   );
 };

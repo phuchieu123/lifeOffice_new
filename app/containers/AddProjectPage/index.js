@@ -1,28 +1,10 @@
 import React, { Fragment, useState, useEffect, memo } from 'react';
-import { View, ImageBackground, TouchableOpacity, Keyboard, DeviceEventEmitter, BackHandler } from 'react-native';
+import { View, ImageBackground, TouchableOpacity, Keyboard, DeviceEventEmitter, BackHandler, Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import {
-  Content,
-  Button,
-  Icon,
-  Card,
-  CardItem,
-  Form,
-  Item,
-  Input,
-  Label,
-  DatePicker,
-  ListItem,
-  Left,
-  Body,
-  Text,
-  Right,
-  Switch,
-  ActionSheet,
-} from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 
 import { useInjectSaga } from '../../utils/injectSaga';
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -183,25 +165,25 @@ export function AddProjectPage(props) {
 
       <View>
         <View>
-          <CardItem bordered style={{ backgroundColor: '#f2f2f2' }} cardBody>
-            <Form style={{ flex: 1, backgroundColor: 'white' }}>
-              <ImageInput source={avatar} onSave={setAvatar} />
+          <View bordered style={{ backgroundColor: '#f2f2f2' }} cardBody>
+            <View style={{ flex: 1, backgroundColor: 'white' }}>
+              <Image source={avatar} onSave={setAvatar} />
 
-              <Item inlineLabel>
-                <Label>Dự án</Label>
+              <View inlineLabel>
+                <Text>Dự án</Text>
                 <Right style={{ height: 40, flex: 1, justifyContent: 'center' }}>
                   <Switch value={data.isProject} onValueChange={() => handleChange('isProject', !data.isProject)} />
                 </Right>
-              </Item>
+              </View>
 
-              {!_.get(taskConfig, 'startDate.checkedShowForm') ? null : <Item inlineLabel error={error.name}>
-                <Label >{data.isProject ? 'Tên dự án:' : 'Tên công việc:'}</Label>
+              {!_.get(taskConfig, 'startDate.checkedShowForm') ? null : <View inlineLabel error={error.name}>
+                <Text >{data.isProject ? 'Tên dự án:' : 'Tên công việc:'}</Text>
                 <Input onChangeText={e => handleChange('name', e)} value={data.name} style={{ textAlign: 'right', marginRight: 5 }} multiline={true} />
                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-              </Item>}
+              </View>}
 
-              <Item inlineLabel error={error.provincial}>
-                <Label > {convertLabel(_.get(taskConfig, 'provincial.title') || 'Khu vực')}:</Label>
+              <View inlineLabel error={error.provincial}>
+                <Text > {convertLabel(_.get(taskConfig, 'provincial.title') || 'Khu vực')}:</Text>
                 <Search
                   single
                   items={provincialColumns}
@@ -209,49 +191,49 @@ export function AddProjectPage(props) {
                   handleSelectItems={(value) => handleChange('provincial', _.get(value, '[0]'))}
                   selectedItems={data.provincial ? [data.provincial] : []}
                 />
-              </Item>
+              </View>
 
-              {!_.get(taskConfig, 'startDate.checkedShowForm') ? null : <Item inlineLabel error={error.startDate}>
-                <Label >{convertLabel(_.get(taskConfig, 'startDate.title') || 'Ngày bắt đầu')}:</Label>
+              {!_.get(taskConfig, 'startDate.checkedShowForm') ? null : <View inlineLabel error={error.startDate}>
+                <Text >{convertLabel(_.get(taskConfig, 'startDate.title') || 'Ngày bắt đầu')}:</Text>
                 <DateTimePicker
                   mode="datetime"
                   onSave={(e) => handleChange('startDate', e)}
                   value={data.startDate && moment(data.startDate).format(DATE_FORMAT.DATE_TIME)}
                 />
-              </Item>}
+              </View>}
 
-              {!_.get(taskConfig, 'endDate.checkedShowForm') ? null : <Item inlineLabel error={error.endDate}>
-                <Label >{convertLabel(_.get(taskConfig, 'endDate.title') || 'Ngày kết thúc')}:</Label>
+              {!_.get(taskConfig, 'endDate.checkedShowForm') ? null : <View inlineLabel error={error.endDate}>
+                <Text >{convertLabel(_.get(taskConfig, 'endDate.title') || 'Ngày kết thúc')}:</Text>
                 <DateTimePicker
                   mode="datetime"
                   onSave={(e) => handleChange('endDate', e)}
                   value={data.endDate && moment(data.endDate).format(DATE_FORMAT.DATE_TIME)}
                 />
-              </Item>}
+              </View>}
 
-              {!_.get(taskConfig, 'template.checkedShowForm') ? null : <Item inlineLabel error={error.template}>
-                <Label >{convertLabel(_.get(taskConfig, 'template.title') || 'Quy trình')}:</Label>
+              {!_.get(taskConfig, 'template.checkedShowForm') ? null : <View inlineLabel error={error.template}>
+                <Text >{convertLabel(_.get(taskConfig, 'template.title') || 'Quy trình')}:</Text>
                 <SingleAPISearch
                   API={API_SAMPLE_PROCESS}
                   onSelectedItemObjectsChange={(value) => handleChange('template', _.get(value, '[0]'))}
                   selectedItems={data.template ? [data.template] : []}
                   filterOr={['name']}
                 />
-              </Item>}
+              </View>}
 
-              {!_.get(taskConfig, 'customer.checkedShowForm') ? null : <Item inlineLabel error={error.customer}>
-                <Label >{convertLabel(_.get(taskConfig, 'customer.title')) || 'Khách hàng'}:</Label>
+              {!_.get(taskConfig, 'customer.checkedShowForm') ? null : <View inlineLabel error={error.customer}>
+                <Text >{convertLabel(_.get(taskConfig, 'customer.title')) || 'Khách hàng'}:</Text>
                 <SingleAPISearch
                   API={API_CUSTOMER}
                   selectedItems={data.customer ? [data.customer] : []}
                   onSelectedItemsChange={(value) => handleChange('customer', _.get(value, '[0]'))}
                   filterOr={['name', 'customerCif', 'phoneNumber']}
                 />
-              </Item>
+              </View>
               }
 
-              {!_.get(taskConfig, 'priority.checkedShowForm') ? null : <Item inlineLabel error={error.priority}>
-                <Label >{convertLabel(_.get(taskConfig, 'priority.title') || 'Độ ưu tiên')}:</Label>
+              {!_.get(taskConfig, 'priority.checkedShowForm') ? null : <View inlineLabel error={error.priority}>
+                <Text >{convertLabel(_.get(taskConfig, 'priority.title') || 'Độ ưu tiên')}:</Text>
                 <CustomMultiSelect
                   single
                   uniqueKey="value"
@@ -260,17 +242,17 @@ export function AddProjectPage(props) {
                   handleSelectItems={(value) => handleChange('priority', _.get(value, '[0]'))}
                   selectedItems={data.priority ? [data.priority] : []}
                 />
-              </Item>
+              </View>
               }
-              {!_.get(taskConfig, 'description.checkedShowForm') ? null : <Item inlineLabel error={error.description}>
-                <Label >{convertLabel(_.get(taskConfig, 'description.title') || 'Mô tả')}:</Label>
+              {!_.get(taskConfig, 'description.checkedShowForm') ? null : <View inlineLabel error={error.description}>
+                <Text >{convertLabel(_.get(taskConfig, 'description.title') || 'Mô tả')}:</Text>
                 <Input value={data.description} onChangeText={e => handleChange('description', e)} style={{ textAlign: 'right', marginRight: 5, paddingTop: 10 }} multiline={true} />
                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-              </Item>
+              </View>
               }
               <CollapseView title='Người tham gia'>
-                {!_.get(taskConfig, 'taskManager.checkedShowForm') ? null : <Item inlineLabel error={error.taskManager}>
-                  <Label >{convertLabel(_.get(taskConfig, 'taskManager.title') || 'Quản lý')}:</Label>
+                {!_.get(taskConfig, 'taskManager.checkedShowForm') ? null : <View inlineLabel error={error.taskManager}>
+                  <Text >{convertLabel(_.get(taskConfig, 'taskManager.title') || 'Quản lý')}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
                     selectedItems={Array.isArray(data.taskManager) ? data.taskManager : []}
@@ -278,30 +260,30 @@ export function AddProjectPage(props) {
                     filterOr={['name', 'code', 'phoneNumber']}
                     selectedDatas={[profile]}
                   />
-                </Item>}
+                </View>}
 
-                {!_.get(taskConfig, 'viewable.checkedShowForm') ? null : <Item inlineLabel error={error.viewable}>
-                  <Label >{convertLabel(_.get(taskConfig, 'viewable.title') || 'Người được xem')}:</Label>
+                {!_.get(taskConfig, 'viewable.checkedShowForm') ? null : <View inlineLabel error={error.viewable}>
+                  <Text >{convertLabel(_.get(taskConfig, 'viewable.title') || 'Người được xem')}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
                     selectedItems={Array.isArray(data.viewable) ? data.viewable : []}
                     onSelectedItemsChange={value => handleChange('viewable', value)}
                     filterOr={['name', 'code', 'phoneNumber']}
                   />
-                </Item>}
+                </View>}
 
 
-                {!_.get(taskConfig, 'join.checkedShowForm') ? null : <Item inlineLabel error={error.join}>
-                  <Label >{convertLabel(_.get(taskConfig, 'join.title') || 'Người tham gia')}:</Label>
+                {!_.get(taskConfig, 'join.checkedShowForm') ? null : <View inlineLabel error={error.join}>
+                  <Text >{convertLabel(_.get(taskConfig, 'join.title') || 'Người tham gia')}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
                     onSelectedItemObjectsChange={(e) => handleChange('join', e)}
                     selectedItems={_.get(data, 'join._id')}
                   />
-                </Item>
+                </View>
                 }
-                {!_.get(taskConfig, 'inCharge.checkedShowForm') ? null : <Item inlineLabel error={error.inCharge}>
-                  <Label >{convertLabel(_.get(taskConfig, 'inCharge.title') || 'Người phụ trách')}:</Label>
+                {!_.get(taskConfig, 'inCharge.checkedShowForm') ? null : <View inlineLabel error={error.inCharge}>
+                  <Text >{convertLabel(_.get(taskConfig, 'inCharge.title') || 'Người phụ trách')}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
                     selectedItems={Array.isArray(data.inCharge) ? data.inCharge.map((c) => c._id) : []}
@@ -309,23 +291,23 @@ export function AddProjectPage(props) {
                     filterOr={['name', 'code', 'phoneNumber']}
                     selectedDatas={[profile]}
                   />
-                </Item>
+                </View>
                 }
 
-                {!_.get(taskConfig, 'support.checkedShowForm') ? null : <Item inlineLabel error={error.support}>
+                {!_.get(taskConfig, 'support.checkedShowForm') ? null : <View inlineLabel error={error.support}>
 
-                  <Label >{convertLabel(_.get(taskConfig, 'support.title') || 'Người hỗ trợ')}:</Label>
+                  <Text >{convertLabel(_.get(taskConfig, 'support.title') || 'Người hỗ trợ')}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
                     selectedItems={Array.isArray(data.support) ? data.support : []}
                     onSelectedItemsChange={value => handleChange('support', value)}
                     filterOr={['name', 'code', 'phoneNumber']}
                   />
-                </Item>
+                </View>
                 }
 
-                {!_.get(taskConfig, 'approved.checkedShowForm') ? null : <Item inlineLabel error={error.approved}>
-                  <Label >{convertLabel(_.get(taskConfig, 'approved.title') || 'Nhóm phê duyệt')}:</Label>
+                {!_.get(taskConfig, 'approved.checkedShowForm') ? null : <View inlineLabel error={error.approved}>
+                  <Text >{convertLabel(_.get(taskConfig, 'approved.title') || 'Nhóm phê duyệt')}:</Text>
                   <SingleAPISearch
                     query={{
                       filter: {
@@ -340,11 +322,11 @@ export function AddProjectPage(props) {
                   //   isActive: true,
                   // }}
                   />
-                </Item>
+                </View>
                 }
 
-                {!_.get(taskConfig, 'approvedProgress.checkedShowForm') ? null : <Item inlineLabel error={error.approvedProgress}>
-                  <Label >{convertLabel(_.get(taskConfig, 'approvedProgress.title') || 'Người phê duyệt tiến độ')}:</Label>
+                {!_.get(taskConfig, 'approvedProgress.checkedShowForm') ? null : <View inlineLabel error={error.approvedProgress}>
+                  <Text >{convertLabel(_.get(taskConfig, 'approvedProgress.title') || 'Người phê duyệt tiến độ')}:</Text>
                   <SingleAPISearch
                     API={API_USERS}
                     onSelectedItemObjectsChange={value => handleChange('approvedProgress', _.get(value, '[0]'))}
@@ -352,13 +334,13 @@ export function AddProjectPage(props) {
                     onRemove={() => setApprovedProgress(null)}
                     filterOr={['name']}
                   />
-                </Item>}
+                </View>}
               </CollapseView>
-            </Form>
-          </CardItem>
+            </View>
+          </View>
         </View>
-        <LoadingButton isBusy={isLoading} block handlePress={handleSubmit}>
-          <Icon name="check" type="Feather" />
+        <LoadingButton style={{paddingVertical: 10, backgroundColor:"rgba(46, 149, 46, 1)"}} isBusy={isLoading} block handlePress={handleSubmit}>
+          <Icon style={{color: 'white', fontSize:20, textAlign: 'center'}} name="check" type="Feather" />
         </LoadingButton>
       </View>
     </Fragment>
