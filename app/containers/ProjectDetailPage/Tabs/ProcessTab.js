@@ -1,4 +1,4 @@
-import { Button, Card, CardItem, Content, Form, Icon, Input, Item, Label, Text, Textarea, View } from 'native-base';
+import {Text,View } from 'react-native';
 import React, { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -65,7 +65,7 @@ export function ProcessTab(props) {
   }
 
   return (
-    <Content>
+    <View>
       <Card>
         <CardItem>
           <Form style={{ flex: 1, backgroundColor: 'white' }}>
@@ -127,7 +127,8 @@ export function ProcessTab(props) {
           </Form>
         </CardItem>
       </Card>
-    </Content>
+    
+    </View>
   );
 }
 
