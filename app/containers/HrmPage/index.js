@@ -70,7 +70,8 @@ export function HrmPage(props) {
                 type="FontAwesome5"
                 style={{ textAlign: 'center', fontSize: 70, color: '#1cc6c5', margin: 10 }}
               />
-              <Text style={styles.text}>Lịch</Text>
+              <Text style={styles.t
+              ext}>Lịch</Text>
             </Button> */}
             <Button style={styles.buttonStyle} onPress={() => handleNavigate('WorkingSchedulePage')}>
               <Icon name="plane" type="FontAwesome" style={{ ...styles.icon, fontSize: 65 }} />

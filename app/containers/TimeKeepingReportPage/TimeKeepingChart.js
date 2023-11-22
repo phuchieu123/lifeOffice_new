@@ -1,8 +1,9 @@
 import moment from 'moment';
-import { Container, Content, Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/AntDesign';
 import React, { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import {View, Text} from 'react-native'
 import { createStructuredSelector } from 'reselect';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -58,24 +59,24 @@ const TimeKeepingChart = (props) => {
   };
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       <BackHeader
         title="Biểu đồ chấm công"
         navigation={navigation}
          rightStyle={{ flex: 0.3 }}
         rightHeader={
-          <Icon name="calendar" type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff' , marginHorizontal:10 }} />
+          <Icon name="calendar" size={20} type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff' , marginHorizontal:10 }} />
         }
       />
-      <Content style={styles.content}>{timeKeepingReportData && <BarChart data={timeKeepingReportData} />}</Content>
-
+      <View style={styles.content}>{timeKeepingReportData && <BarChart data={timeKeepingReportData} />}</View>
+      
       <DateRangePicker
         initialRange={[startDate.toDate(), endDate.toDate()]}
         handleCancel={() => setShowDatePicker(false)}
         onSetDateRange={handleSetDateRange}
         showDatePicker={showDatePicker}
       />
-    </Container>
+    </View>
   );
 };
 
