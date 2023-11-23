@@ -4,9 +4,9 @@
  *
  */
 
-import { Icon, Input, Item, Text, View } from 'native-base';
+import { Icon, } from 'native-base';
 import React, { memo, useCallback, useState } from 'react';
-import { FlatList, Keyboard } from 'react-native';
+import { FlatList, Keyboard, TextInput, Text, View } from 'react-native';
 import { useInput } from '../../utils/useInput';
 // import styled from 'styled-components';
 import { createFile, uploadImage } from '../../api/fileSystem';
@@ -67,11 +67,11 @@ function CommentInput(props) {
         />
       </View> : null}
       <View padder>
-        <Item regular>
-          <Input {...bindMessage} placeholder={textMng ? 'Viết ý kiến...' : ''} />
+        <View regular>
+          <TextInput {...bindMessage} placeholder={textMng ? 'Viết ý kiến...' : ''} />
           {textMng ? <Icon name="paperclip" type='FontAwesome' onPress={onSendFile} /> : null}
           <Icon active name="send" onPress={handleSendMessage} />
-        </Item>
+        </View>
       </View>
     </View>
 

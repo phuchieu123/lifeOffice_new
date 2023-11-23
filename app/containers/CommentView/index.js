@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import _ from 'lodash';
 import moment from 'moment';
 import { Body, Icon, Left, List, ListItem, Right, Text, Thumbnail, View } from 'native-base';
-import { ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
+import { ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { getAvatar, getUri, handleSearch, serialize } from '../../utils/common';
 import { useInjectReducer } from '../../utils/injectReducer';
 import { useInjectSaga } from '../../utils/injectSaga';
@@ -120,13 +120,13 @@ const Comments = ({ comment, order = 1, handleReply, replyId, code, handleSendCo
   };
 
   return (
-    <List key={`comment_${comment._id}`}>
+    <View key={`comment_${comment._id}`}>
 
-      <ListItem avatar>
-        <Left>
-          {thumbnail && <Thumbnail source={thumbnail} small />}
-        </Left>
-        <Body>
+      <View avatar>
+        <View>
+          {thumbnail && <Image source={thumbnail} small />}
+        </View>
+        <View>
           <Text>{comment.user.name}</Text>
           <Text note>{comment.content}</Text>
           {comment.noteTag.length ? comment.noteTag.map(i => {return <Text>
@@ -159,8 +159,8 @@ const Comments = ({ comment, order = 1, handleReply, replyId, code, handleSendCo
               Xem {comment.totalReply} trả lời...
             </Text>
           ) : null}
-        </Body>
-        <Right>
+        </View>
+        <View>
           <Text note>{moment(comment.createdAt).format('DD/MM/YY')}</Text>
           {order < 2 && (
             <View style={{ flexDirection: 'row' }}>
@@ -170,8 +170,8 @@ const Comments = ({ comment, order = 1, handleReply, replyId, code, handleSendCo
               <Icon name="delete" type="MaterialIcons" onPress={() => { onDeleteComment(comment._id); }} style={{ marginLeft: 10 }} />
             </View>
           )}
-        </Right>
-      </ListItem>
+        </View>
+      </View>
       <View style={{ marginLeft: 56 }}>
         {children.map((child) => (
           <Comments
@@ -192,7 +192,7 @@ const Comments = ({ comment, order = 1, handleReply, replyId, code, handleSendCo
           userId={comment.user}
         />
       )}
-    </List>
+    </View>
   );
 };
 

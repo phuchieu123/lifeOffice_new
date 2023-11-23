@@ -89,7 +89,7 @@ const FileView = props => {
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => {
                 const { name, createdAt } = item
-                    console.log(item,'ssssssssssssssssssssss')
+                   
                 return(
                 <View style={{}}>
                     <Icon type='MaterialCommunityIcons' name='file' />

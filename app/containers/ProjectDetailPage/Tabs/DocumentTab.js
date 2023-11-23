@@ -6,7 +6,7 @@
  */
 
 import React, { memo, useEffect, useState } from 'react';
-import { Text, Button, View, Content, Card, CardItem, Item, Label, Form, Icon, ListItem } from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
 import { API_TASKS_CONTRACT, APP_URL, UPLOAD_FILE } from '../../../configs/Paths';
 // import { getJwtToken } from '../../../utils/authen';
 import { MODULE, REQUEST_METHOD } from '../../../utils/constants';
@@ -21,7 +21,7 @@ import ListPage from '../../../components/ListPage';
 import FabLayout from '../../../components/CustomFab/FabLayout';
 import FileView from '../../../components/FileView';
 import { addFile } from '../../../api/fileSystem';
-import DocumentPicker from 'react-native-document-picker'
+import DocumentPicker from 'react-native-document-picker';
 import ToastCustom from '../../../components/ToastCustom';
 
 
@@ -67,7 +67,7 @@ export function DocumentTab(props) {
             <FileView id={projectDetail._id} code={MODULE.TASK} visible={true} reload={reload} />
 
 
-            <FabLayout onPress={handleAdd}>
+            <FabLayout style={styles} onPress={handleAdd}>
                 <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
             </FabLayout>
 
@@ -78,4 +78,13 @@ export function DocumentTab(props) {
 
 export default memo(DocumentTab);
 
-
+const styles = {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+  };
