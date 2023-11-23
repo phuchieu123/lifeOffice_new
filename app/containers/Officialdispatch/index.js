@@ -172,7 +172,7 @@ export default function Officialdispatch(props) {
                                 <View style={{borderWidth: 0.5, borderBlockColor: 'gray', backgroundColor:'#fff', paddingVertical: 10}}>
                                     <View>
                                         <View style={styles.view}>
-                                            <View style={{ flex: 1 }}>
+                                            <View style={{ flex: 1,  }}>
                                                 <Text numberOfLines={1}>{item.name}</Text>
                                             </View>
                                         </View>

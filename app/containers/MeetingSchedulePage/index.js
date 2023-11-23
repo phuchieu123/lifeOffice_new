@@ -8,7 +8,7 @@ import { useInjectReducer } from '../../utils/injectReducer';
 import makeSelectMeetingSchedulePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { Header, Icon, Container, View, CardItem, Body, Card, Text } from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
 import ListPage from '../../components/ListPage';
 import CustomHeader from '../../components/Header';
 import RightHeader from '../../components/CustomFilter/RightHeader';
@@ -17,7 +17,7 @@ import SearchBox from '../../components/SearchBox';
 import { MEETING_SCHEDULE } from '../../configs/Paths';
 import _ from 'lodash';
 import { getProfile } from '../../utils/authen';
-import { BackHandler, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
+import { BackHandler, TouchableNativeFeedback, TouchableOpacity, View, Text } from 'react-native';
 import { navigate } from '../../RootNavigation';
 import * as RootNavigation from '../../RootNavigation';
 const DATE_FORMAT = 'YYYY-MM-DD HH:mm';
@@ -139,11 +139,11 @@ export function MeetingSchedulePage(props) {
   }
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       {isSeaching ? (
-        <Header searchBar rounded hasTabs>
+        <View searchBar rounded hasTabs>
           <SearchBox onSearch={onSearchText} onClose={() => setIsSearching(false)} textSearch={textSearch} />
-        </Header>
+        </View>
       ) : null}
       <CustomHeader
         title="Lịch họp"
@@ -164,22 +164,22 @@ export function MeetingSchedulePage(props) {
                 delayLongPress={3000}
               >
 
-                <Card style={{ borderRadius: 10 }}>
-                  <CardItem style={{ borderRadius: 10 }}>
-                    <Body>
+                <View style={{ borderRadius: 10, marginVertical: 10, backgroundColor:'#ddd', padding: 5 }}>
+                  <View style={{ borderRadius: 10 }}>
+                    <View>
                       <View style={styles.view}>
-                        <View style={{ flex: 1 }}>
+                        <View >
                           <Text numberOfLines={1}>{item.name}</Text>
                         </View>
                       </View>
                       {_.has(item, 'roomMetting.name') ? <View style={styles.view}>
-                        <View style={{ flex: 1 }}>
+                        <View >
                           <Text note>{item.roomMetting.name}</Text>
                         </View>
                       </View> : null}
                       {_.has(item, 'content') ?
                         <View style={styles.view}>
-                          <View style={{ flex: 1 }}>
+                          <View >
                             <Text note numberOfLines={3}>{item.content}</Text>
                           </View>
                         </View> : null}
@@ -189,9 +189,9 @@ export function MeetingSchedulePage(props) {
                           <Text note style={{ justifyContent: 'center' }}>{item.timeStartFormatHH} {item.timeStartFormat} - {item.timeEndFormatHH} {item.timeEndFormat}</Text>
                         </View>
                       </View>
-                    </Body>
-                  </CardItem>
-                </Card>
+                    </View>
+                  </View>
+                </View>
               </TouchableOpacity>
             )
           }}
@@ -199,10 +199,19 @@ export function MeetingSchedulePage(props) {
       </View>
 
       {/* <FabLayout onPress={() => { RootNavigation.navigate('CreateNewDetail') }}> */}
-      <FabLayout onPress={() => { RootNavigation.navigate('MeetingScheduleDatailPage', { onSuccess: handleReload }) }}>
+      <FabLayout  style={{
+                    position: 'absolute',
+                    bottom: 10,
+                    right: 10,
+                    width: 40,
+                    height: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 50,
+                  }} onPress={() => { RootNavigation.navigate('MeetingScheduleDatailPage', { onSuccess: handleReload }) }}>
         <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
       </FabLayout>
-    </Container>
+    </View>
   );
 }
 
@@ -215,9 +224,8 @@ function mapDispatchToProps(dispatch) {
 }
 const styles = {
   view: {
-    display: 'flex',
     flexDirection: 'row',
-    marginBottom: 2
+   
   },
   icon: {
     fontSize: 18,
