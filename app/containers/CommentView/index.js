@@ -9,10 +9,10 @@ import React, { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import _ from 'lodash';
 import moment from 'moment';
-import { Body, Icon, Left, List, ListItem, Right, Text, Thumbnail, View } from 'native-base';
+import { Body, Left, List, ListItem, Right, Text, Thumbnail, View } from 'native-base';
 import { ImageBackground, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { getAvatar, getUri, handleSearch, serialize } from '../../utils/common';
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -120,7 +120,7 @@ const Comments = ({ comment, order = 1, handleReply, replyId, code, handleSendCo
   };
 
   return (
-    <View key={`comment_${comment._id}`}>
+    <View  key={`comment_${comment._id}`}>
 
       <View avatar>
         <View>

@@ -18,12 +18,12 @@ import _, { join } from 'lodash';
 import ImageInput from '../../../components/CustomInput/ImageInput';
 import CustomDateTimePicker from '../../../components/CustomDateTimePicker/DateTimePicker';
 import { makeSelectUserRole, makeSelectViewConfig } from '../../App/selectors';
-
+import IconEn from 'react-native-vector-icons/Entypo';
 import CollapseView from '../../../components/CustomView/CollapseView';
 import { API_APPROVE_GROUP, CLIENT_ID } from '../../../configs/Paths';
 import { update } from '../../../api/tasks';
 import RenderHTML from "react-native-render-html";
-import { DeviceEventEmitter, Dimensions, ScrollView, useWindowDimensions, Text, View, TextInput } from 'react-native';
+import { DeviceEventEmitter, Dimensions, ScrollView, useWindowDimensions, Text, View, TextInput,  } from 'react-native';
 import WebView from 'react-native-webview';
 const DATETIME_FORMAT = 'DD/MM/YYYY HH:mm';
 
@@ -197,8 +197,20 @@ export function DetailTab(props) {
   };
   return (
     <LoadingLayout isLoading={isLoading}>
-      <View style={{flex: 1}}>
-        <View transparent>
+      <ScrollView keyboardShouldPersistTaps="handled"  style={{flex: 1,  backgroundColor:'#ddd',}}>
+        <View style={{
+            backgroundColor: '#f2f2f2',
+            flex: 1,
+            margin: 5,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: -2,
+              height: 5,
+            },
+            shadowOpacity: 0.36,
+            shadowRadius: 6.68,
+            elevation: 11,
+          }} transparent>
           <View bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }} cardBody>
             <View style={{ flex: 1, backgroundColor: 'white' }}>
               <ImageInput source={avatar || (projectDetail.avatar ? { uri: projectDetail.avatar } : null)} onSave={setAvatar} />
@@ -208,7 +220,7 @@ export function DetailTab(props) {
                   <Text >{'Mã công việc'}</Text>
                   <TextInput onChangeText={e => handleChange('code', e)} value={data.code} style={{ textAlign: 'right', marginRight: 5 }} disabled />
                 </View> */}
-                {!_.get(taskConfig, 'customer.checkedShowForm') ? null : <View inlineLabel error={error.name}>
+                {!_.get(taskConfig, 'customer.checkedShowForm') ? null : <View inlineLabel style={styles.view}  error={error.name}>
                   <Text >{'Tên công việc:'}</Text>
                   <TextInput disabled={!taskRole.PUT} multiline={true} onChangeText={e => handleChange('name', e)} value={data.name} placeholder="Tối thiểu 5 kí tự" style={{ textAlign: 'right', marginRight: 5, paddingTop: 10 }} />
                   <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
@@ -218,7 +230,7 @@ export function DetailTab(props) {
 
 
 
-                {!_.get(taskConfig, 'customer.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.customer}>
+                {!_.get(taskConfig, 'customer.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.customer}>
                   <Text >{convertLabel(_.get(taskConfig, 'customer.title')) || 'Khách hàng'}:</Text>
                   <SingleAPISearch
                     API={API_CUSTOMER}
@@ -230,7 +242,7 @@ export function DetailTab(props) {
                   />
                 </View>}
 
-                {!_.get(taskConfig, 'startDate.checkedShowForm') ? null : taskRole && <View inlineLabel style={{ height: 42 }} error={error.startDate}>
+                {!_.get(taskConfig, 'startDate.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.startDate}>
                   <Text >{convertLabel(_.get(taskConfig, 'startDate.title')) || 'Ngày bắt đầu'}:</Text>
                   <CustomDateTimePicker
                     mode="datetime"
@@ -239,7 +251,7 @@ export function DetailTab(props) {
                   />
                 </View>}
 
-                {!_.get(taskConfig, 'endDate.checkedShowForm') ? null : taskRole && <View inlineLabel style={{ height: 42 }} error={error.endDate}>
+                {!_.get(taskConfig, 'endDate.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view}  error={error.endDate}>
                   <Text >{convertLabel(_.get(taskConfig, 'endDate.title')) || 'Ngày kết thúc'}:</Text>
                   <CustomDateTimePicker
                     mode="datetime"
@@ -248,7 +260,7 @@ export function DetailTab(props) {
                   />
                 </View>}
 
-                {!_.get(taskConfig, 'taskStatus.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.taskStatus}>
+                {!_.get(taskConfig, 'taskStatus.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.taskStatus}>
                   <Text >{convertLabel(_.get(taskConfig, 'taskStatus.title')) || 'Tiến độ'}:</Text>
                   <CustomMultiSelect
                     disabled={!taskRole.PUT}
@@ -262,7 +274,7 @@ export function DetailTab(props) {
                   />
                 </View>}
 
-                {!_.get(taskConfig, 'priority.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.priority}>
+                {!_.get(taskConfig, 'priority.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.priority}>
                   <Text >{convertLabel(_.get(taskConfig, 'priority.title')) || 'Độ ưu tiên'}:</Text>
                   <CustomMultiSelect
                     uniqueKey="value"
@@ -277,13 +289,13 @@ export function DetailTab(props) {
                 </View>}
 
 
-                {!_.get(taskConfig, 'description.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.description}>
+                {!_.get(taskConfig, 'description.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.description}>
                   <Text >{convertLabel(_.get(taskConfig, 'description.title')) || 'Mô tả'}:</Text>
-                  <TextInput disabled={!taskRole.PUT} onChangeText={e => handleChange('description', e)} value={data.description} style={{ textAlign: 'right', marginRight: 5 }} />
-                  <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
+                  <TextInput disabled={!taskRole.PUT} onChangeText={e => handleChange('description', e)} value={data.description} style={{ textAlign: 'right', marginRight: 5, flex: 1 }} />
+                  <IconEn active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
                 </View>}
 
-                {/* {!_.get(taskConfig, 'organizationUnit.checkedShowForm') ? null : <View inlineLabel error={error.organizatiSonUnit}>
+                {/* {!_.get(taskConfig, 'organizationUnit.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.organizatiSonUnit}>
                   <Text >{convertLabel(_.get(taskConfig, 'organizationUnit.title')) || 'Đơn vị chủ trì'}:</Text>
                   <SingleAPISearch
                     onSelectedItemsChange={(value) => handleChange('organizationUnit', _.get(value, '[0]'))}
@@ -296,14 +308,14 @@ export function DetailTab(props) {
                   />
                 </View>} */}
 
-                {!_.get(taskConfig, 'description.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.createdBy}>
+                {!_.get(taskConfig, 'description.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.createdBy}>
                   <Text >{convertLabel(_.get(taskConfig, 'createdBy.title')) || 'Người tạo'}:</Text>
-                  <TextInput disabled={!taskRole.PUT} onChangeText={e => handleChange('description', e)} value={projectDetail.createdBy && projectDetail.createdBy.name} style={{ textAlign: 'right', marginRight: 5 }} />
-                  <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
+                  <TextInput disabled={!taskRole.PUT} onChangeText={e => handleChange('description', e)} value={projectDetail.createdBy && projectDetail.createdBy.name} style={{ textAlign: 'right', marginRight: 5, flex: 1 }} />
+                  <IconEn active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
                 </View>}
               </CollapseView>
               {renderHtml === '<p></p>' ? null : <CollapseView hide title='Mô tả chi tiết'>
-                {/* <View inlineLabel >
+                {/* <View inlineLabel style={styles.view} >
                   <Text >Mô tả chi tiết</Text>
                   <TextInput onChangeText={e => handleChange('desHtml', e)} value={data.desHtml} style={{ textAlign: 'right', marginRight: 5 }} />
                   <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
@@ -317,7 +329,7 @@ export function DetailTab(props) {
                 </ScrollView>
               </CollapseView>}
               <CollapseView hide title='Người tham gia'>
-                {!_.get(taskConfig, 'taskManager.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.taskManager}>
+                {!_.get(taskConfig, 'taskManager.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.taskManager}>
                   <Text >{convertLabel(_.get(taskConfig, 'taskManager.title') || 'Quản lý')}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
@@ -329,7 +341,7 @@ export function DetailTab(props) {
                   />
                 </View>}
 
-                {!_.get(taskConfig, 'viewable.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.viewable}>
+                {!_.get(taskConfig, 'viewable.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.viewable}>
                   <Text >{convertLabel(_.get(taskConfig, 'viewable.title')) || 'Người được xem'}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
@@ -341,7 +353,7 @@ export function DetailTab(props) {
                   />
                 </View>}
 
-                {!_.get(taskConfig, 'join.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.join}>
+                {!_.get(taskConfig, 'join.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.join}>
                   <Text >{convertLabel(_.get(taskConfig, 'join.title') || 'Người tham gia')}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
@@ -353,7 +365,7 @@ export function DetailTab(props) {
                 </View>
                 }
 
-                {!_.get(taskConfig, 'inCharge.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.inCharge}>
+                {!_.get(taskConfig, 'inCharge.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.inCharge}>
                   <Text >{convertLabel(_.get(taskConfig, 'inCharge.title')) || 'Người phụ trách'}:</Text>
                   <MultiAPISearch
                     API={API_USERS}
@@ -364,7 +376,7 @@ export function DetailTab(props) {
                   />
                 </View>}
 
-                {!_.get(taskConfig, 'support.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.support}>
+                {!_.get(taskConfig, 'support.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.support}>
 
                   <Text >{convertLabel(_.get(taskConfig, 'support.title') || 'Người hỗ trợ')}:</Text>
                   <MultiAPISearch
@@ -377,7 +389,7 @@ export function DetailTab(props) {
                 </View>
                 }
 
-                {!_.get(taskConfig, 'approved.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.approved}>
+                {!_.get(taskConfig, 'approved.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.approved}>
                   <Text >{convertLabel(_.get(taskConfig, 'approved.title') || 'Nhóm phê duyệt')}:</Text>
                   <SingleAPISearch
                     query={{
@@ -395,7 +407,7 @@ export function DetailTab(props) {
                 </View>
                 }
 
-                {!_.get(taskConfig, 'approvedProgress.checkedShowForm') ? null : taskRole && <View inlineLabel error={error.approvedProgress}>
+                {!_.get(taskConfig, 'approvedProgress.checkedShowForm') ? null : taskRole && <View inlineLabel style={styles.view} error={error.approvedProgress}>
                   <Text >{convertLabel(_.get(taskConfig, 'approvedProgress.title') || 'Người phê duyệt tiến độ')}:</Text>
                   <SingleAPISearch
                     API={API_USERS}
@@ -420,12 +432,12 @@ export function DetailTab(props) {
             </View>
           </View>
           {taskRole &&
-            <LoadingButton block style={{ margin: 2, marginTop: 0, borderRadius: 5 }} isBusy={isBusy} handlePress={handleSubmit}>
+            <LoadingButton block style={{ margin: 2, marginTop: 0, borderRadius: 5,  backgroundColor: 'rgba(46, 149, 46, 1)' }} isBusy={isBusy} handlePress={handleSubmit}>
               <Icon name="check" type="Feather" />
             </LoadingButton>
           }
         </View>
-      </View>
+      </ScrollView>
     </LoadingLayout>
   );
 }
@@ -444,3 +456,8 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect, memo)(DetailTab);
+
+
+const styles ={
+  view: {paddingVertical: 5, borderBottomWidth: 1, borderColor: '#aaa', flexDirection:'row', alignItems:'center', justifyContent:'space-between', paddingHorizontal: 5 }
+}

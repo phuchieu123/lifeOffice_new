@@ -4,11 +4,13 @@
  *
  */
 
-import { Icon, } from 'native-base';
+
 import React, { memo, useCallback, useState } from 'react';
 import { FlatList, Keyboard, TextInput, Text, View } from 'react-native';
 import { useInput } from '../../utils/useInput';
 // import styled from 'styled-components';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import IconA from 'react-native-vector-icons/AntDesign';
 import { createFile, uploadImage } from '../../api/fileSystem';
 import { picupkFile } from '../../utils/fileSystem';
 
@@ -57,7 +59,7 @@ function CommentInput(props) {
           keyExtractor={(item) => item.name}
           renderItem={({ item, index }) => <View style={{ height: 30, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: '#ccc', borderRadius: 20, padding: 0, paddingHorizontal: 15, marginLeft: 5 }}>
             <Text numberOfLines={1} style={{ maxWidth: 80 }}>{item.name}</Text>
-            <Icon
+            <IconA
               name="close"
               type="AntDesign"
               onPress={() => onDeleteFile(index)}
