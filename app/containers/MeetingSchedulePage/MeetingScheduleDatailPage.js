@@ -418,12 +418,20 @@ export function MeetingScheduleDatailPage(props) {
                     
                     name="Tài Liệu"
                     component={() =>{return(
-                        <>
+                        <View style={{flex: 1}}>
+                            
                             <FileView id={localData._id} code={'Calendar'} visible={true} reload={reload} />
-                    <FabLayout onPress={() => isLoading ? "" : handleAddFile()}>
-                        <Icon type="Entypo" name="plus" style={{ color: '#fff', }} />
-                    </FabLayout>
-                        </>
+                             <FabLayout style={{ position: 'absolute',
+        bottom: 10,
+        right: 10,
+        width: 40,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 50,}} onPress={() => isLoading ? "" : handleAddFile()}>
+                            <Icon type="Entypo" name="plus" style={{ color: '#fff', }} />
+                              </FabLayout>
+                        </View>
                     )}}
                    
                     />
