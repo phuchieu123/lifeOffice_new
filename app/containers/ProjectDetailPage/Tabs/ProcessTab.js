@@ -66,7 +66,7 @@ export function ProcessTab(props) {
 
   return (
     <View>
-      <Card>
+      {/* <Card>
         <CardItem>
           <Form style={{ flex: 1, backgroundColor: 'white' }}>
             {!_.get(taskConfig, 'taskStatus.checkedShowForm') ? null : <Item fixedLabel >
@@ -126,7 +126,7 @@ export function ProcessTab(props) {
 
           </Form>
         </CardItem>
-      </Card>
+      </Card> */}
     
     </View>
   );

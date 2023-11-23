@@ -1,5 +1,6 @@
 import React, {memo, useEffect, useState} from 'react';
-import { View, Text} from 'react-native';
+import {BackHandler, View, Text} from 'react-native';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Icon from 'react-native-vector-icons/Octicons';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
@@ -28,9 +29,11 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import makeSelectProjectDetailPage from './selectors';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-const Tab = createMaterialTopTabNavigator;
+
 // import { makeSelectRoleDepartmentBos, makeSelectUserRoleTask } from '../App/selectors';
+
+
+const Tab = createMaterialTopTabNavigator();
 export function ProjectDetailPage(props) {
   useInjectReducer({key: 'projectDetailPage', reducer});
   useInjectSaga({key: 'projectDetailPage', saga});
@@ -94,9 +97,10 @@ export function ProjectDetailPage(props) {
         navigation={navigation}
         rightHeader={
           <Icon
-            style={{color: 'white'}}
+            style={{color: 'white', fontSize: 20}}
             name="checklist"
             type="Octicons"
+         
             onPress={() => navigate('AddApproveProject', {item: projectDetail})}
           />
         }
@@ -114,7 +118,7 @@ export function ProjectDetailPage(props) {
             backgroundColor: 'white', // Màu của thanh dưới chữ khi tab được chọn
           },
         }}>
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Chi tiết"
           component={() => {
             return (
@@ -129,7 +133,7 @@ export function ProjectDetailPage(props) {
               />
             );
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Tiến độ"
           component={() => {
