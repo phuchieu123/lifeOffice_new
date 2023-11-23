@@ -68,7 +68,7 @@ function SalaryPage(props) {
           const inCharge = _.get(item, 'inChargedEmployeeId.name')
           const department = _.get(item, 'organizationUnitId.name')
 
-          return <TouchableOpacity activeOpacity={1}  onPress={() => navigation.navigate('HrmSalaryPageDetail', { item: item }) }>
+          return <TouchableOpacity activeOpacity={1} style={{flexDirection:'row', alignItems:'center', justifyContent:'space-between', margin: 10, paddingBottom: 10, borderBottomWidth: 0.75,}}  onPress={() => navigation.navigate('HrmSalaryPageDetail', { item: item }) }>
             <View>
               <Text>{`Bảng lương tháng ${month} năm ${year}`}</Text>
               {inCharge && <Text note numberOfLines={1}>{`Phụ trách: ${inCharge}`}</Text>}
