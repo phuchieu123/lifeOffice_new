@@ -82,24 +82,23 @@ const FileView = props => {
         
   
     return !visible ? null :
-      <View>
+      <View style={{flex: 1}}>
           <FlatList
             refreshing={reload}
             data={data}
-            style={{flex: 1}}
             keyExtractor={(item) => item._id}
             renderItem={({ item }) => {
                 const { name, createdAt } = item
                     console.log(item,'ssssssssssssssssssssss')
                 return(
-                <View >
+                <View style={{}}>
                     <Icon type='MaterialCommunityIcons' name='file' />
 
                     <View>
                         <TouchableOpacity onPress={() => { toWatch(item) }}>
                             <Text>{name}</Text>
                             <Text style={{ fontSize: 14 }}>Ngày tạo: {moment(createdAt).format(DATE_FORMAT.DATE_TIME)}</Text>
-                            <Text>sssssssssssss</Text>
+                            
                         </TouchableOpacity>
                     </View>
 

@@ -91,7 +91,7 @@ export function ProjectDetailPage(props) {
   };
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       <BackHeader
         title={projectDetail && projectDetail.name}
         navigation={navigation}
@@ -118,7 +118,7 @@ export function ProjectDetailPage(props) {
             backgroundColor: 'white', // Màu của thanh dưới chữ khi tab được chọn
           },
         }}>
-        {/* <Tab.Screen
+        <Tab.Screen
           name="Chi tiết"
           component={() => {
             return (
@@ -133,7 +133,7 @@ export function ProjectDetailPage(props) {
               />
             );
           }}
-        /> */}
+        />
         <Tab.Screen
           name="Tiến độ"
           component={() => {
