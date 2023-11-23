@@ -150,7 +150,7 @@ export function ProcessTab(props) {
                 maxLength={500}
                 style={{
                   width: '100%',
-                  textAlign: 'left',
+                  textAlignVertical: 'top',
                   marginBottom: 10,
                   height: 120,
                   borderWidth: 0.7,
@@ -167,9 +167,9 @@ export function ProcessTab(props) {
               <TouchableOpacity
                 disabled={isBusy}
                 block
-                style={{justifyContent: 'center', borderRadius: 5}}
+                style={{justifyContent: 'center', borderRadius: 5 , paddingVertical: 10, backgroundColor:'rgba(46, 149, 46, 1)', marginHorizontal: 10}}
                 onPress={handleSubmit}>
-                <Icon name="check" type="Feather" />
+                <Icon style={{fontSize: 20, textAlign: 'center', color:'white'}} name="check" type="Feather" />
               </TouchableOpacity>
             )}
           </View>
