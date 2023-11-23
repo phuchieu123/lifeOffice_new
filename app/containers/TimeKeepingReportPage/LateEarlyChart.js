@@ -98,7 +98,7 @@ const LateEarlyChart = (props) => {
         navigation={navigation}
         rightStyle={{ flex: 0.3 }}
         rightHeader={
-          <Icon name="calendar" type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff', marginHorizontal: 10 }} />
+          <Icon name="calendar" type="AntDesign" onPress={() => setShowDatePicker(true)} style={{ color: '#fff', marginHorizontal: 10,fontSize:20  }} />
         }
       />
       <View style={styles.content}>

@@ -261,7 +261,7 @@ function DetailContent(props) {
                 </View>}
 
                 {!_.get(docuentaryConfig, 'recieverPosition.checkedShowForm') ? null : <View style={styles.item} inlineLabel error={error.recieverPosition}>
-                    <Text >{convert(_.get(docuentaryConfig['recieverPosition.name'], 'title') || 'Vai trò người nhận')}:</Text>
+                    <Text  >{convert(_.get(docuentaryConfig['recieverPosition.name'], 'title') || 'Vai trò người nhận')}:</Text>
                     <MultiAPISearch
                         disabled={!PUT}
                         query={{ clientId, moduleCode: code }}

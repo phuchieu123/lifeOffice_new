@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStructuredSelector } from 'reselect';
 import { Text, View, ScrollView, TextInput, DeviceEventEmitter, BackHandler } from 'react-native';
 import { compose } from 'redux';
@@ -15,7 +16,7 @@ import FabLayout from '../../components/CustomFab/FabLayout';
 import ListPage from '../../components/ListPage';
 import { MEETING_SCHEDULE, API_CUSTOMER, API_USERS, API_TASK_CONFIG, API_TASK_TASKS, MEETING_DEPARTENT } from '../../configs/Paths';
 import { getProfile } from '../../utils/authen';
-import { Header, Container, Card, CardItem, Item, Icon, Form, Label, Input, Button, Textarea, Right, Tabs, Tab, TabHeading } from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
 import Modal from 'react-native-modal';
 import LoadingButton from '../../components/LoadingButton';
 import { TouchableWithoutFeedback } from 'react-native';
@@ -40,6 +41,8 @@ import DocumentPicker from 'react-native-document-picker'
 import RenderRecordModal from './RenderRecordModal';
 import { validateForm } from '../../utils/validate';
 const DATETIME_FORMAT = 'DD/MM/YYYY HH:mm';
+
+const Tab = createMaterialTopTabNavigator();
 
 export function MeetingScheduleDatailPage(props) {
     useInjectReducer({ key: 'meetingSchedulePage', reducer });
@@ -223,58 +226,70 @@ export function MeetingScheduleDatailPage(props) {
     // }
 
     return (
-        <Container>
+        <View style={{flex: 1}}>
             <BackHeader
                 title={isUpdate ? localData.name : 'Thêm mới lịch họp'}
                 navigation={navigation}
             />
 
-            <Tabs>
+        <Tab.Navigator
+        tabBarOptions={{
+          style: {
+            backgroundColor: 'rgba(46, 149, 46, 1)', // Màu nền của toàn bộ thanh tab
+            borderTopWidth: 0.5,
+            borderTopColor:'#aaa',
+          },
+          activeTintColor: 'white', // Màu chữ của tab đang được chọn
+          inactiveTintColor: 'white', // Màu chữ của tab không được chọn
+          indicatorStyle: {
+            backgroundColor: 'white', // Màu của thanh dưới chữ khi tab được chọn
+          },
+        }}
+        >
 
-                <Tab
-                    heading={
-                        <TabHeading>
-                            <Text style={{ color: '#fff', fontWeight: '700' }}>Chi Tiết</Text>
-                        </TabHeading>
-                    }>
-                    <LoadingLayout isLoading={isLoading}>
+                <Tab.Screen
+                    
+                    name="Chi Tiết"
+            
+                    component={() =>{return(
+                        <LoadingLayout isLoading={isLoading}>
                         <ScrollView>
-                            <View style={{ display: 'flex', justifyContent: 'center' }}>
-                                <Form style={{ flex: 1, backgroundColor: '#fff' }}>
-                                    {!_.get(calendarConfig, 'name.checkedShowForm') ? null : <Item inlineLabel error={error.name}>
-                                        <Label >{convert(_.get(calendarConfig, 'name.title')) || 'Tên cuộc họp'}:</Label>
-                                        <Input disabled={!PUT} value={localData.name} onChangeText={e => handleChange('name', e.replace('  ', ' '))} style={styles.input} />
-                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                                    </Item>}
+                            <View style={{ justifyContent: 'center', marginHorizontal: 20 }}>
+                                <View style={{ flex: 1, backgroundColor: '#fff' }}>
+                                    {!_.get(calendarConfig, 'name.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.name}>
+                                        <Text style={{flex: 1}}  >{convert(_.get(calendarConfig, 'name.title')) || 'Tên cuộc họp'}:</Text>
+                                        <TextInput disabled={!PUT} value={localData.name} onChangeText={e => handleChange('name', e.replace('  ', ' '))} style={styles.input} />
+                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, marginRight: 5 }} />
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'code.checkedShowForm') ? null : <Item inlineLabel error={error.code} >
-                                        <Label >{convert(_.get(calendarConfig, 'code.title')) || 'Mã cuộc họp'}:</Label>
-                                        <Input disabled={!PUT} value={localData.code} onChangeText={e => handleChange('code', e.replace('  ', ' '))} style={styles.input} />
-                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                                    </Item>}
+                                    {!_.get(calendarConfig, 'code.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.code} >
+                                        <Text  style={{flex: 1}}>{convert(_.get(calendarConfig, 'code.title')) || 'Mã cuộc họp'}:</Text>
+                                        <TextInput disabled={!PUT} value={localData.code} onChangeText={e => handleChange('code', e.replace('  ', ' '))} style={styles.input} />
+                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, marginRight: 5 }} />
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'timeStart.checkedShowForm') ? null : <Item inlineLabel error={error.timeStart}>
-                                        <Label >{convert(_.get(calendarConfig, 'timeStart.title')) || 'Thời gian bắt đầu'}:</Label>
+                                    {!_.get(calendarConfig, 'timeStart.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.timeStart}>
+                                        <Text >{convert(_.get(calendarConfig, 'timeStart.title')) || 'Thời gian bắt đầu'}:</Text>
                                         <DateTimePicker
                                             disabled={!PUT}
                                             mode="datetime"
                                             onSave={(e) => handleChange('timeStart', e)}
                                             value={localData.timeStart && moment(localData.timeStart).format(DATE_FORMAT.DATE_TIME)}
                                         />
-                                    </Item>}
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'timeEnd.checkedShowForm') ? null : <Item inlineLabel error={error.timeEnd}>
-                                        <Label >{convert(_.get(calendarConfig, 'timeEnd.title')) || 'Thời gian kết thúc'}:</Label>
+                                    {!_.get(calendarConfig, 'timeEnd.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.timeEnd}>
+                                        <Text >{convert(_.get(calendarConfig, 'timeEnd.title')) || 'Thời gian kết thúc'}:</Text>
                                         <DateTimePicker
                                             disabled={!PUT}
                                             mode="datetime"
                                             onSave={(e) => handleChange('timeEnd', e)}
                                             value={localData.timeEnd && moment(localData.timeEnd).format(DATE_FORMAT.DATE_TIME)}
                                         />
-                                    </Item>}
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'roomMetting.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.roomMetting}>
-                                        <Label >{convert(_.get(calendarConfig, 'roomMetting.title')) || 'Phòng họp'}:</Label>
+                                    {!_.get(calendarConfig, 'roomMetting.checkedShowForm') ? null : <View inlineLabel style={styles.view}  error={error.roomMetting}>
+                                        <Text >{convert(_.get(calendarConfig, 'roomMetting.title')) || 'Phòng họp'}:</Text>
 
                                         <SingleAPISearch
                                             Single
@@ -285,17 +300,17 @@ export function MeetingScheduleDatailPage(props) {
                                             selectedDatas={_.get(meeting, 'roomMetting') && [_.get(meeting, 'roomMetting')]}
                                             onRemove={(e) => handleChange('roomMetting', null)}
                                         />
-                                    </Item>}
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'address.checkedShowForm') ? null : <Item inlineLabel style={{}} error={error.address}>
-                                        <Label >{convert(_.get(calendarConfig, 'address.title')) || 'Địa điểm họp'}:</Label>
+                                    {!_.get(calendarConfig, 'address.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.address}>
+                                        <Text >{convert(_.get(calendarConfig, 'address.title')) || 'Địa điểm họp'}:</Text>
 
-                                        <Input multiline disabled={!PUT} value={localData.address} onChangeText={e => handleChange('address', e)} style={styles.input} />
-                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                                    </Item>}
+                                        <TextInput multiline disabled={!PUT} value={localData.address} onChangeText={e => handleChange('address', e)} style={styles.input} />
+                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, marginRight: 5 }} />
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'task.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.task}>
-                                        <Label >{convert(_.get(calendarConfig, 'task.title')) || 'Công việc dự án'}:</Label>
+                                    {!_.get(calendarConfig, 'task.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.task}>
+                                        <Text >{convert(_.get(calendarConfig, 'task.title')) || 'Công việc dự án'}:</Text>
                                         <SingleAPISearch
                                             disabled={!PUT}
                                             query={{ filter: { isProject: true } }}
@@ -305,10 +320,10 @@ export function MeetingScheduleDatailPage(props) {
                                             selectedDatas={_.get(meeting, 'task') && [_.get(meeting, 'task')]}
                                             onRemove={(e) => handleChange('task', null)}
                                         />
-                                    </Item>}
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'prepare.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.prepare}>
-                                        <Label >{convert(_.get(calendarConfig, 'prepare.title')) || 'Người chuẩn bị'}:</Label>
+                                    {!_.get(calendarConfig, 'prepare.checkedShowForm') ? null : <View inlineLabel style={styles.view}  error={error.prepare}>
+                                        <Text >{convert(_.get(calendarConfig, 'prepare.title')) || 'Người chuẩn bị'}:</Text>
                                         <MultiAPISearch
                                             disabled={!PUT}
                                             API={API_USERS}
@@ -318,16 +333,16 @@ export function MeetingScheduleDatailPage(props) {
                                             onRemove={(e) => handleChange('prepare', [])}
                                         />
 
-                                    </Item>}
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'prepareMeeting.checkedShowForm') ? null : <Item inlineLabel error={error.prepareMeeting} >
-                                        <Label >{convert(_.get(calendarConfig, 'prepareMeeting.title')) || 'Chuẩn bị cuộc họp'}:</Label>
-                                        <Input multiline disabled={!PUT} value={localData.prepareMeeting} onChangeText={e => handleChange('prepareMeeting', e)} style={styles.input} />
-                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16 }} />
-                                    </Item>}
+                                    {!_.get(calendarConfig, 'prepareMeeting.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.prepareMeeting} >
+                                        <Text >{convert(_.get(calendarConfig, 'prepareMeeting.title')) || 'Chuẩn bị cuộc họp'}:</Text>
+                                        <TextInput multiline disabled={!PUT} value={localData.prepareMeeting} onChangeText={e => handleChange('prepareMeeting', e)} style={styles.input} />
+                                        <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, marginRight: 5 }} />
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'customers.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.customers}>
-                                        <Label >{convert(_.get(calendarConfig, 'customers.title')) || 'Khách hàng'}:</Label>
+                                    {!_.get(calendarConfig, 'customers.checkedShowForm') ? null : <View inlineLabel style={styles.view}  error={error.customers}>
+                                        <Text >{convert(_.get(calendarConfig, 'customers.title')) || 'Khách hàng'}:</Text>
 
                                         <MultiAPISearch
                                             disabled={!PUT}
@@ -337,10 +352,10 @@ export function MeetingScheduleDatailPage(props) {
                                             selectedDatas={_.get(meeting, 'customers')}
                                             onRemove={(e) => handleChange('customers', [])}
                                         />
-                                    </Item>}
+                                    </View>}
 
-                                    {!_.get(calendarConfig, 'people.checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.people}>
-                                        <Label >{convert(_.get(calendarConfig, 'people.title')) || 'Người tham gia'}:</Label>
+                                    {!_.get(calendarConfig, 'people.checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.people}>
+                                        <Text >{convert(_.get(calendarConfig, 'people.title')) || 'Người tham gia'}:</Text>
 
                                         <MultiAPISearch
                                             disabled={!PUT}
@@ -353,10 +368,10 @@ export function MeetingScheduleDatailPage(props) {
                                             onRemove={(e) => handleChange('people', [])}
                                         />
 
-                                    </Item>}
+                                    </View>}
 
-                                    {!_.get(_.get(calendarConfig, 'organizer.name'), 'checkedShowForm') ? null : <Item inlineLabel style={{ display: 'flex', justifyContent: 'space-between' }} error={error.organizer}>
-                                        <Label >{convert(_.get(calendarConfig, 'organizer.name').title) || 'Người tổ chức'}:</Label>
+                                    {!_.get(_.get(calendarConfig, 'organizer.name'), 'checkedShowForm') ? null : <View inlineLabel style={styles.view} error={error.organizer}>
+                                        <Text >{convert(_.get(calendarConfig, 'organizer.name').title) || 'Người tổ chức'}:</Text>
                                         <SingleAPISearch
                                             disabled={!PUT}
                                             uniqueKey="employeeId"
@@ -367,13 +382,13 @@ export function MeetingScheduleDatailPage(props) {
                                             customData={arr => arr.map(e => ({ ...e, employeeId: e.employeeId || e._id }))}
                                             onRemove={(e) => handleChange('organizer', null)}
                                         />
-                                    </Item>}
+                                    </View>}
 
-                                    <Item inlineLabel style={{}} underline={false}>
-                                        <Label style={{ marginTop: 10 }}>Nội Dung: </Label>
-                                    </Item>
+                                    <View inlineLabel style={styles.view}  underline={false}>
+                                        <Text style={{ marginTop: 10 }}>Nội Dung: </Text>
+                                    </View>
                                     <View style={{ marginHorizontal: 15 }} >
-                                        <Textarea
+                                        <TextInput
                                             disabled={!PUT}
                                             rowSpan={5}
                                             bordered
@@ -384,36 +399,43 @@ export function MeetingScheduleDatailPage(props) {
                                     </View>
 
                                     <RenderRecordModal isVisible={isVisible} onClose={() => setIsVisible(false)} localData={localData._id} />
-                                </Form>
+                                </View>
                             </View>
 
 
-                            {!calender.POST ? null : <View style={{ flexDirection: 'row', padding: 10, paddingRight: 20 }}>
+                            {!calender.POST ? null : <View style={{ flexDirection: 'row', margin: 10,  backgroundColor:'rgba(46, 149, 46, 1)', paddingHorizontal: 10, borderRadius: 10 }}>
                                 <LoadingButton isBusy={updating} handlePress={handleAdd} style={{ width: '100%', justifyContent: 'center' }}>
-                                    <Icon name="check" type="Feather" />
+                                    <Icon style={{color:'white', fontSize: 20, textAlign:'center'}} name="check" type="Feather" />
                                 </LoadingButton>
                             </View>}
-                        </ScrollView >
+                        </ScrollView>
                     </LoadingLayout>
-                </Tab>
-                <Tab
-                    heading={
-                        <TabHeading>
-                            <Text style={{ color: '#fff', fontWeight: '700' }}>Tài Liệu</Text>
-                        </TabHeading>
-                    }>
-
-                    <FileView id={localData._id} code={'Calendar'} visible={true} reload={reload} />
+                    )}}
+                    />
+                    
+               
+                <Tab.Screen
+                    
+                    name="Tài Liệu"
+                    component={() =>{return(
+                        <>
+                            <FileView id={localData._id} code={'Calendar'} visible={true} reload={reload} />
                     <FabLayout onPress={() => isLoading ? "" : handleAddFile()}>
-                        <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
+                        <Icon type="Entypo" name="plus" style={{ color: '#fff', }} />
                     </FabLayout>
-                </Tab>
-            </Tabs>
+                        </>
+                    )}}
+                   
+                    />
+
+                   
+               
+            </Tab.Navigator>
 
 
 
 
-        </Container >
+        </View>
     );
 
 }
@@ -439,9 +461,13 @@ export default compose(withConnect)(MeetingScheduleDatailPage);
 
 const styles = {
     view: {
-        display: 'flex',
         flexDirection: 'row',
-        marginBottom: 2
+        marginBottom: 2,
+        alignItems: 'center',
+        justifyContent:'space-between',
+        paddingVertical: 10,
+        borderBottomWidth: 0.7,
+        borderBottomColor: 'gray'
     },
     icon: {
         fontSize: 18,
@@ -454,5 +480,6 @@ const styles = {
         marginRight: 5,
         minHeight: 42
     }
+
 }
 
