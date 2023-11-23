@@ -15,7 +15,8 @@ const CollapseView = props => {
             justifyContent: 'flex-end',
             alignItems:'center',
             paddingVertical: 10,
-borderBottomWidth: 1, borderColor: '#ccc',marginRight: 8,
+            borderBottomWidth: 1, borderColor: '#ccc',marginRight: 8,
+            
             // justifyContent: 'space-between',
             height: 45
         }} onPress={toggle}>

@@ -432,8 +432,8 @@ export function DetailTab(props) {
             </View>
           </View>
           {taskRole &&
-            <LoadingButton block style={{ margin: 2, marginTop: 0, borderRadius: 5,  backgroundColor: 'rgba(46, 149, 46, 1)' }} isBusy={isBusy} handlePress={handleSubmit}>
-              <Icon name="check" type="Feather" />
+            <LoadingButton block style={{ margin: 2, marginTop: 0, borderRadius: 5,  backgroundColor: 'rgba(46, 149, 46, 1)', paddingVertical: 10 ,marginTop: 10}} isBusy={isBusy} handlePress={handleSubmit}>
+              <Icon name="check" type="Feather" style={{color:'white', fontSize: 20, textAlign:'center'}} />
             </LoadingButton>
           }
         </View>

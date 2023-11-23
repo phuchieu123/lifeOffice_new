@@ -51,7 +51,7 @@ function CommentInput(props) {
   }
 
   return (
-    <View>
+    <View >
       {textMng ? <View style={{ flexDirection: 'row', marginTop: 10, marginLeft: 10 }}>
         <FlatList
           horizontal
@@ -68,11 +68,11 @@ function CommentInput(props) {
           }
         />
       </View> : null}
-      <View padder>
-        <View regular>
-          <TextInput {...bindMessage} placeholder={textMng ? 'Viết ý kiến...' : ''} />
+      <View padder style={{ borderWidth: 0.5, marginVertical: 10, marginHorizontal: 5,  }}>
+        <View regular style={{flexDirection: 'row', alignItems: 'center'}} >
+          <TextInput {...bindMessage} placeholder={textMng ? 'Viết ý kiến...' : ''} style={{flex: 1}} />
           {textMng ? <Icon name="paperclip" type='FontAwesome' onPress={onSendFile} /> : null}
-          <Icon active name="send" onPress={handleSendMessage} />
+          <Icon active name="send" onPress={handleSendMessage} size={18} style={{paddingHorizontal: 5}} />
         </View>
       </View>
     </View>

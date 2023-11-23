@@ -65,7 +65,7 @@ export function CommentView(props) {
   const handleReply = (comment) => setReplyId(comment._id);
 
   return (
-    <View>
+    <View >
       <CommentInput onSendComment={handleSendComment} projectId={project._id} textMng={textMng} />
       <LoadingLayout isLoading={isLoading}>
         {Array.isArray(comments) &&
@@ -120,7 +120,7 @@ const Comments = ({ comment, order = 1, handleReply, replyId, code, handleSendCo
   };
 
   return (
-    <View  key={`comment_${comment._id}`}>
+    <View style={{marginBottom: 10, }}  key={`comment_${comment._id}`}>
 
       <View avatar>
         <View>
