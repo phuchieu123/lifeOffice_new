@@ -244,11 +244,9 @@ export function BusinessOpDetailPage(props) {
           },
         }}
       >
-        <Tab.Screen heading={
-          <TabHeading>
-            <Text style={{ color: '#fff', fontWeight: '700' }}>Chi Tiết</Text>
-          </TabHeading>
-        }>
+        <Tab.Screen name='Chi Tiết'
+         
+        >
           <LoadingLayout isLoading={isLoading}>
             <Content>
               {!_.get(fieldConfig, 'code.checkedShowForm') ? null : <Item inlineLabel disabled={isUpdate}>

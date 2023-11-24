@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import theme from 'utils/customTheme';
+import theme from '../../utils/customTheme';
 const deviceHeight = Dimensions.get('screen').height;
 const deviceWidth = Dimensions.get('screen').width;
 

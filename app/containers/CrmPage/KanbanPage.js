@@ -69,7 +69,7 @@ function KanbanPage(props) {
         small
         block
         full
-        style={{ backgroundColor: kanban.color, borderRadius: 20, marginBottom: 3 }}
+        style={{ backgroundColor: kanban.color, borderRadius: 20, marginBottom: 3, marginHorizontal: 5 }}
       // onPress={() => handleCreateBusinessOp(kanban)}
       >
         {/* <Icon name="plus" type="FontAwesome" /> */}

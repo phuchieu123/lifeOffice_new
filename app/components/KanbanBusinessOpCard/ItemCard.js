@@ -4,7 +4,7 @@ import moment from 'moment';
 import { ImageBackground, View, Text, TouchableOpacity } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import { compose } from 'redux';
-import { Card, CardItem, Right, Button, Body, List, ListItem, Label } from 'native-base';
+import { Card, CardItem, Right, Button, Body, List, ListItem, Label, Center } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import images from '../../images';
 import CustomMultiSelect from '../CustomMultiSelect';
@@ -22,7 +22,7 @@ function ItemCard(props) {
     const { kanban, kanbanOption, updateBusinessOp, openBusinessDetail, businessOp, fieldConfig } = props;
 
     return (
-        <View style={{ height: 320, margin: 5, borderRadius: 20 }}>
+        <View style={{ height: 320, margin: 5, borderRadius: 20, }}>
             <View bordered cardBody>
                 <ImageBackground
                     source={
@@ -57,8 +57,9 @@ function ItemCard(props) {
                             <Button transparent iconRight small>
                                 <Icon active name="navicon" type="FontAwesome" style={{ color: kanban.color }} />
                             </Button>
-                            <Text style={{ color: '#fff', fontSize: 14 }}>Trạng thái: </Text>
-                            <View style={{ flexDirection: 'row' }}>
+                            
+                            <View style={{ flexDirection: 'row', alignItems: 'center', padding: 5 }}>
+                                <Text style={{ color: '#fff', fontSize: 14 }}>Trạng thái: </Text>
                                 <CustomMultiSelect
                                     single
                                     items={kanbanOption}
@@ -80,8 +81,8 @@ function ItemCard(props) {
                                 <Button transparent iconRight small>
                                     <Icon active name="user-circle" type="FontAwesome" style={{ color: kanban.color }} />
                                 </Button>
-                                <Text style={{ color: '#fff', fontSize: 14 }} >{convert(_.get(fieldConfig, 'responsibilityPerson.title')) || 'Người chịu trách nhiệm'}: </Text>
-                                <Text numberOfLines={1} style={{ color: '#fff' }}>
+                                <View style={{flexDirection:'row', justifyContent:'space-between',padding : 5}}><Text style={{ color: '#fff', fontSize: 14 }} >{convert(_.get(fieldConfig, 'responsibilityPerson.title')) || 'Người chịu trách nhiệm'}: </Text>
+                                <Text numberOfLines={1} style={{ color: '#fff', fontSize: 14 }}>
                                     {businessOp.responsibilityPerson && businessOp.responsibilityPerson.name}
                                 </Text>
                                 {_.get(businessOp, 'responsibilityPerson.length') !== 1
@@ -92,7 +93,7 @@ function ItemCard(props) {
                                     : <Text numberOfLines={1} style={{ color: '#fff' }}>
                                         {_.get(businessOp, 'responsibilityPerson[0].name', '')}
                                     </Text>
-                                }
+                                }</View>
                             </View>
                             : null}
 
@@ -181,6 +182,7 @@ const styles = {
     cardItem: {
         backgroundColor: GRAY_BLUR,
         borderRadius: 0,
+        
     },
     cardItemView: {
         flex: 1,
