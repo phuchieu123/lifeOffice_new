@@ -36,19 +36,19 @@ export function BusinessContract(props) {
                 itemComponent={({ item }) =>
                     <View>
                         <View bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }} cardBody>
-                            <Form style={{ flex: 1, backgroundColor: 'white' }}>
+                            <View style={{ flex: 1, backgroundColor: 'white' }}>
                                 <View style={{ padding: 10 }}>
                                     <View style={{ flexDirection: 'row' }}>
-                                        <Label style={{ fontSize: 14, color: 'black' }} >Tên hợp đồng: </Label>
+                                        <Text style={{ fontSize: 14, color: 'black' }} >Tên hợp đồng: </Text>
                                         <Text style={{ textAlign: 'center', alignItems: 'center', }}>{item.name}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row' }} >
-                                        <Label style={{ fontSize: 14, color: 'black' }} >Loại hợp đồng: </Label>
+                                        <Text style={{ fontSize: 14, color: 'black' }} >Loại hợp đồng: </Text>
                                         <Text style={{ textAlign: 'center', }}></Text>
                                     </View>
 
                                 </View>
-                            </Form>
+                            </View>
                         </View>
                     </View>
                 }

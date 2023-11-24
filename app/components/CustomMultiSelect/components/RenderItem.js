@@ -61,7 +61,7 @@ const RenderItem = props => {
         onPress={() => onItemPress()}>
         {title}
       </Text>
-      <View style={{}}>
+      <View style={{ flexDirection: 'row'}}>
         {readOnly ? null : (
           <RadioCustom selected={selected} toggleRadio={onItemPress} />
         )}

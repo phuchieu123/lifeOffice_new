@@ -8,13 +8,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { BackHandler, DeviceEventEmitter,TextInput, TouchableOpacity,Text,
-  View } from 'react-native';
+  View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 // import DocumentPicker from 'react-native-document-picker';
 import Icon from 'react-native-vector-icons/Entypo';
-
+import IconFon from 'react-native-vector-icons/FontAwesome';
 
 import { TouchableWithoutFeedback } from 'react-native';
 import { useInjectReducer } from '../../utils/injectReducer';
@@ -237,14 +237,15 @@ export function BusinessOpDetailPage(props) {
         <Tab.Screen 
         name='Chi Tiết'
         component={() => <LoadingLayout isLoading={isLoading}>
-            <View>
-              {!_.get(fieldConfig, 'code.checkedShowForm') ? null : <View inlineLabel disabled={isUpdate}>
-                <Text >{convertLabel(_.get(fieldConfig, 'code.title')) || 'Mã CHKD'}:</Text>
+            <ScrollView>
+            <View style={{marginHorizontal: 10}}>
+              {!_.get(fieldConfig, 'code.checkedShowForm') ? null : <View style={styles} inlineLabel disabled={isUpdate}>
+                <Text  >{convertLabel(_.get(fieldConfig, 'code.title')) || 'Mã CHKD'}:</Text>
                 <TextInput style={{ textAlign: 'right', minHeight: 45 }} value={code} disabled />
               </View>}
 
-              {!_.get(fieldConfig, 'name.checkedShowForm') ? null : <View inlineLabel error={fieldConfig.name.isRequire && _.isEmpty(name)}>
-                <Text >{convertLabel(_.get(fieldConfig, 'name.title')) || 'Tên CHKD'}:</Text>
+              {!_.get(fieldConfig, 'name.checkedShowForm') ? null : <View style={styles} inlineLabel error={fieldConfig.name.isRequire && _.isEmpty(name)}>
+                <Text style={{flex: 1}} >{convertLabel(_.get(fieldConfig, 'name.title')) || 'Tên CHKD'}:</Text>
                 <TextInput
                   style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                   value={name}
@@ -252,12 +253,12 @@ export function BusinessOpDetailPage(props) {
                   onChangeText={(val) => handleChange('name', val)}
                   disabled={!fieldConfig}
                 />
-                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
+                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc', marginRight: 5 }} />
               </View>}
 
 
-              {!(fieldConfig['customer.name'] && fieldConfig['customer.name'].checkedShowForm) ? null : <View inlineLabel>
-                <Text >{convertLabel(_.get(fieldConfig, 'customer.title')) || 'Khách hàng'}:</Text>
+              {!(fieldConfig['customer.name'] && fieldConfig['customer.name'].checkedShowForm) ? null : <View style={styles} inlineLabel>
+                <Text style={{flex: 1}} >{convertLabel(_.get(fieldConfig, 'customer.title')) || 'Khách hàng'}:</Text>
                 <SingleAPISearch
                   readOnly={!fieldConfig}
                   uniqueKey='customerId'
@@ -269,7 +270,7 @@ export function BusinessOpDetailPage(props) {
                   selectedDatas={customerNew || _.get(customer, 'customerId') && [customer]}
                   customData={arr => arr.map(e => ({ ...e, customerId: e._id }))}
                 />
-                <Icon
+                <IconFon
                   name="user-circle"
                   type="FontAwesome"
                   style={{ fontSize: 20, marginLeft: 5, color: '#ccc' }}
@@ -278,7 +279,7 @@ export function BusinessOpDetailPage(props) {
                 />
               </View>}
 
-              {!_.get(fieldConfig, 'source.checkedShowForm') ? null : <View inlineLabel>
+              {!_.get(fieldConfig, 'source.checkedShowForm') ? null : <View style={styles} inlineLabel>
                 <Text >{convertLabel(_.get(fieldConfig, 'source.title')) || 'Nguồn cơ hội'}:</Text>
                 <Search
                   uniqueKey="title"
@@ -293,7 +294,7 @@ export function BusinessOpDetailPage(props) {
               </View>}
 
 
-              {!_.get(fieldConfig, 'note.checkedShowForm') ? null : <View inlineLabel style={{ justifyContent: 'center' }} error={_.get(fieldConfig, 'note.isRequire') && _.isEmpty(note)}>
+              {!_.get(fieldConfig, 'note.checkedShowForm') ? null : <View style={styles} inlineLabel error={_.get(fieldConfig, 'note.isRequire') && _.isEmpty(note)}>
                 <Text >{convertLabel(_.get(fieldConfig, 'note.title')) || 'Ghi chú'}:</Text>
 
                 <TextInput
@@ -303,11 +304,11 @@ export function BusinessOpDetailPage(props) {
                   onChangeText={(val) => handleChange('note', val)}
                   disabled={!fieldConfig}
                 />
-                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
+                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc', marginRight: 5 }} />
               </View>}
 
 
-              {!_.get(fieldConfig, 'productType.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'productType.isRequire') && _.isEmpty(productType)}>
+              {!_.get(fieldConfig, 'productType.checkedShowForm') ? null : <View style={styles} inlineLabel error={_.get(fieldConfig, 'productType.isRequire') && _.isEmpty(productType)}>
                 <Text >{convertLabel(_.get(fieldConfig, 'productType.title')) || 'Loại sản phẩm'}:</Text>
                 <TextInput
                   style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
@@ -316,12 +317,12 @@ export function BusinessOpDetailPage(props) {
                   onChangeText={(val) => handleChange('productType', val)}
                   disabled={!fieldConfig}
                 />
-                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
+                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc', marginRight: 5 }} />
               </View>}
 
 
 
-              {!_.get(fieldConfig, 'specialOffer.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'specialOffer.isRequire') && _.isEmpty(specialOffer)}>
+              {!_.get(fieldConfig, 'specialOffer.checkedShowForm') ? null : <View style={styles} inlineLabel error={_.get(fieldConfig, 'specialOffer.isRequire') && _.isEmpty(specialOffer)}>
                 <Text >{convertLabel(_.get(fieldConfig, 'specialOffer.title')) || 'Chương trình ưu đãi'}:</Text>
 
                 <TextInput
@@ -331,11 +332,11 @@ export function BusinessOpDetailPage(props) {
                   onChangeText={(val) => handleChange('specialOffer', val)}
                   disabled={!fieldConfig}
                 />
-                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
+                <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc', marginRight: 5 }} />
               </View>}
 
 
-              {!_.get(fieldConfig, 'supervisor.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'supervisor.isRequire') && _.isEmpty(supervisor)}>
+              {!_.get(fieldConfig, 'supervisor.checkedShowForm') ? null : <View style={styles} inlineLabel error={_.get(fieldConfig, 'supervisor.isRequire') && _.isEmpty(supervisor)}>
                 <Text >{convertLabel(_.get(fieldConfig, 'supervisor.title')) || 'Người giám sát'}:</Text>
 
                 <MultiAPISearch
@@ -346,7 +347,7 @@ export function BusinessOpDetailPage(props) {
                 />
               </View>}
 
-              {!_.get(fieldConfig, 'responsibilityPerson.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'responsibilityPerson.isRequire') && _.isEmpty(supervisor)}>
+              {!_.get(fieldConfig, 'responsibilityPerson.checkedShowForm') ? null : <View style={styles} inlineLabel error={_.get(fieldConfig, 'responsibilityPerson.isRequire') && _.isEmpty(supervisor)}>
                 <Text >{convertLabel(_.get(fieldConfig, 'responsibilityPerson.title')) || 'Người chịu trách nhiệm'}:</Text>
                 <MultiAPISearch
                   API={API_USERS}
@@ -357,13 +358,13 @@ export function BusinessOpDetailPage(props) {
               </View>}
 
               {_.has(localState, 'customer') && <>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <TouchableOpacity onPress={handleShowCustomerInfo} transparent iconRight>
+                <View style={{paddingVertical: 10}}>
+                  <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'flex-end' }} onPress={handleShowCustomerInfo} transparent iconRight>
                     <Text style={{ color: theme.brandPrimary }}>Thông tin khách hàng</Text>
-                    <Icon
+                    <IconFon
                       type="FontAwesome"
                       name={!showCustomerInfo ? 'caret-down' : 'caret-up'}
-                      style={{ fontSize: 16, color: theme.brandPrimary }}
+                      style={{ fontSize: 16, color: theme.brandPrimary, paddingHorizontal:5 }}
                     />
                   </TouchableOpacity>
                 </View>
@@ -379,23 +380,24 @@ export function BusinessOpDetailPage(props) {
               </>}
 
               {isUpdate && <>
-                <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <TouchableOpacity onPress={handleShowComment} transparent iconRight>
+                <View style={{paddingVertical: 10}} >
+                  <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'flex-end' }} onPress={handleShowComment} transparent iconRight>
                     <Text style={{ color: theme.brandPrimary }}>Bình luận</Text>
-                    <Icon
+                    <IconFon
                       type="FontAwesome"
                       name={!showMoreComment ? 'caret-down' : 'caret-up'}
-                      style={{ fontSize: 16, color: theme.brandPrimary }}
+                      style={{ fontSize: 16, color: theme.brandPrimary,  paddingHorizontal:5  }}
                     />
                   </TouchableOpacity>
                 </View>
                 {showMoreComment && <CommentView project={businessOp} code="BusinessOpportunities" />}
               </>}
 
-              <LoadingButton block isBusy={isBusinessLoading} handlePress={handleSubmit}>
-                <Icon name="check" type="Feather" />
+              <LoadingButton block isBusy={isBusinessLoading} style={{paddingVertical: 10, borderRadius: 10, backgroundColor:'rgba(46, 149, 46, 1)'}} handlePress={handleSubmit}>
+                <Icon name="check" style={{fontSize: 20, color:'white', textAlign: 'center'}} type="Feather" />
               </LoadingButton>
             </View>
+            </ScrollView>
           </LoadingLayout>
          }
         />
@@ -407,13 +409,13 @@ export function BusinessOpDetailPage(props) {
             }
     
               />
-{/* 
+
       <Tab.Screen 
             name='Hợp Đồng'
             component={() => <BusinessContract localState={localState || {}} />
               
           }
-             /> */}
+             />
 
 
   
@@ -447,3 +449,13 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(BusinessOpDetailPage);
+
+
+const styles={ 
+  flexDirection:'row',
+  justifyContent:'space-between',
+  alignItems:'center',
+  borderBottomWidth: 0.75,
+  borderBottomColor:'gray',
+  paddingBottom: 10
+}

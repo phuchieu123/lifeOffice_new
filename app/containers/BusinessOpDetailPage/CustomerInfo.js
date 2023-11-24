@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
-
-import { Button, Icon, Text, List, ListItem, Left, Right, View } from 'native-base';
+import {View, Text } from 'react-native';
 import { Linking } from 'react-native';
 
 function CustomerInfo({ customer, onCreateLog }) {
@@ -26,46 +25,46 @@ function CustomerInfo({ customer, onCreateLog }) {
   };
 
   return (
-    <List style={{ marginBottom: 5 }}>
+    <View style={{ marginBottom: 5, flex: 1 }}>
       {customer.name ? (
-        <ListItem>
-          <Left>
+        <View>
+          <View>
             <Text>{customer.name}</Text>
-          </Left>
+          </View>
           <Right>
             <Button small iconLeft transparent color="info">
               <Icon name="user" type="FontAwesome" />
             </Button>
           </Right>
-        </ListItem>
+        </View>
       ) : null}
       {customer.phoneNumber ?
-        (<ListItem>
-          <Left>
+        (<View>
+          <View>
             <Text>{customer.phoneNumber.length > 0 ? customer.phoneNumber : "Chưa có số điện thoại"}</Text>
-          </Left>
-          <Right>
+          </View>
+          <View>
             <Button small iconLeft transparent onPress={() => handlePhoneCall(customer.phoneNumber)}>
               <Icon name="phone" type="FontAwesome" />
             </Button>
-          </Right>
-        </ListItem>)
+          </View>
+        </View>)
         : null}
 
       {customer.email ?
-        (<ListItem>
-          <Left>
+        (<View>
+          <View>
             <Text>{customer.email.length > 0 ? customer.email : "Chưa có email"}</Text>
-          </Left>
-          <Right>
+          </View>
+          <View>
             <Button small iconLeft transparent onPress={() => handleSendEmail(customer.email)}>
               <Icon name="envelope" type="FontAwesome" />
             </Button>
-          </Right>
-        </ListItem>)
+          </View>
+        </View>)
         : null}
 
-    </List>
+    </View>
   );
 }
 

@@ -1,17 +1,14 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Content, Button, Icon, Card, CardItem, Form, Item, Label, Input, View, Textarea, Left, Body, Text } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import CustomMultiSelect from '../../components/CustomMultiSelect';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
-
-
 import _, { parseInt } from 'lodash';
 import SingleAPISearch from '../../components/CustomMultiSelect/SingleAPISearch';
 import { API_CUSTOMER, API_DYNAMIC_FORM, API_INVENTORY, API_INVENTORY_SERVICE, API_USERS } from '../../configs/Paths';
 import { navigate } from '../../RootNavigation';
-import { TouchableOpacity, TextInput, Image, DeviceEventEmitter, Dimensions, ScrollView } from 'react-native';
+import { TouchableOpacity, TextInput, Image, DeviceEventEmitter, Dimensions, ScrollView, Text, View } from 'react-native';
 import ListPage from '../../components/ListPage';
 import { FlatList } from 'react-native';
 import MultiAPISearch from '../../components/CustomMultiSelect/MultiAPISearch';
@@ -194,23 +191,23 @@ export function renDerQuoteSell(props) {
                 title={params.item ? 'Thông tin báo giá sản phẩm' : 'Thêm mới báo giá sản phẩm'}
             />
             <ScrollView>
-                <Card>
-                    <CardItem>
-                        <Form style={{ flex: 1, backgroundColor: 'white' }}>
-                            <Item inlineLabel error={error.name} >
-                                <Label>Tên BG/BH*:</Label>
-                                <Input
+                <View>
+                    <View>
+                        <View style={{ flex: 1, backgroundColor: 'white' }}>
+                            <View inlineLabel error={error.name} >
+                                <Text>Tên BG/BH*:</Text>
+                                <TextInput
                                     style={{ textAlign: 'left', minHeight: 45, paddingTop: 10 }}
                                     value={data.name}
                                     onChangeText={(val) => handleChange('name', val)}
                                     disabled={putAuth}
                                 />
                                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                            </Item>
+                            </View>
 
-                            <Item inlineLabel >
-                                <Label >Mã BG/BH:</Label>
-                                <Input
+                            <View inlineLabel >
+                                <Text >Mã BG/BH:</Text>
+                                <TextInput
                                     value={data.code}
                                     style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                                     disabled={true}
@@ -218,9 +215,9 @@ export function renDerQuoteSell(props) {
                                     onChangeText={(val) => handleChange('code', val)}
                                 />
                                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                            </Item>
-                            <Item inlineLabel error={error.customer}>
-                                <Label >Khách hàng*:</Label>
+                            </View>
+                            <View inlineLabel error={error.customer}>
+                                <Text >Khách hàng*:</Text>
                                 <SingleAPISearch
                                     API={API_CUSTOMER}
                                     onSelectedItemObjectsChange={(value) => handleChange('customer', _.get(value, '[0]'))}
@@ -234,11 +231,11 @@ export function renDerQuoteSell(props) {
                                     onPress={() => navigate('AddCustomer')}
 
                                 />
-                            </Item>
+                            </View>
 
 
-                            <Item inlineLabel>
-                                <Label >Dịch vụ:</Label>
+                            <View inlineLabel>
+                                <Text >Dịch vụ:</Text>
                                 <SingleAPISearch
 
                                     API={API_INVENTORY_SERVICE}
@@ -249,10 +246,10 @@ export function renDerQuoteSell(props) {
                                 // filterOr={['name', 'customerCif', 'phoneNumber']}
                                 />
 
-                            </Item>
-                            <Item inlineLabel >
-                                <Label >Nhân viên bán hàng: </Label>
-                                <Input
+                            </View>
+                            <View inlineLabel >
+                                <Text >Nhân viên bán hàng: </Text>
+                                <TextInput
                                     style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                                     disabled={true}
                                     multiline={true}
@@ -260,11 +257,11 @@ export function renDerQuoteSell(props) {
 
                                 />
                                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                            </Item>
+                            </View>
 
-                            <Item inlineLabel >
-                                <Label >Giảm giá:</Label>
-                                <Input
+                            <View inlineLabel >
+                                <Text >Giảm giá:</Text>
+                                <TextInput
                                     value={data.percentageDiscount}
                                     style={{ textAlign: 'left', minHeight: 45, flex: 2 }}
                                     multiline={false}
@@ -274,15 +271,15 @@ export function renDerQuoteSell(props) {
                                     disabled={putAuth}
                                 />
 
-                                <Label >Đơn vị:</Label>
+                                <Text >Đơn vị:</Text>
                                 <TouchableOpacity  >
                                     <Icon style={{ alignSelf: 'center', fontSize: 18 }} name='percent' type='FontAwesome' />
                                 </TouchableOpacity>
 
-                            </Item>
-                            <Item inlineLabel error={error.ratio} >
-                                <Label >Tỷ Lệ*:</Label>
-                                <Input
+                            </View>
+                            <View inlineLabel error={error.ratio} >
+                                <Text >Tỷ Lệ*:</Text>
+                                <TextInput
                                     style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                                     value={data ? data.ratio : null}
                                     multiline={true}
@@ -291,12 +288,12 @@ export function renDerQuoteSell(props) {
                                     disabled={putAuth}
                                 />
                                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-                            </Item>
+                            </View>
 
 
 
-                            <Item inlineLabel>
-                                <Label >Nhóm nhận hoa hồng:</Label>
+                            <View inlineLabel>
+                                <Text >Nhóm nhận hoa hồng:</Text>
                                 <MultiAPISearch
                                     API={API_USERS}
                                     selectedItems={Array.isArray(data.commissionGroup) ? data.commissionGroup.map(e => e._id) : []}
@@ -306,60 +303,60 @@ export function renDerQuoteSell(props) {
                                 // onRemove={() => setCustomer(null)}
                                 // filterOr={['name', 'customerCif', 'phoneNumber']}
                                 />
-                            </Item>
-                            <Item style={{ flexDirection: 'row' }} >
-                                <Label style={{ alignSelf: 'center' }}>Tổng tiền thanh toán: </Label>
-                                <Input
+                            </View>
+                            <View style={{ flexDirection: 'row' }} >
+                                <Text style={{ alignSelf: 'center' }}>Tổng tiền thanh toán: </Text>
+                                <TextInput
                                     value={sumQuote ? currencyFormat(sumQuote) : ''}
                                     style={{ textAlign: 'center', minHeight: 45, paddingTop: 10 }}
                                     multiline={true}
                                     disabled={true}
                                 />
-                            </Item>
+                            </View>
 
 
                             <CollapseView title='Tùy chọn thêm'>
-                                <Item inlineLabel >
-                                    <Label>Ngày giao hàng:</Label>
+                                <View inlineLabel >
+                                    <Text>Ngày giao hàng:</Text>
                                     <DateTimePicker
                                         mode="date"
                                         onSave={(e) => handleChange('deliveryDate', e)}
                                         value={data.deliveryDate && moment(data.deliveryDate).format(DATE_FORMAT.DATE)}
                                         disabled={putAuth}
                                     />
-                                </Item>
-                                <Item inlineLabel >
-                                    <Label>Ngày hết hạn:</Label>
+                                </View>
+                                <View inlineLabel >
+                                    <Text>Ngày hết hạn:</Text>
                                     <DateTimePicker
                                         mode="date"
                                         onSave={(e) => handleChange('expiredDate', e)}
                                         value={data.expiredDate && moment(data.expiredDate).format(DATE_FORMAT.DATE)}
                                         disabled={putAuth}
                                     />
-                                </Item>
-                                <Item inlineLabel>
-                                    <Label>Ngày Thanh toán:</Label>
+                                </View>
+                                <View inlineLabel>
+                                    <Text>Ngày Thanh toán:</Text>
                                     <DateTimePicker
                                         mode="date"
                                         onSave={(e) => handleChange('billDate', e)}
                                         value={data.billDate && moment(data.billDate).format(DATE_FORMAT.DATE)}
                                         disabled={putAuth}
                                     />
-                                </Item>
+                                </View>
                             </CollapseView>
 
 
                             <CollapseView title='Thay đổi ngày bán hàng'>
 
-                                <Item inlineLabel>
-                                    <Label>Ngày bán:</Label>
+                                <View inlineLabel>
+                                    <Text>Ngày bán:</Text>
                                     <DateTimePicker
                                         mode="date"
                                         onSave={(e) => handleChange('salesDate', e)}
                                         value={data.salesDate && moment(data.salesDate).format(DATE_FORMAT.DATE)}
                                         disabled={putAuth}
                                     />
-                                </Item>
+                                </View>
 
                             </CollapseView>
 
@@ -401,7 +398,7 @@ export function renDerQuoteSell(props) {
                             </ScrollView> : null}
 
                             <Item inlineLabel error={error.template} >
-                                <Label>Biểu mẫu:* </Label>
+                                <Text>Biểu mẫu:* </Text>
                                 <SingleAPISearch
                                     displayKey='title'
                                     query={{
@@ -430,13 +427,13 @@ export function renDerQuoteSell(props) {
                                 </LoadingButton>
                             }
 
-                        </Form>
+                        </View>
 
-                    </CardItem>
+                    </View>
 
-                </Card>
+                </View>
 
-            </ScrollView >
+            </ScrollView>
 
         </>
 
@@ -531,7 +528,7 @@ const RenderItem = (props) => {
                         <Text style={{ color: 'rgba(46, 149, 46, 1)' }}> VNĐ</Text>
                     </View>
                     <View style={{ flexDirection: 'row' }}>
-                        <Label style={{ alignSelf: 'center', color: 'red', fontSize: 16 }}>Chiết khấu: </Label>
+                        <Text style={{ alignSelf: 'center', color: 'red', fontSize: 16 }}>Chiết khấu: </Text>
                         <TextInput
                             value={localData ? localData.percentageDiscount : '1'}
                             onChangeText={(val) => {
@@ -555,7 +552,7 @@ const RenderItem = (props) => {
                             multiline={true}
                             editable={!disabled}
                         />
-                        <Label style={{ alignSelf: 'center', color: 'black', fontSize: 16 }}> %</Label>
+                        <Text style={{ alignSelf: 'center', color: 'black', fontSize: 16 }}> %</Text>
 
                     </View>
                 </View>
@@ -579,7 +576,7 @@ const RenderItem = (props) => {
                         <Icon name='plus' type='Entypo' style={{ textAlign: 'center' }} />
                     </TouchableOpacity>
                     <View>
-                        <Input
+                        <TextInput
                             value={String(localData.amount)}
                             onChangeText={(val) => {
                                 handleChange('amount', val)
