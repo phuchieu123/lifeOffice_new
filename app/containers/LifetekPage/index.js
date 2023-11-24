@@ -1,16 +1,16 @@
 import React from 'react';
 import { WebView } from 'react-native-webview';
 import BackHeader from '../../components/Header/BackHeader';
-import { Container } from 'native-base';
+import {View} from 'react-native';
 
 const LifetekTab = (props) => {
   const { navigation } = props;
 
   return (
-    <Container>
+    <View>
       <BackHeader navigation={navigation} title={'About Us'} />
       <WebView source={{ uri: 'lifetek.vn' }} />
-    </Container>
+    </View>
   );
 };
 export default LifetekTab;

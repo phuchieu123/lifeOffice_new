@@ -34,8 +34,8 @@ export function BusinessContract(props) {
                 }}
                 api={API_CONTRACT}
                 itemComponent={({ item }) =>
-                    <Card>
-                        <CardItem bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }} cardBody>
+                    <View>
+                        <View bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }} cardBody>
                             <Form style={{ flex: 1, backgroundColor: 'white' }}>
                                 <View style={{ padding: 10 }}>
                                     <View style={{ flexDirection: 'row' }}>
@@ -49,8 +49,8 @@ export function BusinessContract(props) {
 
                                 </View>
                             </Form>
-                        </CardItem>
-                    </Card>
+                        </View>
+                    </View>
                 }
             />
 

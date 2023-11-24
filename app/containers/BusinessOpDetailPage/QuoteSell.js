@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState } from 'react';
-import { Content, Button, Icon, Card, CardItem, Form, Item, Label, Input, View, Textarea, Left, Body, Text } from 'native-base';
+import Icon from 'react-native-vector-icons/AntDesign';
 import CustomMultiSelect from '../../components/CustomMultiSelect';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -11,7 +11,7 @@ import _ from 'lodash';
 import SingleAPISearch from '../../components/CustomMultiSelect/SingleAPISearch';
 import { API_CUSTOMER, API_DYNAMIC_FORM, API_INVENTORY, API_INVENTORY_SERVICE, API_SALES_QUOTATION } from '../../configs/Paths';
 import { navigate } from '../../RootNavigation';
-import { Alert, DeviceEventEmitter, TouchableOpacity } from 'react-native';
+import { Alert, DeviceEventEmitter, TouchableOpacity,View,Text, TextInput  } from 'react-native';
 import ListPage from '../../components/ListPage';
 import MultiAPISearch from '../../components/CustomMultiSelect/MultiAPISearch';
 import * as actions from './actions';
@@ -146,17 +146,17 @@ export function QuoteSell(props) {
                 itemComponent={({ item }) => {
 
                     return (
-                        <TouchableOpacity
+                        <TouchableOpacity 
                             key={`${item._id}`}
                             onPress={() => navigate('renDerQuoteSell', { "item": item }, { 'kanban': kanban }, { '_id': localData._id })}
                         >
                             <View>
-                                <Card>
-                                    <CardItem>
-                                        <Form style={{ flex: 1, backgroundColor: 'white'}}>
+                                <View>
+                                    <View>
+                                        <View style={{ flex: 1, backgroundColor: 'white'}}>
                                             {/* <Item inlineLabel > */}
-                                                <Label>Tên BG/BH: </Label>
-                                                <Input
+                                                <Text>Tên BG/BH: </Text>
+                                                <TextInput
                                                     style={{ textAlign: 'left', minHeight: 45, paddingTop: 10 }}
                                                     multiline={true}
                                                     value={item.name}
@@ -164,8 +164,8 @@ export function QuoteSell(props) {
                                                 />
                                             {/* </Item> */}
                                             {/* <Item inlineLabel > */}
-                                                <Label >Mã BG/BH: </Label>
-                                                <Input
+                                                <Text >Mã BG/BH: </Text>
+                                                <TextInput
                                                     style={{ textAlign: 'left', minHeight: 45, paddingTop: 10 }}
                                                     disabled={true}
                                                     multiline={true}
@@ -175,8 +175,8 @@ export function QuoteSell(props) {
                                                 {/* <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} /> */}
                                             {/* </Item> */}
                                             {/* <Item inlineLabel > */}
-                                                <Label>Tên cơ hội kinh doanh: </Label>
-                                                <Input
+                                                <Text>Tên cơ hội kinh doanh: </Text>
+                                                <TextInput
                                                     style={{ textAlign: 'left', minHeight: 45, paddingTop: 10 }}
                                                     disabled={true}
                                                     multiline={true}
@@ -184,17 +184,17 @@ export function QuoteSell(props) {
                                                 />
                                             {/* </Item> */}
                                             {/* <Item inlineLabel > */}
-                                                <Label>Loại báo giá/Bán hàng: </Label>
-                                                <Input
+                                                <Text>Loại báo giá/Bán hàng: </Text>
+                                                <TextInput
                                                     style={{ textAlign: 'left', minHeight: 45, paddingTop: 10 }}
                                                     disabled={true}
                                                     multiline={true}
                                                     value={item.typeOfSalesQuotation}
                                                 />
                                             {/* </Item> */}
-                                        </Form>
-                                    </CardItem>
-                                </Card>
+                                        </View>
+                                    </View>
+                                </View>
                             </View>
                         </TouchableOpacity>
                     )
@@ -219,12 +219,12 @@ export function QuoteSell(props) {
                     <View style={{ position: 'absolute', left: 0, width: '100%', bottom: 0 }}>
 
                         <View padder style={{ flexDirection: 'row' }}>
-                            <Button block onPress={creatPdf} style={{ flex: 1, borderRadius: 10, marginRight: 5 }}>
+                            <TouchableOpacity block onPress={creatPdf} style={{ flex: 1, borderRadius: 10, marginRight: 5 }}>
                                 <Icon name="check" type="Feather" />
-                            </Button>
-                            <Button block onPress={() => setHendalProps(false)} full style={{ flex: 1, borderRadius: 10, marginRight: 5 }} warning>
+                            </TouchableOpacity>
+                            <TouchableOpacity block onPress={() => setHendalProps(false)} full style={{ flex: 1, borderRadius: 10, marginRight: 5 }} warning>
                                 <Icon name="close" type="AntDesign" />
-                            </Button>
+                            </TouchableOpacity>
                         </View>
                     </View>
                 </View>
@@ -232,7 +232,16 @@ export function QuoteSell(props) {
 
 
 
-            {isDisplay ? <FabLayout onPress={handleAddProject}>
+            {isDisplay ? <FabLayout  style={{
+                    position: 'absolute',
+                    bottom: 10,
+                    right: 10,
+                    width: 40,
+                    height: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderRadius: 50,
+                  }} onPress={handleAddProject}>
                 <Icon type="Entypo" name="plus" style={{ color: '#fff' }} />
             </FabLayout> : null}
         </>

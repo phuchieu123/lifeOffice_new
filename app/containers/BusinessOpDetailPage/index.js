@@ -7,23 +7,13 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { BackHandler, DeviceEventEmitter } from 'react-native';
+import { BackHandler, DeviceEventEmitter,TextInput, TouchableOpacity,Text,
+  View } from 'react-native';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 // import DocumentPicker from 'react-native-document-picker';
-import {
-  Button,
-  Container,
-  Content,
-  Icon,
-  Input,
-  Item,
-  Label,
-  TabHeading,
-  Text,
-  View
-} from 'native-base';
+import Icon from 'react-native-vector-icons/Entypo';
 
 
 import { TouchableWithoutFeedback } from 'react-native';
@@ -224,7 +214,7 @@ export function BusinessOpDetailPage(props) {
 
   return (
 
-    <View>
+    <View style={{flex: 1}}>
       <BackHeader
         navigation={navigation}
         title={isUpdate ? localState.name : 'Thêm mới CHKD'}
@@ -244,21 +234,18 @@ export function BusinessOpDetailPage(props) {
           },
         }}
       >
-        <Tab.Screen name='Chi Tiết'
-         
-        >
-          <LoadingLayout isLoading={isLoading}>
-            <Content>
-              {!_.get(fieldConfig, 'code.checkedShowForm') ? null : <Item inlineLabel disabled={isUpdate}>
-                <Label >{convertLabel(_.get(fieldConfig, 'code.title')) || 'Mã CHKD'}:</Label>
-                <Input style={{ textAlign: 'right', minHeight: 45 }} value={code} disabled />
-              
-              </Item>}
+        <Tab.Screen 
+        name='Chi Tiết'
+        component={() => <LoadingLayout isLoading={isLoading}>
+            <View>
+              {!_.get(fieldConfig, 'code.checkedShowForm') ? null : <View inlineLabel disabled={isUpdate}>
+                <Text >{convertLabel(_.get(fieldConfig, 'code.title')) || 'Mã CHKD'}:</Text>
+                <TextInput style={{ textAlign: 'right', minHeight: 45 }} value={code} disabled />
+              </View>}
 
-
-              {!_.get(fieldConfig, 'name.checkedShowForm') ? null : <Item inlineLabel error={fieldConfig.name.isRequire && _.isEmpty(name)}>
-                <Label >{convertLabel(_.get(fieldConfig, 'name.title')) || 'Tên CHKD'}:</Label>
-                <Input
+              {!_.get(fieldConfig, 'name.checkedShowForm') ? null : <View inlineLabel error={fieldConfig.name.isRequire && _.isEmpty(name)}>
+                <Text >{convertLabel(_.get(fieldConfig, 'name.title')) || 'Tên CHKD'}:</Text>
+                <TextInput
                   style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                   value={name}
                   multiline={true}
@@ -266,11 +253,11 @@ export function BusinessOpDetailPage(props) {
                   disabled={!fieldConfig}
                 />
                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-              </Item>}
+              </View>}
 
 
-              {!(fieldConfig['customer.name'] && fieldConfig['customer.name'].checkedShowForm) ? null : <Item inlineLabel>
-                <Label >{convertLabel(_.get(fieldConfig, 'customer.title')) || 'Khách hàng'}:</Label>
+              {!(fieldConfig['customer.name'] && fieldConfig['customer.name'].checkedShowForm) ? null : <View inlineLabel>
+                <Text >{convertLabel(_.get(fieldConfig, 'customer.title')) || 'Khách hàng'}:</Text>
                 <SingleAPISearch
                   readOnly={!fieldConfig}
                   uniqueKey='customerId'
@@ -289,10 +276,10 @@ export function BusinessOpDetailPage(props) {
                   onPress={() => navigate('AddCustomer')}
 
                 />
-              </Item>}
+              </View>}
 
-              {!_.get(fieldConfig, 'source.checkedShowForm') ? null : <Item inlineLabel>
-                <Label >{convertLabel(_.get(fieldConfig, 'source.title')) || 'Nguồn cơ hội'}:</Label>
+              {!_.get(fieldConfig, 'source.checkedShowForm') ? null : <View inlineLabel>
+                <Text >{convertLabel(_.get(fieldConfig, 'source.title')) || 'Nguồn cơ hội'}:</Text>
                 <Search
                   uniqueKey="title"
                   displayKey="title"
@@ -303,13 +290,13 @@ export function BusinessOpDetailPage(props) {
                   height='auto'
                   readOnly={!fieldConfig}
                 />
-              </Item>}
+              </View>}
 
 
-              {!_.get(fieldConfig, 'note.checkedShowForm') ? null : <Item inlineLabel style={{ justifyContent: 'center' }} error={_.get(fieldConfig, 'note.isRequire') && _.isEmpty(note)}>
-                <Label >{convertLabel(_.get(fieldConfig, 'note.title')) || 'Ghi chú'}:</Label>
+              {!_.get(fieldConfig, 'note.checkedShowForm') ? null : <View inlineLabel style={{ justifyContent: 'center' }} error={_.get(fieldConfig, 'note.isRequire') && _.isEmpty(note)}>
+                <Text >{convertLabel(_.get(fieldConfig, 'note.title')) || 'Ghi chú'}:</Text>
 
-                <Input
+                <TextInput
                   style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                   multiline={true}
                   value={note}
@@ -317,12 +304,12 @@ export function BusinessOpDetailPage(props) {
                   disabled={!fieldConfig}
                 />
                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-              </Item>}
+              </View>}
 
 
-              {!_.get(fieldConfig, 'productType.checkedShowForm') ? null : <Item inlineLabel error={_.get(fieldConfig, 'productType.isRequire') && _.isEmpty(productType)}>
-                <Label >{convertLabel(_.get(fieldConfig, 'productType.title')) || 'Loại sản phẩm'}:</Label>
-                <Input
+              {!_.get(fieldConfig, 'productType.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'productType.isRequire') && _.isEmpty(productType)}>
+                <Text >{convertLabel(_.get(fieldConfig, 'productType.title')) || 'Loại sản phẩm'}:</Text>
+                <TextInput
                   style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                   value={productType}
                   multiline={true}
@@ -330,14 +317,14 @@ export function BusinessOpDetailPage(props) {
                   disabled={!fieldConfig}
                 />
                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-              </Item>}
+              </View>}
 
 
 
-              {!_.get(fieldConfig, 'specialOffer.checkedShowForm') ? null : <Item inlineLabel error={_.get(fieldConfig, 'specialOffer.isRequire') && _.isEmpty(specialOffer)}>
-                <Label >{convertLabel(_.get(fieldConfig, 'specialOffer.title')) || 'Chương trình ưu đãi'}:</Label>
+              {!_.get(fieldConfig, 'specialOffer.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'specialOffer.isRequire') && _.isEmpty(specialOffer)}>
+                <Text >{convertLabel(_.get(fieldConfig, 'specialOffer.title')) || 'Chương trình ưu đãi'}:</Text>
 
-                <Input
+                <TextInput
                   style={{ textAlign: 'right', minHeight: 45, paddingTop: 10 }}
                   value={specialOffer}
                   multiline={true}
@@ -345,11 +332,11 @@ export function BusinessOpDetailPage(props) {
                   disabled={!fieldConfig}
                 />
                 <Icon active type="Entypo" name="keyboard" style={{ fontSize: 16, color: '#ccc' }} />
-              </Item>}
+              </View>}
 
 
-              {!_.get(fieldConfig, 'supervisor.checkedShowForm') ? null : <Item inlineLabel error={_.get(fieldConfig, 'supervisor.isRequire') && _.isEmpty(supervisor)}>
-                <Label >{convertLabel(_.get(fieldConfig, 'supervisor.title')) || 'Người giám sát'}:</Label>
+              {!_.get(fieldConfig, 'supervisor.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'supervisor.isRequire') && _.isEmpty(supervisor)}>
+                <Text >{convertLabel(_.get(fieldConfig, 'supervisor.title')) || 'Người giám sát'}:</Text>
 
                 <MultiAPISearch
                   API={API_USERS}
@@ -357,28 +344,28 @@ export function BusinessOpDetailPage(props) {
                   selectedItems={Array.isArray(_.get(localState, 'supervisor')) && localState.supervisor.map(e => e._id)}
                   selectedDatas={_.get(localState, 'supervisor')}
                 />
-              </Item>}
+              </View>}
 
-              {!_.get(fieldConfig, 'responsibilityPerson.checkedShowForm') ? null : <Item inlineLabel error={_.get(fieldConfig, 'responsibilityPerson.isRequire') && _.isEmpty(supervisor)}>
-                <Label >{convertLabel(_.get(fieldConfig, 'responsibilityPerson.title')) || 'Người chịu trách nhiệm'}:</Label>
+              {!_.get(fieldConfig, 'responsibilityPerson.checkedShowForm') ? null : <View inlineLabel error={_.get(fieldConfig, 'responsibilityPerson.isRequire') && _.isEmpty(supervisor)}>
+                <Text >{convertLabel(_.get(fieldConfig, 'responsibilityPerson.title')) || 'Người chịu trách nhiệm'}:</Text>
                 <MultiAPISearch
                   API={API_USERS}
                   onSelectedItemObjectsChange={(e) => handleChange('responsibilityPerson', e)}
                   selectedItems={Array.isArray(_.get(localState, 'responsibilityPerson')) && localState.responsibilityPerson.map(e => e._id)}
                   selectedDatas={_.get(localState, 'responsibilityPerson')}
                 />
-              </Item>}
+              </View>}
 
               {_.has(localState, 'customer') && <>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Button onPress={handleShowCustomerInfo} transparent iconRight>
+                  <TouchableOpacity onPress={handleShowCustomerInfo} transparent iconRight>
                     <Text style={{ color: theme.brandPrimary }}>Thông tin khách hàng</Text>
                     <Icon
                       type="FontAwesome"
                       name={!showCustomerInfo ? 'caret-down' : 'caret-up'}
                       style={{ fontSize: 16, color: theme.brandPrimary }}
                     />
-                  </Button>
+                  </TouchableOpacity>
                 </View>
                 {showCustomerInfo && (
                   <TouchableWithoutFeedback onPress={() => navigate('AddCustomer', { id: customer.customerId, view: true })}>
@@ -393,14 +380,14 @@ export function BusinessOpDetailPage(props) {
 
               {isUpdate && <>
                 <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-                  <Button onPress={handleShowComment} transparent iconRight>
+                  <TouchableOpacity onPress={handleShowComment} transparent iconRight>
                     <Text style={{ color: theme.brandPrimary }}>Bình luận</Text>
                     <Icon
                       type="FontAwesome"
                       name={!showMoreComment ? 'caret-down' : 'caret-up'}
                       style={{ fontSize: 16, color: theme.brandPrimary }}
                     />
-                  </Button>
+                  </TouchableOpacity>
                 </View>
                 {showMoreComment && <CommentView project={businessOp} code="BusinessOpportunities" />}
               </>}
@@ -408,30 +395,25 @@ export function BusinessOpDetailPage(props) {
               <LoadingButton block isBusy={isBusinessLoading} handlePress={handleSubmit}>
                 <Icon name="check" type="Feather" />
               </LoadingButton>
-            </Content>
+            </View>
           </LoadingLayout>
-        </Tab.Screen>
+         }
+        />
+          
+        
         <Tab.Screen 
             name='báo giá'
-            component={() => {
-            return (
-               <QuoteSell localData={localState ? localState : {}} kanban={kanban} />
-              );
-          }}
-              options={{
-            tabBarLabel: ({focused}) => (<Text style={{ color: '#fff', fontWeight: '700' }}>Báo giá</Text>)
-          }}/>
-
+            component={() => <QuoteSell localData={localState ? localState : {}} kanban={kanban} />
+            }
+    
+              />
+{/* 
       <Tab.Screen 
             name='Hợp Đồng'
-            component={() => {
-            return (
-              <BusinessContract localState={localState || {}} />
-              );
-          }}
-              options={{
-            tabBarLabel: ({focused}) => ( <Text style={{ color: '#fff', fontWeight: '700' }}>Hợp Đồng</Text>)
-          }}/>
+            component={() => <BusinessContract localState={localState || {}} />
+              
+          }
+             /> */}
 
 
   
