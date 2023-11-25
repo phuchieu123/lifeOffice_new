@@ -31,11 +31,11 @@ function CustomerInfo({ customer, onCreateLog }) {
           <View>
             <Text>{customer.name}</Text>
           </View>
-          <Right>
+          <View>
             <Button small iconLeft transparent color="info">
               <Icon name="user" type="FontAwesome" />
             </Button>
-          </Right>
+          </View>
         </View>
       ) : null}
       {customer.phoneNumber ?

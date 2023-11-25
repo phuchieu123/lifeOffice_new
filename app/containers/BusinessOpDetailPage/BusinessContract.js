@@ -34,13 +34,13 @@ export function BusinessContract(props) {
                 }}
                 api={API_CONTRACT}
                 itemComponent={({ item }) =>
-                    <View>
+                    <View style={{borderBottomWidth: 0.75, borderColor: 'gray', marginHorizontal: 10}}>
                         <View bordered style={{ backgroundColor: '#f2f2f2', flex: 1 }} cardBody>
                             <View style={{ flex: 1, backgroundColor: 'white' }}>
                                 <View style={{ padding: 10 }}>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Text style={{ fontSize: 14, color: 'black' }} >Tên hợp đồng: </Text>
-                                        <Text style={{ textAlign: 'center', alignItems: 'center', }}>{item.name}</Text>
+                                        <Text style={{ flex: 1 }}>{item.name}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row' }} >
                                         <Text style={{ fontSize: 14, color: 'black' }} >Loại hợp đồng: </Text>
