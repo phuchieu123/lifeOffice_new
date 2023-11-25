@@ -59,7 +59,9 @@ const TimeKeepingPage = (props) => {
       <View style={styles.content}>
         {/* <AccountTab profile={profile || {}} /> */}
 
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CheckTheFace')}>
+        <TouchableOpacity style={styles.button}
+         onPress={() => navigation.navigate('CheckTheFace')}
+         >
         
           <View style={{ flexDirection: 'row', flex: 1 }}>
           

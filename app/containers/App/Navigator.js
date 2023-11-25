@@ -77,7 +77,7 @@ import UpdatePersonnel from '../PersonnelPage/UpdatePersonnel';
 import AddPersonnel from '../PersonnelPage/AddPersonnel';
 import ListFilePersonnel from '../PersonnelPage/ListFilePersonnel';
 import RenderPagePersonnel from '../PersonnelPage/RenderPagePersonnel';
-// import CheckTheFace from '../CheckTheFace';
+import CheckTheFace from '../CheckTheFace';
 import SmallJob from '../ProjectPage/SmallJob';
 import ScannerPage from '../LifeDriver/ScannerPage';
 import DetailContent from '../Officialdispatch/DetailContent';
@@ -195,7 +195,7 @@ export default Navigator = ({ isLoggedIn }) => {
                     <AppStack.Screen name="AddPersonnel" component={AddPersonnel} />
                     <AppStack.Screen name="ListFilePersonnel" component={ListFilePersonnel} />
                     <AppStack.Screen name="RenderPagePersonnel" component={RenderPagePersonnel} />
-                    {/* <AppStack.Screen name="CheckTheFace" component={CheckTheFace} /> */}
+                    <AppStack.Screen name="CheckTheFace" component={CheckTheFace} />
                     <AppStack.Screen name="SmallJob" component={SmallJob} />
                     <AppStack.Screen name="ScannerPage" component={ScannerPage} />
                     <AppStack.Screen name="DetailContent" component={DetailContent} />
