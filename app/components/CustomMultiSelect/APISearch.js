@@ -239,11 +239,11 @@ const APISearch = (props) => {
             {!single && <View padder style={{ flexDirection: 'row', margin: 5, marginTop: 0 }}>
                 {(!readOnly && (selectedItems.length || showSelected))
                     ? showSelected
-                        ? <Button block small onPress={onGetSelected} full style={{ flex: 1, borderRadius: 10, margin: 5, marginBottom: 0 }} success>
-                            <Text>{selectedTextCount}</Text>
+                        ? <Button block small onPress={onGetSelected} full style={{ flex: 1, borderRadius: 10, margin: 5, marginBottom: 0,backgroundColor:'rgba(46, 149, 46, 1)' }} success>
+                            <Text style={{color:'white'}}>{selectedTextCount}</Text>
                         </Button>
-                        : <Button block small onPress={onGetSelected} full style={{ flex: 1, borderRadius: 10, margin: 5, marginBottom: 0 }} primary>
-                            <Text>{selectedTextCount}</Text>
+                        : <Button block small onPress={onGetSelected} full style={{ flex: 1, borderRadius: 10, margin: 5, marginBottom: 0,backgroundColor:'rgba(46, 149, 46, 1)' }} primary>
+                            <Text style={{color:'white'}}>{selectedTextCount}</Text>
                         </Button>
                     : null
                 }
