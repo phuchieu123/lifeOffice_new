@@ -34,10 +34,12 @@ export default StyleSheet.create({
     zIndex: 20,
     height: 50,
     borderRadius: 100,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'rgba(46, 149, 46, 1)'
   },
   buttonRound: {
-    fontSize: 30
+    fontSize: 30,
+    color:'white'
   },
 
 });

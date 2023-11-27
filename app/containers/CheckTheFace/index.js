@@ -1,11 +1,12 @@
 import React, { useEffect, memo, useState, useRef, useCallback } from 'react';
-import { Dimensions } from 'react-native';
-import { Camera } from 'react-native-vision-camera';
-import * as Location from 'expo-location';
+import { Dimensions, ActivityIndicator } from 'react-native';
+import Geolocation from '@react-native-community/geolocation';
 import styles from './styles';
 import { requestCamera, requestLocation } from '../../utils/permission';
 import BackHeader from '../../components/Header/BackHeader';
-import { Icon, Text, View, Button, Spinner } from 'native-base';
+import { Text, View, Button, Spinner } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconS from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -20,11 +21,12 @@ import ToastCustom from '../../components/ToastCustom';
 import { makeSelectProfile } from '../App/selectors';
 import { getByIdHrm } from '../../api/hrmEmployee';
 import { uploadImage } from '../../api/fileSystem';
+import { Camera, useCameraDevices } from 'react-native-vision-camera';
 
 const CheckTheFace = (props) => {
   const { navigation, profile } = props;
-
-  const [type, setType] = useState(Camera.Constants.Type.front);
+  console.log(Camera.Type,'ssssssssssssss camera');
+  // const [type, setType] = useState(Camera.Constants.Type.front);
   const [faces, setFaces] = useState([]);
   const [hasPermission, setHasPermission] = useState();
   const [visible, setVisible] = useState();
@@ -33,9 +35,13 @@ const CheckTheFace = (props) => {
   const [cameraStyle, setCameraStyle] = useState();
   const [checkin, setCheckin] = useState(IN);
   const [takingPhoto, setTakingPhoto] = useState(false);
-
   const cameraRef = useRef();
   const location = useRef({});
+  const devices = useCameraDevices();
+  const device = devices.back;
+
+
+
 
   useEffect(() => {
     (async () => {
@@ -54,10 +60,12 @@ const CheckTheFace = (props) => {
     let clientLocation;
     if (hasPermission) {
       const _getLocationAsync = async () => {
-        clientLocation = await Location.watchPositionAsync(
-          { accuracy: Location.Accuracy.Highest, timeInterval: 5000, distanceInterval: 0 },
+        clientLocation = await Geolocation.watchPositionAsync(
+          { accuracy: Geolocation.Accuracy.Highest, timeInterval: 5000, distanceInterval: 0 },
           (loc) => (location.current = loc),
+        
         );
+        
       };
       _getLocationAsync();
     }
@@ -68,19 +76,19 @@ const CheckTheFace = (props) => {
 
   const toggleCheckin = useCallback(() => setCheckin((e) => (e === IN ? OUT : IN)), []);
 
-  const checkInOut = () => {
-    setType(type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back);
-  };
+  // const checkInOut = () => {
+  //   setType(type === Camera.Type.back ? Camera.Type.front : Camera.Type.back);
+  // };
 
   const onFacesDetected = useCallback((e) => {
     setFaces(e.faces);
   }, []);
-
+  console.log(location.current,'location cu ren ');
   const takePicture = async () => {
     // if (!location.current || takingPhoto) return;
 
     let result = {}
-    const { coords: { latitude, longitude } } = location.current;
+    const { coords: { latitude, longitude } } = location.current || {};
 
     const data = {
       type: checkin,
@@ -164,7 +172,7 @@ const CheckTheFace = (props) => {
       <BackHeader title="Chấm công" navigation={navigation} />
       {hasPermission && (
         <View>
-          {type === Camera.Constants.Type.back ? (
+          {device === device ? (
             <Icon
               type="MaterialIcons"
               name="camera-rear"
@@ -176,7 +184,7 @@ const CheckTheFace = (props) => {
                 top: 20,
                 zIndex: 2,
               }}
-              onPress={checkInOut}
+              // onPress={checkInOut}
             />
           ) : (
             <Icon
@@ -190,23 +198,26 @@ const CheckTheFace = (props) => {
                 top: 20,
                 zIndex: 2,
               }}
-              onPress={checkInOut}
+              // onPress={checkInOut}
             />
           )}
-          <Camera
+         {device ?  <Camera
             onCameraReady={onCameraReady}
             ratio={ratio}
             ref={cameraRef}
-            type={type}
+            // type={type}
+            device={device}
+            isActive={true}
+            photo={true}
             style={cameraStyle || styles.camera}
             onFacesDetected={onFacesDetected}
             faceDetectorSettings={
               {
                 // minDetectionInterval: 100,
-                // tracking: true,
+                // tracking: true, 
               }
             }
-          />
+          />: null}
           {faces.map((face, index) => {
             return <RenderFace key={`face_${index}`} face={face} />;
           })}
@@ -219,13 +230,13 @@ const CheckTheFace = (props) => {
         {checkin === IN ? (
           <Button disabled={takingPhoto} style={styles.buttonCheckin}>
             {takingPhoto ? (
-              <Spinner color="#fff" />
+              <ActivityIndicator color="#fff" />
             ) : (
               <>
-                <Text style={{ flex: 1, textAlign: 'right' }} onPress={takePicture}>
+                <Text style={{  textAlign: 'right', color:'white'  }} onPress={takePicture}>
                   Chấm công vào
                 </Text>
-                <Icon
+                <IconS
                   type="MaterialCommunityIcons"
                   name="rotate-3d-variant"
                   style={styles.buttonRound}
@@ -240,10 +251,10 @@ const CheckTheFace = (props) => {
               <Spinner color="#fff" style={{}} />
             ) : (
               <>
-                <Text style={{ flex: 1, textAlign: 'right' }} onPress={takePicture}>
+                <Text style={{ textAlign: 'right', color:'white' }} onPress={takePicture}>
                   Chấm công ra
                 </Text>
-                <Icon
+                <IconS
                   type="MaterialCommunityIcons"
                   name="rotate-3d-variant"
                   style={styles.buttonRound}
@@ -255,6 +266,7 @@ const CheckTheFace = (props) => {
         )}
       </View>
     </>
+   
   );
 };
 const mapStateToProps = createStructuredSelector({
