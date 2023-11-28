@@ -1,10 +1,10 @@
 import React, { useEffect, memo, useState, useRef, useCallback } from 'react';
-import { Dimensions, ActivityIndicator } from 'react-native';
+import { Dimensions, ActivityIndicator, Text, View, TouchableOpacity } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import styles from './styles';
 import { requestCamera, requestLocation } from '../../utils/permission';
 import BackHeader from '../../components/Header/BackHeader';
-import { Text, View, Button, Spinner } from 'native-base';
+import { Spinner } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconS from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createStructuredSelector } from 'reselect';
@@ -35,7 +35,8 @@ const CheckTheFace = (props) => {
   const [cameraStyle, setCameraStyle] = useState();
   const [checkin, setCheckin] = useState(IN);
   const [takingPhoto, setTakingPhoto] = useState(false);
-  const cameraRef = useRef();
+  const [showCamera,suncamera]=useState()
+  const cameraRef = useRef(null);
   const location = useRef({});
   const devices = useCameraDevices();
   const device = devices.back;
@@ -86,55 +87,64 @@ const CheckTheFace = (props) => {
   console.log(location.current,'location cu ren ');
   const takePicture = async () => {
     // if (!location.current || takingPhoto) return;
+    const photo = await cameraRef.current.takePhoto({
+      qualityPrioritization: 'speed',
+  flash: 'off',
+  enableShutterSound: false
+    })
 
-    let result = {}
-    const { coords: { latitude, longitude } } = location.current || {};
+    const file = await camera.current.takePhoto()
+await CameraRoll.save(`file://${file.path}`, {
+  type: 'photo',
+})
+    // let result = {}
+    // const { coords: { latitude, longitude } } = location.current || {};
 
-    const data = {
-      type: checkin,
-      long: longitude,
-      lat: latitude,
-      isHrm: true
-    };
+    // const data = {
+    //   type: checkin,
+    //   long: longitude,
+    //   lat: latitude,
+    //   isHrm: true
+    // };
 
-    try {
-      setTakingPhoto(true);
-      const faceImage = await cameraRef.current.takePictureAsync({
-        // skipProcessing: true, 
-        base64: true, quality: 1
-      });
-      cameraRef.current.pausePreview();
-      data.link = await uploadImage(faceImage, 'TimeKeeping');
-      result = await reconize(faceImage);
-      if (result.success) {
-        data.employeeId = result.person_id;
-        const employee = await getByIdHrm(result.person_id)
-        if (employee._id === profile.hrmEmployeeId) {
-          const tkResult = await onFaceCheckIn(data);
-          console.log(tkResult, "tkResult");
-          if (_.get(tkResult, 'data.data[0]')) {
-            setEmployeeData({ ...employee, ...data, msg: 'Nhận diện thành công' });
-            setTimeout(() => {
-              setVisible(result.status)
-              console.log(result.status);
-            }, 500);
-          } else {
-            data.message = _.get(tkResult, 'message', 'Chấm công thất bại');
-            result.success = false
-          }
-        } else {
-          ToastCustom({ text: 'Thông tin nhân sự không hợp lệ', type: 'danger' });
-          result.success = false
-        }
-      } else data.message = result.msg
-    } catch (error) {
-      console.log(error, "minherror");
-      data.message = 'Chấm công thất bại';
-      result.success = false
-    }
-    if (!result.success) onCheckInFail(data);
-    cameraRef.current.resumePreview();
-    setTakingPhoto(false);
+    // try {
+    //   setTakingPhoto(true);
+    //   const faceImage = await cameraRef.current.takePictureAsync({
+    //     // skipProcessing: true, 
+    //     base64: true, quality: 1
+    //   });
+    //   cameraRef.current.pausePreview();
+    //   data.link = await uploadImage(faceImage, 'TimeKeeping');
+    //   result = await reconize(faceImage);
+    //   if (result.success) {
+    //     data.employeeId = result.person_id;
+    //     const employee = await getByIdHrm(result.person_id)
+    //     if (employee._id === profile.hrmEmployeeId) {
+    //       const tkResult = await onFaceCheckIn(data);
+    //       console.log(tkResult, "tkResult");
+    //       if (_.get(tkResult, 'data.data[0]')) {
+    //         setEmployeeData({ ...employee, ...data, msg: 'Nhận diện thành công' });
+    //         setTimeout(() => {
+    //           setVisible(result.status)
+    //           console.log(result.status);
+    //         }, 500);
+    //       } else {
+    //         data.message = _.get(tkResult, 'message', 'Chấm công thất bại');
+    //         result.success = false
+    //       }
+    //     } else {
+    //       ToastCustom({ text: 'Thông tin nhân sự không hợp lệ', type: 'danger' });
+    //       result.success = false
+    //     }
+    //   } else data.message = result.msg
+    // } catch (error) {
+    //   console.log(error, "minherror");
+    //   data.message = 'Chấm công thất bại';
+    //   result.success = false
+    // }
+    // if (!result.success) onCheckInFail(data);
+    // cameraRef.current.resumePreview();
+    // setTakingPhoto(false);
   };
 
   const onCheckInFail = async (data) => {
@@ -228,25 +238,28 @@ const CheckTheFace = (props) => {
 
       <View style={styles.bottomButton}>
         {checkin === IN ? (
-          <Button disabled={takingPhoto} style={styles.buttonCheckin}>
+          <TouchableOpacity disabled={takingPhoto} style={styles.buttonCheckin}>
             {takingPhoto ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <>
-                <Text style={{  textAlign: 'right', color:'white'  }} onPress={takePicture}>
+              <TouchableOpacity  >
+                <TouchableOpacity  style={{justifyContent: 'center'}} onPress={takePicture}>
+                <Text style={{  textAlign: 'center', color:'white'  }} >
                   Chấm công vào
                 </Text>
+                </TouchableOpacity>
+              
                 <IconS
                   type="MaterialCommunityIcons"
                   name="rotate-3d-variant"
                   style={styles.buttonRound}
                   onPress={toggleCheckin}
                 />
-              </>
+              </TouchableOpacity>
             )}
-          </Button>
+          </TouchableOpacity>
         ) : (
-          <Button disabled={takingPhoto} style={styles.buttonCheckin} danger>
+          <TouchableOpacity disabled={takingPhoto} style={styles.buttonCheckin} danger>
             {takingPhoto ? (
               <Spinner color="#fff" style={{}} />
             ) : (
@@ -262,7 +275,7 @@ const CheckTheFace = (props) => {
                 />
               </>
             )}
-          </Button>
+          </TouchableOpacity>
         )}
       </View>
     </>
