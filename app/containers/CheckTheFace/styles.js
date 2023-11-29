@@ -39,7 +39,8 @@ export default StyleSheet.create({
   },
   buttonRound: {
     fontSize: 30,
-    color:'white'
+    color:'white',
+    textAlign:'center'
   },
 
 });

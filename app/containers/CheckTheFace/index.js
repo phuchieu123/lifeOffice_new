@@ -1,5 +1,5 @@
 import React, { useEffect, memo, useState, useRef, useCallback } from 'react';
-import { Dimensions, ActivityIndicator, Text, View, TouchableOpacity } from 'react-native';
+import { Dimensions, ActivityIndicator, Text, View, TouchableOpacity, CameraRoll, Image } from 'react-native';
 import Geolocation from '@react-native-community/geolocation';
 import styles from './styles';
 import { requestCamera, requestLocation } from '../../utils/permission';
@@ -22,10 +22,10 @@ import { makeSelectProfile } from '../App/selectors';
 import { getByIdHrm } from '../../api/hrmEmployee';
 import { uploadImage } from '../../api/fileSystem';
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
+import { Positions } from 'react-native-calendars/src/expandableCalendar';
 
 const CheckTheFace = (props) => {
   const { navigation, profile } = props;
-  console.log(Camera.Type,'ssssssssssssss camera');
   // const [type, setType] = useState(Camera.Constants.Type.front);
   const [faces, setFaces] = useState([]);
   const [hasPermission, setHasPermission] = useState();
@@ -33,13 +33,14 @@ const CheckTheFace = (props) => {
   const [employeeData, setEmployeeData] = useState({});
   const [ratio, setRatio] = useState();
   const [cameraStyle, setCameraStyle] = useState();
+  const [typeCamera, setTypeCamera] =useState(true);
   const [checkin, setCheckin] = useState(IN);
   const [takingPhoto, setTakingPhoto] = useState(false);
-  const [showCamera,suncamera]=useState()
   const cameraRef = useRef(null);
+  const [imageSource, setImageSource] =useState('')
   const location = useRef({});
   const devices = useCameraDevices();
-  const device = devices.back;
+  const device = (typeCamera ? devices.back : devices.front);
 
 
 
@@ -58,93 +59,108 @@ const CheckTheFace = (props) => {
   }, []);
 
   useEffect(() => {
-    let clientLocation;
-    if (hasPermission) {
-      const _getLocationAsync = async () => {
-        clientLocation = await Geolocation.watchPositionAsync(
-          { accuracy: Geolocation.Accuracy.Highest, timeInterval: 5000, distanceInterval: 0 },
-          (loc) => (location.current = loc),
-        
-        );
-        
-      };
-      _getLocationAsync();
-    }
-    return () => {
-      if (clientLocation) clientLocation.remove();
-    };
-  }, [hasPermission]);
+        let clientLocation;
+        if (hasPermission) {
+          const _getLocationAsync = async () => {
+            clientLocation = await Geolocation.getCurrentPosition(
+              position=>{
+                  const {latitude, longitude}= position.coords;
+                  location.current = {latitude, longitude}
+                  console.log(latitude, longitude, location.current, 'sssssssss');
+              }
+              // { accuracy: Geolocation.Accuracy.Highest, timeInterval: 5000, distanceInterval: 0 },
+              // (loc) => (location.current = loc),
+            );
+          };
+          _getLocationAsync();
+        }
+        return () => {
+          if (clientLocation) clientLocation.remove();
+        };
+      }, [hasPermission]);
 
   const toggleCheckin = useCallback(() => setCheckin((e) => (e === IN ? OUT : IN)), []);
 
-  // const checkInOut = () => {
-  //   setType(type === Camera.Type.back ? Camera.Type.front : Camera.Type.back);
-  // };
+  const checkInOut = () => {
+    setTypeCamera(!typeCamera)
+  };
 
   const onFacesDetected = useCallback((e) => {
     setFaces(e.faces);
   }, []);
-  console.log(location.current,'location cu ren ');
+  console.log(111111)
   const takePicture = async () => {
-    // if (!location.current || takingPhoto) return;
-    const photo = await cameraRef.current.takePhoto({
-      qualityPrioritization: 'speed',
-  flash: 'off',
-  enableShutterSound: false
-    })
 
-    const file = await camera.current.takePhoto()
-await CameraRoll.save(`file://${file.path}`, {
-  type: 'photo',
-})
-    // let result = {}
-    // const { coords: { latitude, longitude } } = location.current || {};
+    console.log(111111)
+    if (!location.current || takingPhoto) return;
+    let result = {}
+    console.log(location.current);
+    const {  latitude, longitude  } = location.current;
+    console.log(111111)
 
-    // const data = {
-    //   type: checkin,
-    //   long: longitude,
-    //   lat: latitude,
-    //   isHrm: true
-    // };
+    const data = {
+            type: checkin,
+            long: longitude,
+            lat: latitude,
+            isHrm: true
+          };
+      
+  
+  //   const photo = await cameraRef.current.takePhoto({
+  //     qualityPrioritization: 'speed',
+  // flash: 'off',
+  // enableShutterSound: false
+  //   })
 
-    // try {
-    //   setTakingPhoto(true);
-    //   const faceImage = await cameraRef.current.takePictureAsync({
-    //     // skipProcessing: true, 
-    //     base64: true, quality: 1
-    //   });
-    //   cameraRef.current.pausePreview();
-    //   data.link = await uploadImage(faceImage, 'TimeKeeping');
-    //   result = await reconize(faceImage);
-    //   if (result.success) {
-    //     data.employeeId = result.person_id;
-    //     const employee = await getByIdHrm(result.person_id)
-    //     if (employee._id === profile.hrmEmployeeId) {
-    //       const tkResult = await onFaceCheckIn(data);
-    //       console.log(tkResult, "tkResult");
-    //       if (_.get(tkResult, 'data.data[0]')) {
-    //         setEmployeeData({ ...employee, ...data, msg: 'Nhận diện thành công' });
-    //         setTimeout(() => {
-    //           setVisible(result.status)
-    //           console.log(result.status);
-    //         }, 500);
-    //       } else {
-    //         data.message = _.get(tkResult, 'message', 'Chấm công thất bại');
-    //         result.success = false
-    //       }
-    //     } else {
-    //       ToastCustom({ text: 'Thông tin nhân sự không hợp lệ', type: 'danger' });
-    //       result.success = false
-    //     }
-    //   } else data.message = result.msg
-    // } catch (error) {
-    //   console.log(error, "minherror");
-    //   data.message = 'Chấm công thất bại';
-    //   result.success = false
-    // }
-    // if (!result.success) onCheckInFail(data);
-    // cameraRef.current.resumePreview();
-    // setTakingPhoto(false);
+    // const file = await cameraRef.current.takePhoto()  
+    // setImageSource(file.path)
+    // setTakingPhoto(!takingPhoto)  
+    // console.log(file.path,'sssssssssssaaaaaa');
+    //   await CameraRoll.save(`file://${file.path}`, {
+    //    type: 'photo',
+    // })
+    console.log(111111)
+
+    try {
+      const faceImage = await cameraRef.current.takePhoto({
+        base64: true, quality: 1
+      });
+  
+      console.log(faceImage.path,'sssss');
+       setImageSource(faceImage.path)
+       setTakingPhoto(!takingPhoto);
+      cameraRef.current.stopRecording();
+      data.link = await uploadImage(faceImage.path, 'TimeKeeping');
+      result = await reconize(faceImage.path);
+      if (result.success) {
+        data.employeeId = result.person_id;
+        const employee = await getByIdHrm(result.person_id)
+        if (employee._id === profile.hrmEmployeeId) {
+          const tkResult = await onFaceCheckIn(data);
+          console.log(tkResult, "tkResult");
+          if (_.get(tkResult, 'data.data[0]')) {
+            setEmployeeData({ ...employee, ...data, msg: 'Nhận diện thành công' });
+            setTimeout(() => {
+              setVisible(result.status)
+              console.log(result.status);
+            }, 500);
+          } else {
+            data.message = _.get(tkResult, 'message', 'Chấm công thất bại');
+            result.success = false
+          }
+        } else {
+          ToastCustom({ text: 'Thông tin nhân sự không hợp lệ', type: 'danger' });
+          result.success = false
+        }
+      } else data.message = result.msg
+    } catch (error) {
+      console.log(error, "minherror");
+      data.message = 'Chấm công thất bại ssssss';
+      result.success = false
+    }
+    if (!result.success) onCheckInFail(data);
+    cameraRef.current.startRecording();
+    setTakingPhoto(false);
   };
 
   const onCheckInFail = async (data) => {
@@ -180,7 +196,7 @@ await CameraRoll.save(`file://${file.path}`, {
   return (
     <>
       <BackHeader title="Chấm công" navigation={navigation} />
-      {hasPermission && (
+      {!takingPhoto ? (
         <View>
           {device === device ? (
             <Icon
@@ -194,7 +210,7 @@ await CameraRoll.save(`file://${file.path}`, {
                 top: 20,
                 zIndex: 2,
               }}
-              // onPress={checkInOut}
+              onPress={checkInOut}
             />
           ) : (
             <Icon
@@ -208,7 +224,7 @@ await CameraRoll.save(`file://${file.path}`, {
                 top: 20,
                 zIndex: 2,
               }}
-              // onPress={checkInOut}
+              onPress={checkInOut}
             />
           )}
          {device ?  <Camera
@@ -232,7 +248,35 @@ await CameraRoll.save(`file://${file.path}`, {
             return <RenderFace key={`face_${index}`} face={face} />;
           })}
         </View>
-      )}
+      ):(  <>
+          {imageSource !== '' ? (
+            <Image
+              style={{ flex: 1}}
+              source={{
+                uri: `file://'${imageSource}`,
+              }}
+            />
+          ) : null}
+
+          <View style={{position: 'absolute',
+              top: 50,
+              left: 10,}}>
+            <TouchableOpacity
+              style={{ 
+                backgroundColor: '#000',
+                padding: 10,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: '#fff',
+                width: 100,
+              }}
+              onPress={()=> setTakingPhoto(true)}>
+                <Text style={{color: '#FFF'}}>Back</Text>
+              </TouchableOpacity>
+          </View>
+        </>) }
 
       <ProfileModalPopup isVisible={visible} onPress={navigation.goBack} employee={employeeData} />
 
@@ -261,19 +305,21 @@ await CameraRoll.save(`file://${file.path}`, {
         ) : (
           <TouchableOpacity disabled={takingPhoto} style={styles.buttonCheckin} danger>
             {takingPhoto ? (
-              <Spinner color="#fff" style={{}} />
+              <ActivityIndicator color="#fff" />
             ) : (
-              <>
-                <Text style={{ textAlign: 'right', color:'white' }} onPress={takePicture}>
+              <TouchableOpacity >
+              <TouchableOpacity  style={{justifyContent: 'center'}} onPress={takePicture}>
+                <Text style={{  textAlign: 'center', color:'white'  }} >
                   Chấm công ra
                 </Text>
+                </TouchableOpacity>
                 <IconS
                   type="MaterialCommunityIcons"
                   name="rotate-3d-variant"
                   style={styles.buttonRound}
                   onPress={toggleCheckin}
                 />
-              </>
+              </TouchableOpacity>
             )}
           </TouchableOpacity>
         )}
@@ -293,3 +339,6 @@ function mapDispatchToProps(dispatch) {
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect, memo)(CheckTheFace);
+
+
+ 

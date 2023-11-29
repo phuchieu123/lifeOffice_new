@@ -20,6 +20,7 @@ const createFile = (file, preName = 'file') => {
 }
 
 const uploadImage = async (img, preName = 'KH') => {
+
     const formData = new FormData();
     formData.append('file', (_.has(img, 'name') && _.has(img, 'filename')) ? img : createFile(img, preName));
 
@@ -30,7 +31,7 @@ const uploadImage = async (img, preName = 'KH') => {
     }
 
     const upload = await fet(url, uploadBody);
-
+    console.log('thành công');
     if (typeof callback === 'function') return callback({ response: upload, url: upload.url, file })
     return upload.url;
 }
