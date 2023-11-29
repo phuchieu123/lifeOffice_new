@@ -35,11 +35,11 @@ const ProfileModal = props => {
     if (!employee) return null
     return <Modal isVisible={isVisible} style={{ height: 'auto' }} >
         <View style={{ backgroundColor: '#fff', borderRadius: 10 }}>
-            <ListItem itemHeader itemDivider style={{ borderRadius: 10, marginBottom: 10 }}>
+            <View itemHeader itemDivider style={{ borderRadius: 10, marginBottom: 10 }}>
                 <Text style={{ fontWeight: 'bold' }}>
                     {title}
                 </Text>
-            </ListItem>
+            </View>
 
             {profile.code ? (
                 <Text style={{ alignSelf: 'center', marginBottom: 10, fontSize: 15 }}>Mã nhân viên: {profile.code}</Text>
@@ -94,7 +94,7 @@ const ProfileModal = props => {
                 <Icon name="check" type="Feather" />
             </Button>
         </View>
-    </Modal >
+    </Modal>
 }
 
 export default ProfileModal

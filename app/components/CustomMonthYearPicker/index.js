@@ -120,7 +120,7 @@ const CustomMonthYearPicker = (props) => {
                             <View style={styles.modalView}>
                                 {listYear.map((item, index) => {
                                     return (
-                                        <TouchableOpacity
+                                        <TouchableOpacity  key={index}
                                             onPress={() => {
                                                 setLocalState({ ...localState, checkYearPicker: true });
                                                 setLocalData({ ...localData, year: item })
@@ -136,7 +136,7 @@ const CustomMonthYearPicker = (props) => {
                             <View style={styles.modalView}>
                                 {monthOfYear.map((item, index) => {
                                     return (
-                                        <TouchableOpacity
+                                        <TouchableOpacity  key={index}
                                             onPress={() => {
                                                 setModalVisible(false);
                                                 setLocalState({
