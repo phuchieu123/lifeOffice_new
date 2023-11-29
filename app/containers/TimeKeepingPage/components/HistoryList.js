@@ -1,9 +1,10 @@
 import moment from 'moment';
-import { Tab, Tabs, Text, View } from 'native-base';
 import React from 'react';
-import { StyleSheet, TouchableOpacity } from 'react-native';
-
+import { StyleSheet, TouchableOpacity,Text, View } from 'react-native';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 const DATE = 'DD/MM/YYYY';
+
+const Tab = createMaterialTopTabNavigator();
 export default HistoryList = (props) => {
   const { item, onPress, index } = props
   const { date, faceTk, fingerTk, name } = item;
@@ -14,17 +15,27 @@ export default HistoryList = (props) => {
   return (
     <>
       <View style={styles.container}>
-        <Tabs
-          tabBarUnderlineStyle={{ backgroundColor: 'green' }} >
-          <Tab
-            heading="Chấm công khuôn mặt"
-            tabStyle={{ backgroundColor: 'white', textAlign: 'center' }}
-            textStyle={{ color: 'black' , textAlign: 'center' }}
-            activeTabStyle={{ backgroundColor: 'white', textAlign: 'center'  }}
-            activeTextStyle={{ color: 'black', fontWeight: 'normal', textAlign: 'center'  }}
-            style={{ ...styles.tabs, height: faceTk.length <= 0 || faceTk.length <= 0 ? 150 : 'auto' }}
-          >
-            <View >
+        <Tab.Navigator
+        tabBarOptions={{
+          style: {
+            backgroundColor: 'rgba(46, 149, 46, 1)', // Màu nền của toàn bộ thanh tab
+            borderTopWidth: 0.5,
+            borderTopColor:'#aaa',
+          },
+          activeTintColor: 'white', // Màu chữ của tab đang được chọn
+          inactiveTintColor: 'white', // Màu chữ của tab không được chọn
+          indicatorStyle: {
+            backgroundColor: 'white', // Màu của thanh dưới chữ khi tab được chọn
+          },
+        }} >
+          <Tab.Screen
+            name="Chấm công khuôn mặt"
+            // tabStyle={{ backgroundColor: 'white', textAlign: 'center' }}
+            // textStyle={{ color: 'black' , textAlign: 'center' }}
+            // activeTabStyle={{ backgroundColor: 'white', textAlign: 'center'  }}
+            // activeTextStyle={{ color: 'black', fontWeight: 'normal', textAlign: 'center'  }}
+            // style={{ ...styles.tabs, height: faceTk.length <= 0 || faceTk.length <= 0 ? 150 : 'auto' }}
+            component={() => <View >
               <Text style={styles.date}>{weekday}{time}</Text>
               {faceTk && faceTk.map((e, index) => {
                 return (
@@ -61,17 +72,17 @@ export default HistoryList = (props) => {
                   </Text>
                 </View>
               }
-            </View>
-          </Tab>
-          <Tab
-            heading="Chấm công vân tay"
-            tabStyle={{ backgroundColor: 'white', textAlign: 'center'  }}
-            textStyle={{ color: 'black', textAlign: 'center'  }}
-            activeTabStyle={{ backgroundColor: 'white', textAlign: 'center'  }}
-            activeTextStyle={{ color: 'black', fontWeight: 'normal' , textAlign: 'center' }}
-            style={styles.tabs}
-          >
-            <View>
+            </View>}
+          />
+
+          <Tab.Screen
+            name="Chấm công vân tay"
+            // tabStyle={{ backgroundColor: 'white', textAlign: 'center'  }}
+            // textStyle={{ color: 'black', textAlign: 'center'  }}
+            // activeTabStyle={{ backgroundColor: 'white', textAlign: 'center'  }}
+            // activeTextStyle={{ color: 'black', fontWeight: 'normal' , textAlign: 'center' }}
+            // style={styles.tabs}
+              component={()=> <View>
               <Text style={styles.date}>{weekday}{time}</Text>
               {fingerTk && fingerTk.map((e, index) => {
                 return (
@@ -101,9 +112,10 @@ export default HistoryList = (props) => {
                     Không có dữ liệu chấm công
                   </Text>
                 </View>}
-            </View>
-          </Tab>
-        </Tabs>
+            </View>}
+         />
+          
+        </Tab.Navigator>
 
       </View>
     </>
