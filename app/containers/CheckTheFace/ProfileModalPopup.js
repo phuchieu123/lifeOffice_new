@@ -17,9 +17,9 @@ const ProfileModal = props => {
         Linking.openURL(url);
     };
 
-    return <Modal isVisible={isVisible} style={{ height: 'auto' }} >
-        <View style={{ backgroundColor: '#fff', borderRadius: 10, padding: 10 }}>
-            <ScrollView>
+    return <Modal isVisible={isVisible} style={{ height: 'auto', flex: 1 }} >
+        <View style={{ backgroundColor: '#fff', borderRadius: 10, padding: 10, flex: 1 }}>
+            <ScrollView style={{ flex: 1}}>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                     {employee.msg ?
                         <Text style={{ alignSelf: 'center', marginBottom: 10, fontSize: 15, fontWeight: 'bold' }}>Trạng thái: {employee.msg}</Text>
@@ -78,8 +78,8 @@ const ProfileModal = props => {
                     </Button>
                 </View>
             </ScrollView>
-        </View >
-    </Modal >
+        </View>
+    </Modal>
 }
 
 export default ProfileModal

@@ -24,6 +24,7 @@ import { uploadImage } from '../../api/fileSystem';
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import { Positions } from 'react-native-calendars/src/expandableCalendar';
 
+
 const CheckTheFace = (props) => {
   const { navigation, profile } = props;
   // const [type, setType] = useState(Camera.Constants.Type.front);
@@ -40,7 +41,7 @@ const CheckTheFace = (props) => {
   const [imageSource, setImageSource] =useState('')
   const location = useRef({});
   const devices = useCameraDevices();
-  const device = (typeCamera ? devices.back : devices.front);
+  const device = devices.back 
 
 
 
@@ -81,11 +82,15 @@ const CheckTheFace = (props) => {
 
   const toggleCheckin = useCallback(() => setCheckin((e) => (e === IN ? OUT : IN)), []);
 
+  
+
+
+
   const checkInOut = () => {
     setTypeCamera(!typeCamera)
   };
 
-  const onFacesDetected = useCallback((e) => {
+  const onFacesDetected = useCallback((e) => {  
     setFaces(e.faces);
   }, []);
   console.log(111111)
@@ -122,16 +127,16 @@ const CheckTheFace = (props) => {
     console.log(111111)
 
     try {
-      const faceImage = await cameraRef.current.takePhoto({
-        base64: true, quality: 1
-      });
-  
-      console.log(faceImage.path,'sssss');
+      const faceImage = await cameraRef.current.takePhoto(
+       
+      );
+      console.log(faceImage,'sssss');
        setImageSource(faceImage.path)
        setTakingPhoto(!takingPhoto);
-      cameraRef.current.stopRecording();
+     
       data.link = await uploadImage(faceImage.path, 'TimeKeeping');
-      result = await reconize(faceImage.path);
+      result = await reconize(faceImage.path); 
+      // await cameraRef.current.stopRecording();
       if (result.success) {
         data.employeeId = result.person_id;
         const employee = await getByIdHrm(result.person_id)
@@ -152,6 +157,8 @@ const CheckTheFace = (props) => {
           ToastCustom({ text: 'Thông tin nhân sự không hợp lệ', type: 'danger' });
           result.success = false
         }
+
+
       } else data.message = result.msg
     } catch (error) {
       console.log(error, "minherror");
@@ -159,7 +166,7 @@ const CheckTheFace = (props) => {
       result.success = false
     }
     if (!result.success) onCheckInFail(data);
-    cameraRef.current.startRecording();
+    // await cameraRef.current.startRecording();
     setTakingPhoto(false);
   };
 
@@ -195,39 +202,39 @@ const CheckTheFace = (props) => {
   };
   return (
     <>
-      <BackHeader title="Chấm công" navigation={navigation} />
-      {!takingPhoto ? (
-        <View>
-          {device === device ? (
-            <Icon
-              type="MaterialIcons"
-              name="camera-rear"
-              style={{
-                position: 'absolute',
-                color: '#fff',
-                fontSize: 40,
-                right: 20,
-                top: 20,
-                zIndex: 2,
-              }}
-              onPress={checkInOut}
-            />
-          ) : (
-            <Icon
-              type="MaterialIcons"
-              name="camera-front"
-              style={{
-                position: 'absolute',
-                color: '#fff',
-                fontSize: 40,
-                right: 20,
-                top: 20,
-                zIndex: 2,
-              }}
-              onPress={checkInOut}
-            />
-          )}
-         {device ?  <Camera
+           <BackHeader title="Chấm công" navigation={navigation} />
+           {!takingPhoto && (
+             <View>
+               { typeCamera ? (
+                 <Icon
+                   type="MaterialIcons"
+                   name="camera-rear"
+                   style={{
+                     position: 'absolute',
+                     color: '#fff',
+                     fontSize: 40,
+                     right: 20,
+                     top: 20,
+                     zIndex: 2,
+                   }}
+                   onPress={checkInOut}
+                 />
+               ) : (
+                 <Icon
+                   type="MaterialIcons"
+                   name="camera-front"
+                   style={{
+                     position: 'absolute',
+                     color: '#fff',
+                     fontSize: 40,
+                     right: 20,
+                     top: 20,
+                     zIndex: 2,
+                   }}
+                   onPress={checkInOut}
+                 />
+               )}
+              {device &&  <Camera
             onCameraReady={onCameraReady}
             ratio={ratio}
             ref={cameraRef}
@@ -243,40 +250,18 @@ const CheckTheFace = (props) => {
                 // tracking: true, 
               }
             }
-          />: null}
-          {faces.map((face, index) => {
-            return <RenderFace key={`face_${index}`} face={face} />;
-          })}
-        </View>
-      ):(  <>
-          {imageSource !== '' ? (
-            <Image
-              style={{ flex: 1}}
-              source={{
-                uri: `file://'${imageSource}`,
-              }}
-            />
-          ) : null}
+          />}
 
-          <View style={{position: 'absolute',
-              top: 50,
-              left: 10,}}>
-            <TouchableOpacity
-              style={{ 
-                backgroundColor: '#000',
-                padding: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderRadius: 10,
-                borderWidth: 1,
-                borderColor: '#fff',
-                width: 100,
-              }}
-              onPress={()=> setTakingPhoto(true)}>
-                <Text style={{color: '#FFF'}}>Back</Text>
-              </TouchableOpacity>
-          </View>
-        </>) }
+
+             
+
+               {faces.map((face, index) => {
+                 return <RenderFace key={`face_${index}`} face={face} />;
+               })}
+             </View>
+           )}
+    
+    
 
       <ProfileModalPopup isVisible={visible} onPress={navigation.goBack} employee={employeeData} />
 
